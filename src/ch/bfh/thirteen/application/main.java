@@ -1,4 +1,4 @@
-package ch.bfh.thirteen.main;
+package ch.bfh.thirteen.application;
 
 public class main {
     public static void main(String args[]){
