@@ -28,4 +28,16 @@ public class Board {
             x++;
         }
     }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public ArrayList<Vector<Field>> getRows() {
+        return rows;
+    }
 }
