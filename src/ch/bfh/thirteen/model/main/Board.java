@@ -1,9 +1,12 @@
 package ch.bfh.thirteen.model.main;
 
+import ch.bfh.thirteen.numbergenerator.main.WeightedRandomNumberGenerator;
+
 import java.util.ArrayList;
 import java.util.Vector;
 
 public class Board {
+    private WeightedRandomNumberGenerator wrng;
     private int current_max = 6;
     private int current_min = 1;
     private int width;
@@ -13,6 +16,7 @@ public class Board {
     public Board(int width, int height) {
         this.width = width;
         this.height = height;
+        wrng = new WeightedRandomNumberGenerator(current_max-1,current_min, new int[]{3,3,3,2,1});
         initializeBoard();
     }
 
@@ -23,10 +27,13 @@ public class Board {
         int x = 0;
         for(Vector<Field> row: rows){
             for(int i = 0; i < height; i++){
-                row.add(new Field(x,i,1));
+                row.add(new Field(x,i,wrng.getNumber()));
             }
             x++;
         }
+
+        // once add the maxnumber to the board
+
     }
 
     public int getWidth() {
