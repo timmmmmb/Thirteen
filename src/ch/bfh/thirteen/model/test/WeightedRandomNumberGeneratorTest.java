@@ -1,6 +1,6 @@
-package ch.bfh.thirteen.numbergenerator.test;
+package ch.bfh.thirteen.model.test;
 
-import ch.bfh.thirteen.numbergenerator.main.WeightedRandomNumberGenerator;
+import ch.bfh.thirteen.model.main.WeightedRandomNumberGenerator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package ch.bfh.thirteen.numbergenerator.main;
+package ch.bfh.thirteen.model.main;
 
 import java.util.ArrayList;
 

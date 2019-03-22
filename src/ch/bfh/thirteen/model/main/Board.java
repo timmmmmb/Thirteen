@@ -1,7 +1,5 @@
 package ch.bfh.thirteen.model.main;
 
-import ch.bfh.thirteen.numbergenerator.main.WeightedRandomNumberGenerator;
-
 import java.util.ArrayList;
 import java.util.Vector;
 
