@@ -14,18 +14,18 @@ public class Board {
     public Board(int width, int height) {
         this.width = width;
         this.height = height;
-        wrng = new WeightedRandomNumberGenerator(current_max-1,current_min, new int[]{3,3,3,2,1});
+        wrng = new WeightedRandomNumberGenerator(current_max - 1, current_min, new int[]{3, 3, 3, 2, 1});
         initializeBoard();
     }
 
-    private void initializeBoard(){
-        for(int i = 0; i < width; i++){
+    private void initializeBoard() {
+        for (int i = 0; i < width; i++) {
             rows.add(new Vector<>());
         }
         int x = 0;
-        for(Vector<Field> row: rows){
-            for(int i = 0; i < height; i++){
-                row.add(new Field(x,i,wrng.getNumber()));
+        for (Vector<Field> row : rows) {
+            for (int i = 0; i < height; i++) {
+                row.add(new Field(x, i, wrng.getNumber()));
             }
             x++;
         }

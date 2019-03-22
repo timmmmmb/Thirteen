@@ -9,7 +9,7 @@ public class Settings {
     /**
      * this function loads all of the resources at the start of the game
      */
-    public static void loadResources(){
+    public static void loadResources() {
 
     }
 

@@ -5,11 +5,10 @@
 
 
 <?import java.net.URL?>
-<HBox xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.bfh.thirteen.controller.loadingScreenController">
-   <children>
-      <Label text="Loading" />
-   </children>
+<HBox xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="ch.bfh.thirteen.controller.loadingScreenController">
     <stylesheets>
-        <URL value="@loadingScreen.css" />
+        <URL value="@loadingScreen.css"/>
     </stylesheets>
+    <Label text="Loading"/>
 </HBox>

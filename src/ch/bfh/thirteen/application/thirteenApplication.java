@@ -15,7 +15,7 @@ public class thirteenApplication extends Application {
     public void start(Stage gameStage) throws Exception {
         // loads the fxml from the view package
         Parent root = FXMLLoader.load(getClass().getResource("../view/loadingScreen.fxml"));
-        Board gameBoard = new Board(Settings.getBoardWidth(),Settings.getBoardHeight());
+        Board gameBoard = new Board(Settings.getBoardWidth(), Settings.getBoardHeight());
         Scene gameScene = new Scene(root, 320, 340);
 
         gameStage.getIcons().add(new Image("images/icon.png"));

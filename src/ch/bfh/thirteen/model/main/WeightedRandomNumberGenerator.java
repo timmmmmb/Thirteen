@@ -10,9 +10,9 @@ public class WeightedRandomNumberGenerator {
     private int[] weight;
     private ArrayList<Integer> possibilitys = new ArrayList<>();
 
-    public WeightedRandomNumberGenerator(int max, int min,int[] weight) throws IllegalArgumentException{
-        if(max-min+1 != weight.length){
-            throw new IllegalArgumentException("weight array doesnt have correct size expected size: "+(max-min+1) +" recieved size "+weight.length);
+    public WeightedRandomNumberGenerator(int max, int min, int[] weight) throws IllegalArgumentException {
+        if (max - min + 1 != weight.length) {
+            throw new IllegalArgumentException("weight array doesnt have correct size expected size: " + (max - min + 1) + " recieved size " + weight.length);
         }
         this.min = min;
         this.max = max;
@@ -20,16 +20,16 @@ public class WeightedRandomNumberGenerator {
         createList();
     }
 
-    private void createList(){
+    private void createList() {
         possibilitys.clear();
-        for(int i = min; i <= max; i++){
-            for(int j = 0; j < weight[i-min];j++){
+        for (int i = min; i <= max; i++) {
+            for (int j = 0; j < weight[i - min]; j++) {
                 possibilitys.add(i);
             }
         }
     }
 
-    public int getNumber(){
+    public int getNumber() {
         double position = (Math.random() * (possibilitys.size()));
         return possibilitys.get((int) position);
     }
