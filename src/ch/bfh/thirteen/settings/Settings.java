@@ -12,4 +12,20 @@ public class Settings {
     public static void loadResources(){
 
     }
+
+    public static int getFieldWidth() {
+        return fieldWidth;
+    }
+
+    public static int getFieldHeight() {
+        return fieldHeight;
+    }
+
+    public static int getBoardHeight() {
+        return boardHeight;
+    }
+
+    public static int getBoardWidth() {
+        return boardWidth;
+    }
 }

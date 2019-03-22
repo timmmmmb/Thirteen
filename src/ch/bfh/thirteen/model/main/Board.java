@@ -1,4 +1,4 @@
-package ch.bfh.thirteen.model;
+package ch.bfh.thirteen.model.main;
 
 import java.util.ArrayList;
 import java.util.Vector;
