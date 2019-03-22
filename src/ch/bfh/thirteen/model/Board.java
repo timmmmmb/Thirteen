@@ -6,23 +6,23 @@ import java.util.Vector;
 public class Board {
     private int current_max = 6;
     private int current_min = 1;
-    private int x_size;
-    private int y_size;
+    private int width;
+    private int height;
     private ArrayList<Vector<Field>> rows = new ArrayList<>();
 
-    public Board(int x_size, int y_size) {
-        this.x_size = x_size;
-        this.y_size = y_size;
+    public Board(int width, int height) {
+        this.width = width;
+        this.height = height;
         initializeBoard();
     }
 
     private void initializeBoard(){
-        for(int i = 0; i < x_size; i++){
+        for(int i = 0; i < width; i++){
             rows.add(new Vector<>());
         }
         int x = 0;
         for(Vector<Field> row: rows){
-            for(int i = 0; i < y_size; i++){
+            for(int i = 0; i < height; i++){
                 row.add(new Field(x,i,1));
             }
             x++;
