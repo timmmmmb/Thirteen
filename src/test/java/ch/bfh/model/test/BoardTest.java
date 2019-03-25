@@ -1,15 +1,13 @@
-package ch.bfh.thirteen.model.test;
+package test.java.ch.bfh.model.test;
 
-import ch.bfh.thirteen.model.main.Board;
-import ch.bfh.thirteen.model.main.Field;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import main.java.ch.bfh.thirteen.model.main.Board;
+import main.java.ch.bfh.thirteen.model.main.Field;
 import java.util.Vector;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
 

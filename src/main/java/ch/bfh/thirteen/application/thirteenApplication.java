@@ -1,7 +1,5 @@
-package ch.bfh.thirteen.application;
+package main.java.ch.bfh.thirteen.application;
 
-import ch.bfh.thirteen.model.main.Board;
-import ch.bfh.thirteen.settings.Settings;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,12 +7,15 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import main.java.ch.bfh.thirteen.model.main.Board;
+import main.java.ch.bfh.thirteen.settings.Settings;
+
 public class thirteenApplication extends Application {
 
     @Override
     public void start(Stage gameStage) throws Exception {
         // loads the fxml from the view package
-        Parent root = FXMLLoader.load(getClass().getResource("../view/loadingScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main/java/ch/bfh/thirteen/view/loadingScreen.fxml"));
         Board gameBoard = new Board(Settings.getBoardWidth(), Settings.getBoardHeight());
         Scene gameScene = new Scene(root, 320, 340);
 

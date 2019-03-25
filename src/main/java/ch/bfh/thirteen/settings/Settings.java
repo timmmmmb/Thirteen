@@ -1,4 +1,4 @@
-package ch.bfh.thirteen.settings;
+package main.java.ch.bfh.thirteen.settings;
 
 public class Settings {
     private static final int fieldWidth = 64;

@@ -1,4 +1,4 @@
-package ch.bfh.thirteen.model.main;
+package main.java.ch.bfh.thirteen.model.main;
 
 public class Field {
     private int x, y;
