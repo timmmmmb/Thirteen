@@ -25,7 +25,7 @@ class BoardTest {
      */
     @Test
     void testConstructorHeight() {
-        assertEquals(gameBoard.getRows().get(0).size(), height);
+        assertEquals(gameBoard.getRows().get(0).size(), height+1);
         assertEquals(gameBoard.getHeight(), height);
     }
 
@@ -34,7 +34,7 @@ class BoardTest {
      */
     @Test
     void testConstructorWidth() {
-        assertEquals(gameBoard.getRows().size(), width);
+        assertEquals(gameBoard.getRows().size(), width+1);
         assertEquals(gameBoard.getWidth(), width);
     }
 
