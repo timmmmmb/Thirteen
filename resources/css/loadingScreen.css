@@ -14,3 +14,12 @@ Label {
     -fx-font-family: Arial, serif;
     -fx-text-fill: white;
 }
+
+.field{
+    -fx-text-alignment: center;
+    -fx-pref-height: 64px;
+    -fx-min-width: 64px;
+    -fx-pref-width: 64px;
+    -fx-min-height: 64px;
+    -fx-background-color: blue;
+}

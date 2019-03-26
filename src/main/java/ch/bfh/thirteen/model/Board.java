@@ -56,10 +56,10 @@ public class Board {
 
     /**
      * used to get one field by coordinates
-     * @param x
-     * @param y
+     * @param x the x coordinate of the searched field
+     * @param y the y coordinate of the searched field
      * @return the Field at the specified coordinates
-     * @throws Exception
+     * @throws Exception if the coordinates are bigger than the board
      */
     public Field getField(int x, int y) throws Exception {
         if(x>getWidth()||y>getHeight())
