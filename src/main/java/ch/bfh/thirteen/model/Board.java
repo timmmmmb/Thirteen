@@ -19,12 +19,12 @@ public class Board {
     }
 
     private void initializeBoard() {
-        for (int i = 0; i < width; i++) {
+        for (int i = 0; i <= width; i++) {
             rows.add(new Vector<>());
         }
         int x = 0;
         for (Vector<Field> row : rows) {
-            for (int i = 0; i < height; i++) {
+            for (int i = 0; i <= height; i++) {
                 row.add(new Field(x, i, wrng.getNumber()));
             }
             x++;
@@ -32,6 +32,39 @@ public class Board {
 
         // once add the maxnumber to the board
 
+    }
+
+    /**
+     * this function is used to get all neighbores of a field
+     * @param f the field which neighbores you need
+     * @return an arraylist with all of the neighbores
+     */
+    public ArrayList<Field> getNeighbores(Field f) throws Exception {
+        int x = f.getX();
+        int y = f.getY();
+        ArrayList<Field> neighbores = new ArrayList<>();
+        if(y<getHeight())
+            neighbores.add(getField(x,y+1));
+        if(y>0)
+            neighbores.add(getField(x,y-1));
+        if(x<getWidth())
+            neighbores.add(getField(x+1,y));
+        if(x>0)
+            neighbores.add(getField(x-1,y));
+        return neighbores;
+    }
+
+    /**
+     * used to get one field by coordinates
+     * @param x
+     * @param y
+     * @return the Field at the specified coordinates
+     * @throws Exception
+     */
+    public Field getField(int x, int y) throws Exception {
+        if(x>getWidth()||y>getHeight())
+            throw new Exception("x "+x+" or y "+y+" to high width "+width+" height "+height);
+        return rows.get(x).get(y);
     }
 
     public int getWidth() {

@@ -51,4 +51,28 @@ class BoardTest {
         }
 
     }
+
+    /**
+     * this test tests if the function returns the correct amount of fields
+     */
+    @Test
+    void testGetNeighbores() {
+        try {
+            Field f = gameBoard.getField(0,0);
+            assertEquals(2, gameBoard.getNeighbores(f).size());
+            f = gameBoard.getField(1,0);
+            assertEquals(3, gameBoard.getNeighbores(f).size());
+            f = gameBoard.getField(1,1);
+            assertEquals(4, gameBoard.getNeighbores(f).size());
+
+            f = gameBoard.getField(width,height);
+            assertEquals(2, gameBoard.getNeighbores(f).size());
+            f = gameBoard.getField(width-1,height);
+            assertEquals(3, gameBoard.getNeighbores(f).size());
+            f = gameBoard.getField(width,height-1);
+            assertEquals(3, gameBoard.getNeighbores(f).size());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
