@@ -15,7 +15,7 @@ Label {
     -fx-text-fill: white;
 }
 
-.field{
+.field {
     -fx-text-alignment: center;
     -fx-pref-height: 64px;
     -fx-min-width: 64px;

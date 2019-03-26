@@ -12,7 +12,7 @@ import main.java.ch.bfh.thirteen.settings.Settings;
 import java.util.Objects;
 
 public class thirteenApplication extends Application {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         launch(args);
     }
 
