@@ -1,4 +1,4 @@
-package main.java.ch.bfh.thirteen.model.main;
+package main.java.ch.bfh.thirteen.model;
 
 import java.util.ArrayList;
 

@@ -3,7 +3,7 @@ package test.java.ch.bfh.model.test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import main.java.ch.bfh.thirteen.model.main.WeightedRandomNumberGenerator;
+import main.java.ch.bfh.thirteen.model.WeightedRandomNumberGenerator;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

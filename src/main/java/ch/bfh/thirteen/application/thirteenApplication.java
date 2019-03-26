@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import main.java.ch.bfh.thirteen.model.main.Board;
+import main.java.ch.bfh.thirteen.model.Board;
 import main.java.ch.bfh.thirteen.settings.Settings;
 
 import java.util.Objects;

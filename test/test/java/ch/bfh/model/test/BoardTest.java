@@ -3,8 +3,8 @@ package test.java.ch.bfh.model.test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import main.java.ch.bfh.thirteen.model.main.Board;
-import main.java.ch.bfh.thirteen.model.main.Field;
+import main.java.ch.bfh.thirteen.model.Board;
+import main.java.ch.bfh.thirteen.model.Field;
 import java.util.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;

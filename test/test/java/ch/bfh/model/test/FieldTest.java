@@ -3,7 +3,7 @@ package test.java.ch.bfh.model.test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import main.java.ch.bfh.thirteen.model.main.Field;
+import main.java.ch.bfh.thirteen.model.Field;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
