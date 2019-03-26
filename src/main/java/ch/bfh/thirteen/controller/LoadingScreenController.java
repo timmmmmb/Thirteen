@@ -1,4 +1,4 @@
 package main.java.ch.bfh.thirteen.controller;
 
-public class loadingScreenController {
+public class LoadingScreenController {
 }

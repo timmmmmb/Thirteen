@@ -1,7 +1,7 @@
-import main.java.ch.bfh.thirteen.application.thirteenApplication;
+import main.java.ch.bfh.thirteen.application.ThirteenApplication;
 
 public class Start {
     public static void main(String[] args) {
-        thirteenApplication.main(args);
+        ThirteenApplication.main(args);
     }
 }
