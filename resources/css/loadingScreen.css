@@ -23,3 +23,7 @@ Label {
     -fx-min-height: 64px;
     -fx-background-color: blue;
 }
+
+.field:hover {
+    -fx-background-color: lightblue;
+}
