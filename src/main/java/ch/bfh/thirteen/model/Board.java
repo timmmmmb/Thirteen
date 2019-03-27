@@ -1,6 +1,7 @@
 package main.java.ch.bfh.thirteen.model;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Vector;
 
 public class Board {
@@ -31,7 +32,25 @@ public class Board {
         }
 
         // once add the maxnumber to the board
+        try {
+            Field f = getField(new Random().nextInt(getWidth() + 1) + getWidth(),getHeight());
+            f.setValue(current_max);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    public boolean isClickable(Field f) throws Exception {
+        for(Field neighbor:getNeighbores(f)){
+            if(isClickable(f,neighbor)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isClickable(Field f1, Field f2){
+        return f1.getValue() == f2.getValue();
     }
 
     /**
