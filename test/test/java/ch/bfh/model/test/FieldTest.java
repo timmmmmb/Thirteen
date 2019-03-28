@@ -1,5 +1,6 @@
 package test.java.ch.bfh.model.test;
 
+import main.java.ch.bfh.thirteen.model.Board;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +16,7 @@ class FieldTest {
 
     @BeforeAll
     static void initializeTests() {
-        field = new Field(x, y, value);
+        field = new Field(x, y, value,new Board(1,1));
     }
 
     /**

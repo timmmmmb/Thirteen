@@ -21,6 +21,7 @@ public class ThirteenApplication extends Application {
         // loads the fxml from the view package
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("fxml/loadingScreen.fxml")));
         Board gameBoard = new Board(Settings.getBoardWidth(), Settings.getBoardHeight());
+        System.out.println(gameBoard.toSting());
         Scene gameScene = new Scene(root, 320, 340);
 
         gameStage.getIcons().add(new Image("images/icon.png"));

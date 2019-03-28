@@ -43,4 +43,7 @@ public class Field {
         incrementValue();
     }
 
+    public String toString(){
+        return String.valueOf(x)+" "+String.valueOf(y)+" "+String.valueOf(value);
+    }
 }

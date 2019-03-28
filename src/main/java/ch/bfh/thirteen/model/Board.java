@@ -20,12 +20,12 @@ public class Board {
     }
 
     private void initializeBoard() {
-        for (int i = 0; i <= width; i++) {
+        for (int i = 0; i < width; i++) {
             rows.add(new Vector<>());
         }
         int x = 0;
         for (Vector<Field> row : rows) {
-            for (int i = 0; i <= height; i++) {
+            for (int i = 0; i < height; i++) {
                 row.add(new Field(x, i, wrng.getNumber(),this));
             }
             x++;
@@ -33,7 +33,7 @@ public class Board {
 
         // once add the maxnumber to the board
         try {
-            Field f = getField(new Random().nextInt(getWidth() + 1) + getWidth(),getHeight());
+            Field f = getField(new Random().nextInt(getWidth()-1),getHeight()-1);
             f.setValue(current_max);
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,7 +83,7 @@ public class Board {
      * @throws Exception if the coordinates are bigger than the board
      */
     public Field getField(int x, int y) throws Exception {
-        if (x > getWidth() || y > getHeight())
+        if (x >= getWidth() || y >= getHeight())
             throw new Exception("x " + x + " or y " + y + " to high width " + width + " height " + height);
         return rows.get(x).get(y);
     }
@@ -98,5 +98,19 @@ public class Board {
 
     public ArrayList<Vector<Field>> getRows() {
         return rows;
+    }
+
+    public String toSting(){
+        StringBuilder result = new StringBuilder();
+        for(int i = 0;i<getWidth();i++){
+            for(Vector<Field> row : rows){
+                result.append(row.get(i).toString());
+                result.append(", ");
+            }
+            result.append("\n");
+
+        }
+
+        return result.toString();
     }
 }
