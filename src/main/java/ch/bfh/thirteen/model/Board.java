@@ -26,7 +26,7 @@ public class Board {
         int x = 0;
         for (Vector<Field> row : rows) {
             for (int i = 0; i <= height; i++) {
-                row.add(new Field(x, i, wrng.getNumber()));
+                row.add(new Field(x, i, wrng.getNumber(),this));
             }
             x++;
         }

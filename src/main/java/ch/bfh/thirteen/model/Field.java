@@ -3,11 +3,13 @@ package main.java.ch.bfh.thirteen.model;
 public class Field {
     private int x, y;
     private int value;
+    private Board parent;
 
-    public Field(int x, int y, int value) {
+    public Field(int x, int y, int value, Board parent) {
         this.x = x;
         this.y = y;
         this.value = value;
+        this.parent = parent;
     }
 
     public int getX() {
@@ -29,4 +31,16 @@ public class Field {
     public void incrementValue(){
         this.value++;
     }
+
+    public void click(){
+        try {
+            if(parent.isClickable(this)){
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        incrementValue();
+    }
+
 }
