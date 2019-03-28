@@ -33,13 +33,6 @@ public class Field {
     }
 
     public void click(){
-        try {
-            if(parent.isClickable(this)){
-                return;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         incrementValue();
     }
 
