@@ -10,6 +10,7 @@ public class Board {
     private int current_min = 1;
     private int width;
     private int height;
+    private static GameState gameState = GameState.UNINITIALIZED;
     private ArrayList<Vector<Field>> rows = new ArrayList<>();
 
     public Board(int width, int height) {
@@ -112,5 +113,39 @@ public class Board {
         }
 
         return result.toString();
+    }
+
+    /**
+     * checks if the game is won
+     * @return true if the current max is 13 else false
+     */
+    public boolean isWon(){
+        return current_max == 13;
+    }
+
+    /**
+     * checks each field if it is clickable
+     * @return true if there is atleast one field clickable
+     */
+    public boolean isLost(){
+        try {
+            for(Vector<Field> row:rows){
+                for(Field f: row){
+                        if(isClickable(f))
+                            return true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * checks if the game is finished
+     * @return true if it is won or lost
+     */
+    public boolean isFinished(){
+        return isLost()||isWon();
     }
 }

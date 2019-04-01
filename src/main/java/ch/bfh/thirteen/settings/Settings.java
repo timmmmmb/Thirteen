@@ -1,14 +1,11 @@
 package main.java.ch.bfh.thirteen.settings;
 
-import main.java.ch.bfh.thirteen.model.GameState;
-
 public class Settings {
     private static final int fieldWidth = 64;
     private static final int fieldHeight = 64;
     private static final int boardHeight = 5;
     private static final int boardWidth = 5;
 
-    private static GameState gameState = GameState.UNINITIALIZED;
 
     /**
      * this function loads all of the resources at the start of the game
