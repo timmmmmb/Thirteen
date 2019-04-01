@@ -3,12 +3,10 @@
 <?import java.net.URL?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
-<?import main.java.ch.bfh.thirteen.model.FieldLabel?>
 
-<HBox xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ch.bfh.thirteen.controller.LoadingScreenController">
+<HBox id="root" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ch.bfh.thirteen.controller.LoadingScreenController">
     <stylesheets>
         <URL value="@../css/loadingScreen.css" />
     </stylesheets>
     <Label text="Loading" />
-    <FieldLabel onMouseClicked="#onClick" text="1" />
 </HBox>

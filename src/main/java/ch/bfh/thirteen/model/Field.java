@@ -47,6 +47,6 @@ public class Field {
     }
 
     public String toString(){
-        return String.valueOf(x)+" "+String.valueOf(y)+" "+String.valueOf(value);
+        return String.valueOf(value);
     }
 }

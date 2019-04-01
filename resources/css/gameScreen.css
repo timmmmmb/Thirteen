@@ -1,0 +1,57 @@
+
+* {
+    -fx-background-color: deeppink;
+    -fx-alignment: center;
+}
+
+HBox {
+    -fx-pref-width: 320px;
+    -fx-pref-height: 340px;
+}
+
+Label {
+    -fx-font-size: 48px;
+    -fx-font-family: Arial, serif;
+    -fx-text-fill: white;
+}
+
+FieldLabel {
+    -fx-font-size: 48px;
+    -fx-font-family: Arial, serif;
+    -fx-text-fill: white;
+
+    -fx-text-alignment: center;
+    -fx-pref-height: 64px;
+    -fx-min-width: 64px;
+    -fx-pref-width: 64px;
+    -fx-min-height: 64px;
+    -fx-background-color: blue;
+}
+
+.field1{
+    -fx-background-color: blue;
+}
+
+.field2{
+    -fx-background-color: red;
+}
+
+.field3{
+    -fx-background-color: green;
+}
+
+FieldLabel:hover{
+    -fx-background-color: lightblue;
+}
+
+.field1:hover {
+    -fx-background-color: lightblue;
+}
+
+.field2:hover {
+    -fx-background-color: darkred;
+}
+
+.field3:hover {
+    -fx-background-color: lightgreen;
+}
