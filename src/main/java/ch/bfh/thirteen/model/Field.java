@@ -28,12 +28,22 @@ public class Field {
         this.value = value;
     }
 
-    public void incrementValue(){
+    private void incrementValue(){
         this.value++;
     }
 
+    /**
+     * use this function to click this field
+     */
     public void click(){
         incrementValue();
+        parent.removeNeighbores(this);
+        if(parent.isWon()){
+            parent.setGameState(GameState.WON);
+        }else if(parent.isLost()){
+            parent.setGameState(GameState.LOST);
+        }
+
     }
 
     public String toString(){

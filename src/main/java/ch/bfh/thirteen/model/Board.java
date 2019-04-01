@@ -10,7 +10,7 @@ public class Board {
     private int current_min = 1;
     private int width;
     private int height;
-    private static GameState gameState = GameState.UNINITIALIZED;
+    private GameState gameState = GameState.UNINITIALIZED;
     private ArrayList<Vector<Field>> rows = new ArrayList<>();
 
     public Board(int width, int height) {
@@ -41,6 +41,12 @@ public class Board {
         }
     }
 
+    /**
+     * checks if two fields are clickable
+     * @param f the field that gets checkt
+     * @return true if the field f can be clicked
+     * @throws Exception if one of the neighbores is not in the board
+     */
     public boolean isClickable(Field f) throws Exception {
         for(Field neighbor:getNeighbores(f)){
             if(isClickable(f,neighbor)){
@@ -50,7 +56,7 @@ public class Board {
         return false;
     }
 
-    public boolean isClickable(Field f1, Field f2){
+    private boolean isClickable(Field f1, Field f2){
         return f1.getValue() == f2.getValue();
     }
 
@@ -60,18 +66,22 @@ public class Board {
      * @param f the field which neighbores you need
      * @return an arraylist with all of the neighbores
      */
-    public ArrayList<Field> getNeighbores(Field f) throws Exception {
+    public ArrayList<Field> getNeighbores(Field f) {
         int x = f.getX();
         int y = f.getY();
         ArrayList<Field> neighbores = new ArrayList<>();
-        if (y < getHeight())
-            neighbores.add(getField(x, y + 1));
-        if (y > 0)
-            neighbores.add(getField(x, y - 1));
-        if (x < getWidth())
-            neighbores.add(getField(x + 1, y));
-        if (x > 0)
-            neighbores.add(getField(x - 1, y));
+        try {
+            if (y < getHeight())
+                neighbores.add(getField(x, y + 1));
+            if (y > 0)
+                neighbores.add(getField(x, y - 1));
+            if (x < getWidth())
+                neighbores.add(getField(x + 1, y));
+            if (x > 0)
+                neighbores.add(getField(x - 1, y));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return neighbores;
     }
 
@@ -147,5 +157,31 @@ public class Board {
      */
     public boolean isFinished(){
         return isLost()||isWon();
+    }
+
+    /**
+     * removes the neighboring fields of f if they have the same value
+     * @param f the field whose neighbores shall get removed
+     */
+    void removeNeighbores(Field f){
+        for(Field neighbore:getNeighbores(f)){
+            if(isClickable(f,neighbore)){
+                removeNeighbores(neighbore);
+                removeField(neighbore);
+            }
+        }
+    }
+
+    /**
+     * removes Field f from the board
+     * @param f the field who shall get removed
+     */
+    private void removeField(Field f){
+        Vector<Field> v = rows.get(f.getX());
+        v.remove(f.getY());
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
     }
 }
