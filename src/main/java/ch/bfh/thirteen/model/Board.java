@@ -46,7 +46,7 @@ public class Board {
      * @param f the field that gets checkt
      * @return true if the field f can be clicked
      */
-    private boolean isClickable(Field f) {
+    public boolean isClickable(Field f) {
         for(Field neighbor:getNeighbores(f)){
             if(isClickable(f,neighbor)){
                 return true;
@@ -127,7 +127,7 @@ public class Board {
      * checks if the game is won
      * @return true if the current max is 13 else false
      */
-    boolean isWon(){
+    public boolean isWon(){
         return current_max == 13;
     }
 
@@ -135,7 +135,7 @@ public class Board {
      * checks each field if it is clickable
      * @return true if there is atleast one field clickable
      */
-    boolean isLost(){
+    public boolean isLost(){
         try {
             for(Vector<Field> row:rows){
                 for(Field f: row){

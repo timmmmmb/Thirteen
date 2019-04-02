@@ -49,7 +49,7 @@ public class Field {
             parent.setGameState(GameState.LOST);
             System.out.println("lost");
         }
-        System.out.println(parent.toSting());
+        //System.out.println(parent.toSting());
 
     }
 
