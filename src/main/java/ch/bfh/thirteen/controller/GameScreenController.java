@@ -6,14 +6,21 @@ import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import main.java.ch.bfh.thirteen.application.ThirteenApplication;
+import main.java.ch.bfh.thirteen.model.Board;
+import main.java.ch.bfh.thirteen.model.Field;
+import main.java.ch.bfh.thirteen.model.FieldLabel;
+
+import java.util.Vector;
 
 public class GameScreenController {
     @FXML
     private HBox mainHBox;
 
-    public static void addFadingIn(final Node node, final Group parent) {
-        final FadeTransition transition = new FadeTransition(Duration.millis(250), node);
+    public static void addFadingIn(final Node node, final VBox parent) {
+        final FadeTransition transition = new FadeTransition(Duration.millis(500), node);
         transition.setFromValue(0);
         transition.setToValue(1);
         transition.setInterpolator(Interpolator.EASE_IN);
@@ -37,13 +44,21 @@ public class GameScreenController {
     /**
      * adds FieldLabels for each Field
      */
-    public static void addLabels(){
-
+    public void addLabels(){
+        Board b = ThirteenApplication.getBoard();
+        for(Vector<Field> row:b.getRows()){
+            VBox v = new VBox();
+            for(int i = row.size()-1; i>=0;i--){
+                FieldLabel fl = new FieldLabel();
+                fl.setTextAndClass(String.valueOf(row.get(i)));
+                addFadingIn(fl,v);
+            }
+            mainHBox.getChildren().add(v);
+        }
     }
 
     @FXML
     void initialize() {
-        System.out.println(mainHBox);
-        System.out.println(mainHBox.getChildren());
+        addLabels();
     }
 }

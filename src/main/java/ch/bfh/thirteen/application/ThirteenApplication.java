@@ -11,7 +11,7 @@ import main.java.ch.bfh.thirteen.settings.Settings;
 import java.util.Objects;
 
 public class ThirteenApplication extends Application {
-    private Board gameBoard;
+    private static Board gameBoard;
     @Override
     public void init() throws Exception{
         Settings.loadResources();
@@ -49,7 +49,7 @@ public class ThirteenApplication extends Application {
         }*/
     }
 
-    public Board getBoard(){
+    public static Board getBoard(){
         return gameBoard;
     }
 }
