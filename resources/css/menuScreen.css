@@ -1,21 +1,29 @@
 * {
-    -fx-background-color: lightgray;
-    background-image: url("Images/background.jpg");
+
     -fx-alignment: center;
+}
+
+#pane{
+    -fx-background-color: lightgray;
+    -fx-background-image: url("../images/background.jpg");
+}
+
+Button{
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
 }
 
 #startButton{
     -fx-background-color: #00E868;
-    -fx-text-fill: white;
-    -fx-font-size: 32px;
-    -fx-font-weight: bold;
+
 
 }
 
 #autoplayButton{
 
     -fx-background-color: #E89B00;
-    -fx-text-fill: white;
-    -fx-font-size: 32px;
-    -fx-font-weight: bold;
+
 }

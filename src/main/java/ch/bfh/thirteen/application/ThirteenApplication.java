@@ -28,7 +28,7 @@ public class ThirteenApplication extends Application {
 
         Scene gameScene = new Scene(root);
 
-        //gameScene.getStylesheets().add(getClass().getResource("css/menuScreen.css").toExternalForm());
+
 
         gameStage.getIcons().add(Settings.getGameIcon());
         gameStage.setTitle("");
