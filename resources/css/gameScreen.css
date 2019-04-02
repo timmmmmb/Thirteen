@@ -1,18 +1,12 @@
 
 * {
-    -fx-background-color: deeppink;
+    -fx-background-color: white;
     -fx-alignment: center;
 }
 
 HBox {
     -fx-pref-width: 320px;
     -fx-pref-height: 340px;
-}
-
-Label {
-    -fx-font-size: 48px;
-    -fx-font-family: Arial, serif;
-    -fx-text-fill: white;
 }
 
 FieldLabel {
@@ -40,6 +34,18 @@ FieldLabel {
     -fx-background-color: green;
 }
 
+.field4{
+    -fx-background-color: yellow;
+}
+
+.field5{
+    -fx-background-color: pink;
+}
+
+.field6{
+    -fx-background-color: darkblue;
+}
+
 FieldLabel:hover{
     -fx-background-color: lightblue;
 }
@@ -53,5 +59,17 @@ FieldLabel:hover{
 }
 
 .field3:hover {
+    -fx-background-color: lightgreen;
+}
+
+.field4:hover {
+    -fx-background-color: lightgreen;
+}
+
+.field5:hover {
+    -fx-background-color: lightgreen;
+}
+
+.field6:hover {
     -fx-background-color: lightgreen;
 }

@@ -48,4 +48,8 @@ public class ThirteenApplication extends Application {
             }
         }*/
     }
+
+    public Board getBoard(){
+        return gameBoard;
+    }
 }
