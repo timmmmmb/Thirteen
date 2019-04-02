@@ -4,6 +4,8 @@ public class Field {
     private int x, y;
     private int value;
     private Board parent;
+    private boolean tobeRemoved = false;
+    private boolean visited = false;
 
     public Field(int x, int y, int value, Board parent) {
         this.x = x;
@@ -36,17 +38,43 @@ public class Field {
      * use this function to click this field
      */
     public void click(){
-        incrementValue();
         parent.removeNeighbores(this);
+        parent.addFields();
+        parent.updateFieldPositions();
+        incrementValue();
         if(parent.isWon()){
             parent.setGameState(GameState.WON);
+            System.out.println("won");
         }else if(parent.isLost()){
             parent.setGameState(GameState.LOST);
+            System.out.println("lost");
         }
+        System.out.println(parent.toSting());
 
     }
 
     public String toString(){
-        return String.valueOf(value);
+        return String.valueOf(value);//+" "+String.valueOf(x)+" "+String.valueOf(y);
+    }
+
+    void setPosition(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    boolean getToBeRemoved(){
+        return tobeRemoved;
+    }
+
+    void toBeRemoved(){
+        tobeRemoved = true;
+    }
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
     }
 }

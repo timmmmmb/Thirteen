@@ -34,7 +34,7 @@ public class Board {
 
         // once add the maxnumber to the board
         try {
-            Field f = getField(new Random().nextInt(getWidth()-1),getHeight()-1);
+            Field f = getField(new Random().nextInt(getWidth()-1),0);
             f.setValue(current_max);
         } catch (Exception e) {
             e.printStackTrace();
@@ -45,9 +45,8 @@ public class Board {
      * checks if two fields are clickable
      * @param f the field that gets checkt
      * @return true if the field f can be clicked
-     * @throws Exception if one of the neighbores is not in the board
      */
-    public boolean isClickable(Field f) throws Exception {
+    public boolean isClickable(Field f) {
         for(Field neighbor:getNeighbores(f)){
             if(isClickable(f,neighbor)){
                 return true;
@@ -71,11 +70,11 @@ public class Board {
         int y = f.getY();
         ArrayList<Field> neighbores = new ArrayList<>();
         try {
-            if (y < getHeight())
+            if (y+1 < getHeight())
                 neighbores.add(getField(x, y + 1));
             if (y > 0)
                 neighbores.add(getField(x, y - 1));
-            if (x < getWidth())
+            if (x+1 < getWidth())
                 neighbores.add(getField(x + 1, y));
             if (x > 0)
                 neighbores.add(getField(x - 1, y));
@@ -94,7 +93,7 @@ public class Board {
      * @throws Exception if the coordinates are bigger than the board
      */
     public Field getField(int x, int y) throws Exception {
-        if (x >= getWidth() || y >= getHeight())
+        if (x >= rows.size() || y >= rows.get(x).size())
             throw new Exception("x " + x + " or y " + y + " to high width " + width + " height " + height);
         return rows.get(x).get(y);
     }
@@ -113,15 +112,14 @@ public class Board {
 
     public String toSting(){
         StringBuilder result = new StringBuilder();
-        for(int i = 0;i<getWidth();i++){
+        for(int i = getWidth()-1;i>=0;i--){
             for(Vector<Field> row : rows){
                 result.append(row.get(i).toString());
                 result.append(", ");
             }
+            result.replace(result.length()-2,result.length(),"");
             result.append("\n");
-
         }
-
         return result.toString();
     }
 
@@ -141,14 +139,14 @@ public class Board {
         try {
             for(Vector<Field> row:rows){
                 for(Field f: row){
-                        if(isClickable(f))
-                            return true;
+                    if(isClickable(f))
+                        return false;
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return false;
+        return true;
     }
 
     /**
@@ -164,10 +162,14 @@ public class Board {
      * @param f the field whose neighbores shall get removed
      */
     void removeNeighbores(Field f){
+        f.setVisited(true);
         for(Field neighbore:getNeighbores(f)){
-            if(isClickable(f,neighbore)){
+            if(!neighbore.isVisited()&&!neighbore.getToBeRemoved()&&isClickable(f,neighbore)){
+                neighbore.toBeRemoved();
                 removeNeighbores(neighbore);
-                removeField(neighbore);
+                if(neighbore.getToBeRemoved()){
+                    removeField(neighbore);
+                }
             }
         }
     }
@@ -178,10 +180,36 @@ public class Board {
      */
     private void removeField(Field f){
         Vector<Field> v = rows.get(f.getX());
-        v.remove(f.getY());
+        v.remove(f);
     }
 
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
+    }
+
+    /**
+     * update all of the positions of the fields to their position in the vector
+     */
+    public void updateFieldPositions(){
+        for(int i = 0; i<rows.size();i++){
+            for(int j = 0; j<rows.get(i).size();j++){
+                Field f = rows.get(i).get(j);
+                f.setPosition(i,j);
+                f.setVisited(false);
+
+            }
+        }
+    }
+
+    /**
+     * adds new Fields while the rows are not full
+     */
+    public void addFields(){
+        for(Vector<Field> row:rows){
+            while(row.size()<height){
+                row.add(new Field(0, 0, wrng.getNumber(),this));
+            }
+        }
+
     }
 }
