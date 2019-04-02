@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import main.java.ch.bfh.thirteen.model.Board;
 import main.java.ch.bfh.thirteen.settings.Settings;
@@ -25,12 +26,16 @@ public class ThirteenApplication extends Application {
         // loads the fxml from the view package
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("fxml/menuScreen.fxml")));
 
-        Scene gameScene = new Scene(root, 320, 340);
+        Scene gameScene = new Scene(root);
+
+        //gameScene.getStylesheets().add(getClass().getResource("css/menuScreen.css").toExternalForm());
 
         gameStage.getIcons().add(Settings.getGameIcon());
         gameStage.setTitle("");
         gameStage.setResizable(false);
         gameStage.setScene(gameScene);
         gameStage.show();
+
+
     }
 }

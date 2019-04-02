@@ -18,7 +18,8 @@ public class ThirteenPreloader extends Preloader {
         this.preloaderStage = primaryStage;
 
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("fxml/loadingScreen.fxml")));
-        Scene scene = new Scene(root,320, 340);
+        Scene scene = new Scene(root);
+
 
         primaryStage.getIcons().add(new Image("images/icon.png"));
         primaryStage.setTitle("");

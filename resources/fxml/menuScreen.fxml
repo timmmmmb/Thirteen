@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="main.java.ch.bfh.thirteen.controller.MenuScreenController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="500.0" prefWidth="400.0" style="-fx-background-image: lightgray;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ch.bfh.thirteen.controller.MenuScreenController">
+    <children>
+        <Button fx:id="startButton" layoutX="125.0" layoutY="250.0" mnemonicParsing="false" onAction="#startEvent" prefHeight="50.0" prefWidth="150.0" text="Start" />
+        <Button fx:id="autoplayButton" layoutX="125.0" layoutY="343.0" mnemonicParsing="false" onAction="#autoplayEvent" prefHeight="50.0" prefWidth="150.0" text="Autoplay" />
+        <ImageView fx:id="image" fitHeight="159.0" fitWidth="162.0" layoutX="121.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../../Desktop/13_2.png" />
+            </image>
+        </ImageView>
+    </children>
 </AnchorPane>

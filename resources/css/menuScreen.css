@@ -1,0 +1,21 @@
+* {
+    -fx-background-color: lightgray;
+    background-image: url("Images/background.jpg");
+    -fx-alignment: center;
+}
+
+#startButton{
+    -fx-background-color: #00E868;
+    -fx-text-fill: white;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+
+}
+
+#autoplayButton{
+
+    -fx-background-color: #E89B00;
+    -fx-text-fill: white;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+}
