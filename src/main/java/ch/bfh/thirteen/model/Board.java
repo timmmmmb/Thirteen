@@ -46,7 +46,7 @@ public class Board {
      * @param f the field that gets checkt
      * @return true if the field f can be clicked
      */
-    public boolean isClickable(Field f) {
+    private boolean isClickable(Field f) {
         for(Field neighbor:getNeighbores(f)){
             if(isClickable(f,neighbor)){
                 return true;
@@ -127,7 +127,7 @@ public class Board {
      * checks if the game is won
      * @return true if the current max is 13 else false
      */
-    public boolean isWon(){
+    boolean isWon(){
         return current_max == 13;
     }
 
@@ -135,7 +135,7 @@ public class Board {
      * checks each field if it is clickable
      * @return true if there is atleast one field clickable
      */
-    public boolean isLost(){
+    boolean isLost(){
         try {
             for(Vector<Field> row:rows){
                 for(Field f: row){
@@ -183,14 +183,14 @@ public class Board {
         v.remove(f);
     }
 
-    public void setGameState(GameState gameState) {
+    void setGameState(GameState gameState) {
         this.gameState = gameState;
     }
 
     /**
      * update all of the positions of the fields to their position in the vector
      */
-    public void updateFieldPositions(){
+    void updateFieldPositions(){
         for(int i = 0; i<rows.size();i++){
             for(int j = 0; j<rows.get(i).size();j++){
                 Field f = rows.get(i).get(j);
@@ -204,7 +204,7 @@ public class Board {
     /**
      * adds new Fields while the rows are not full
      */
-    public void addFields(){
+    void addFields(){
         for(Vector<Field> row:rows){
             while(row.size()<height){
                 row.add(new Field(0, 0, wrng.getNumber(),this));

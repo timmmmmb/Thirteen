@@ -26,7 +26,7 @@ public class Field {
         return value;
     }
 
-    public void setValue(int value){
+    void setValue(int value){
         this.value = value;
     }
 
@@ -70,11 +70,11 @@ public class Field {
         tobeRemoved = true;
     }
 
-    public boolean isVisited() {
+    boolean isVisited() {
         return visited;
     }
 
-    public void setVisited(boolean visited) {
+    void setVisited(boolean visited) {
         this.visited = visited;
     }
 }
