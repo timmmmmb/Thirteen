@@ -94,7 +94,7 @@ public class Board {
      */
     public Field getField(int x, int y) throws Exception {
         if (x >= rows.size() || y >= rows.get(x).size())
-            throw new Exception("x " + x + " or y " + y + " to high width " + width + " height " + height);
+            throw new Exception("x " + x + " or y " + y + " to high width " + rows.size() + " height " + rows.get(x).size());
         return rows.get(x).get(y);
     }
 

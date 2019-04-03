@@ -19,57 +19,29 @@ FieldLabel {
     -fx-min-width: 64px;
     -fx-pref-width: 64px;
     -fx-min-height: 64px;
-    -fx-background-color: blue;
+    -fx-background-color: #fffb00;
 }
 
 .field1{
-    -fx-background-color: blue;
+    -fx-background-color: #fffb00;
 }
 
 .field2{
-    -fx-background-color: red;
+    -fx-background-color: #41e512;
 }
 
 .field3{
-    -fx-background-color: green;
+    -fx-background-color: #eeae14;
 }
 
 .field4{
-    -fx-background-color: yellow;
+    -fx-background-color: #e2241f;
 }
 
 .field5{
-    -fx-background-color: pink;
+    -fx-background-color: #f113ab;
 }
 
 .field6{
-    -fx-background-color: darkblue;
-}
-
-FieldLabel:hover{
-    -fx-background-color: lightblue;
-}
-
-.field1:hover {
-    -fx-background-color: lightblue;
-}
-
-.field2:hover {
-    -fx-background-color: darkred;
-}
-
-.field3:hover {
-    -fx-background-color: lightgreen;
-}
-
-.field4:hover {
-    -fx-background-color: lightgreen;
-}
-
-.field5:hover {
-    -fx-background-color: lightgreen;
-}
-
-.field6:hover {
-    -fx-background-color: lightgreen;
+    -fx-background-color: #ae0ac5;
 }
