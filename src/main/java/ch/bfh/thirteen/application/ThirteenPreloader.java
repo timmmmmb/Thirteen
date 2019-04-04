@@ -21,7 +21,7 @@ public class ThirteenPreloader extends Preloader {
         Scene scene = new Scene(root);
 
 
-        primaryStage.getIcons().add(new Image("images/icon.png"));
+        primaryStage.getIcons().add(new Image("images/13_logo.png"));
         primaryStage.setTitle("");
         primaryStage.setResizable(false);
 

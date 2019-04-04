@@ -1,12 +1,12 @@
 
 * {
-    -fx-background-color: black;
+    -fx-background-color: #000000;
     -fx-alignment: center;
 }
 
 HBox {
-    -fx-pref-width: 340px;
-    -fx-pref-height: 360px;
+    -fx-pref-width: 400px;
+    -fx-pref-height: 500px;
 }
 
 Label{
@@ -15,8 +15,8 @@ Label{
     -fx-text-fill: white;
 
     -fx-text-alignment: center;
-
 }
+
 
 FieldLabel {
     -fx-font-size: 48px;
@@ -24,31 +24,31 @@ FieldLabel {
     -fx-text-fill: white;
 
     -fx-text-alignment: center;
-    -fx-background-color: #fffb00;
+    -fx-background-color: #c8d6e5;
 }
 
 .field1{
-    -fx-background-color: #fffb00;
+    -fx-background-color: #feca57;
 }
 
 .field2{
-    -fx-background-color: #41e512;
+    -fx-background-color: #1dd1a1;
 }
 
 .field3{
-    -fx-background-color: #eeae14;
+    -fx-background-color: #ff9f43;
 }
 
 .field4{
-    -fx-background-color: #e2241f;
+    -fx-background-color: #ee5253;
 }
 
 .field5{
-    -fx-background-color: #f113ab;
+    -fx-background-color: #f368e0;
 }
 
 .field6{
-    -fx-background-color: #ae0ac5;
+    -fx-background-color: #5f27cd;
 }
 
 .field7{

@@ -33,12 +33,28 @@ public class MenuScreenController {
     private ImageView image;
 
     @FXML
+    private Button hiScoreButton;
+
+    @FXML
+    private Button infoButton;
+
+    @FXML
     void autoplayEvent(ActionEvent event) {
 
     }
 
     @FXML
     void startEvent(ActionEvent event) {
+
+    }
+
+    @FXML
+    void hiScoreEvent(ActionEvent event) {
+
+    }
+
+    @FXML
+    void infoEvent(ActionEvent event) {
 
     }
 
@@ -52,6 +68,38 @@ public class MenuScreenController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    void switchAutoplay(MouseEvent event){
+
+    }
+
+    @FXML
+    void switchHighScore(MouseEvent event){
+
+        try {
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Parent newroot = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("fxml/HighScoreScreen.fxml")));
+            stage.setScene(new Scene(newroot));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void switchSettings(MouseEvent event){
+
+        try {
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Parent newroot = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("fxml/SettingsScreen.fxml")));
+            stage.setScene(new Scene(newroot));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
     @FXML
     void initialize() {
