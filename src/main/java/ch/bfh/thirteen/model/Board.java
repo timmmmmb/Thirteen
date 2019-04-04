@@ -1,11 +1,13 @@
 package main.java.ch.bfh.thirteen.model;
 
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Vector;
 
 public class Board {
     private WeightedRandomNumberGenerator wrng;
+    private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
     private int current_max = 6;
     private int current_min = 1;
     private int width;
@@ -39,6 +41,12 @@ public class Board {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        //if the game is not playable restart
+        if(isLost()){
+            rows = new ArrayList<>();
+            initializeBoard();
+        }
+        setGameState(GameState.RUNNING);
     }
 
     /**
@@ -184,6 +192,7 @@ public class Board {
     }
 
     void setGameState(GameState gameState) {
+        this.pcs.firePropertyChange("GameStateChange",this.gameState,gameState);
         this.gameState = gameState;
     }
 
@@ -210,6 +219,9 @@ public class Board {
                 row.add(new Field(0, 0, wrng.getNumber(),this));
             }
         }
+    }
 
+    public PropertyChangeSupport getPcs() {
+        return pcs;
     }
 }

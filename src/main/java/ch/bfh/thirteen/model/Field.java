@@ -1,5 +1,7 @@
 package main.java.ch.bfh.thirteen.model;
 
+import java.lang.reflect.Array;
+
 public class Field {
     private int x, y;
     private int value;
@@ -37,7 +39,8 @@ public class Field {
     /**
      * use this function to click this field
      */
-    public void click(){
+    public Array[] click(){
+        Array[] returnvalue = new Array[2];
         parent.removeNeighbores(this);
         parent.addFields();
         parent.updateFieldPositions();
@@ -50,7 +53,7 @@ public class Field {
             System.out.println("lost");
         }
         //System.out.println(parent.toSting());
-
+        return returnvalue;
     }
 
     public String toString(){

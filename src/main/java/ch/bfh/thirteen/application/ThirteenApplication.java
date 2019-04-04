@@ -5,17 +5,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import main.java.ch.bfh.thirteen.model.Board;
 import main.java.ch.bfh.thirteen.settings.Settings;
 
 import java.util.Objects;
 
 public class ThirteenApplication extends Application {
-    private static Board gameBoard;
     @Override
     public void init() throws Exception{
         Settings.loadResources();
-        gameBoard = new Board(Settings.getBoardWidth(), Settings.getBoardHeight());
+        Settings.initializeBoard();
         //System.out.println(gameBoard.toSting());
         Thread.sleep(1000);
     }
@@ -49,7 +47,4 @@ public class ThirteenApplication extends Application {
         }*/
     }
 
-    public static Board getBoard(){
-        return gameBoard;
-    }
 }

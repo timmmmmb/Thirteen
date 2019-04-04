@@ -9,6 +9,15 @@ HBox {
     -fx-pref-height: 360px;
 }
 
+Label{
+    -fx-font-size: 48px;
+    -fx-font-family: Arial, serif;
+    -fx-text-fill: white;
+
+    -fx-text-alignment: center;
+
+}
+
 FieldLabel {
     -fx-font-size: 48px;
     -fx-font-family: Arial, serif;
