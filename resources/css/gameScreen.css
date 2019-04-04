@@ -24,10 +24,6 @@ FieldLabel {
     -fx-text-fill: white;
 
     -fx-text-alignment: center;
-    -fx-pref-height: 64px;
-    -fx-min-width: 64px;
-    -fx-pref-width: 64px;
-    -fx-min-height: 64px;
     -fx-background-color: #fffb00;
 }
 
@@ -53,4 +49,8 @@ FieldLabel {
 
 .field6{
     -fx-background-color: #ae0ac5;
+}
+
+.field7{
+    -fx-background-color: #c54740;
 }

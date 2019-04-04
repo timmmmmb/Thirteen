@@ -47,10 +47,8 @@ public class Field {
         incrementValue();
         if(parent.isWon()){
             parent.setGameState(GameState.WON);
-            System.out.println("won");
         }else if(parent.isLost()){
             parent.setGameState(GameState.LOST);
-            System.out.println("lost");
         }
         //System.out.println(parent.toSting());
         return returnvalue;

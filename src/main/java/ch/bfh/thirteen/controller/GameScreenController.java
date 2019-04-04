@@ -19,8 +19,6 @@ import main.java.ch.bfh.thirteen.settings.Settings;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Vector;
 
 public class GameScreenController implements PropertyChangeListener {
@@ -64,6 +62,8 @@ public class GameScreenController implements PropertyChangeListener {
                 FieldLabel fl = new FieldLabel(x,y);
                 fl.setTextAndClass(String.valueOf(row.get(i)));
                 fl.setOnMouseClicked(this::click);
+                fl.setPrefHeight(Settings.getFieldHeight());
+                fl.setPrefWidth(Settings.getFieldWidth());
                 //addFadingIn(fl,v);
                 v.getChildren().add(fl);
                 y++;
@@ -120,7 +120,7 @@ public class GameScreenController implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if(evt.getNewValue() instanceof GameState){
+        if(evt.getNewValue() instanceof GameState&&evt.getPropertyName().equals("GameStateChange")){
             if(evt.getNewValue() == GameState.WON){
                 gameStateLabel.setText("Won");
             }else if(evt.getNewValue() == GameState.LOST){
