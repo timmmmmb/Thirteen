@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ch.bfh.thirteen.controller.SettingsScreenController">
+   <children>
+      <Label layoutX="132.0" layoutY="44.0" text="Settings">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Label>
+      <ChoiceBox id="languageMenu" layoutX="200.0" layoutY="155.0" onMouseClicked="#selectLanguage" prefHeight="25.0" prefWidth="109.0" />
+      <Label fx:id="langageLabel" layoutX="87.0" layoutY="159.0" text="Language" />
+      <Label fx:id="musicLabel" layoutX="79.0" layoutY="241.0" text="Music on/off" />
+      <ToggleButton fx:id="musicButton" layoutX="219.0" layoutY="238.0" mnemonicParsing="false" onMouseClicked="#musicOnOff" prefHeight="25.0" prefWidth="84.0" text="ToggleButton" />
+      <Button fx:id="infoButton" layoutX="256.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#switchInfoScreen" text="?" />
+      <Label fx:id="infoLabel" layoutX="78.0" layoutY="319.0" text="How to play?" />
+      <Button fx:id="backButton" layoutX="174.0" layoutY="414.0" mnemonicParsing="false" onMouseClicked="#switchMenuScreen" text="Back" />
+   </children>
+</AnchorPane>

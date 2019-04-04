@@ -1,0 +1,22 @@
+* {
+
+    -fx-alignment: center;
+}
+
+#pane{
+    -fx-background-color: lightgray;
+    -fx-background-image: url("../images/background.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover; }
+
+Button{
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#cca119, #ee8900);
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;}
+
+Button:hover{
+
+    -fx-background-color: linear-gradient(#ffe73a, #ffa22c);}

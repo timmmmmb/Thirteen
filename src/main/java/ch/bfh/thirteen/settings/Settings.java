@@ -18,7 +18,7 @@ public class Settings {
      * this function loads all of the resources at the start of the game
      */
     public static void loadResources() {
-        gameIcon = new Image("images/icon.png");
+        gameIcon = new Image("images/13_logo.png");
     }
 
     public static int getFieldWidth() {
