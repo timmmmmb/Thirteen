@@ -1,12 +1,12 @@
 
 * {
-    -fx-background-color: white;
+    -fx-background-color: black;
     -fx-alignment: center;
 }
 
 HBox {
-    -fx-pref-width: 320px;
-    -fx-pref-height: 340px;
+    -fx-pref-width: 340px;
+    -fx-pref-height: 360px;
 }
 
 FieldLabel {
