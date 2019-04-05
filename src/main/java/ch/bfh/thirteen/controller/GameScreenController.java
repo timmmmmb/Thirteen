@@ -25,16 +25,18 @@ public class GameScreenController implements PropertyChangeListener {
     @FXML
     private AnchorPane gamePane;
     @FXML
-    private Label gameStateLabel;
+    private Label gameStateLabel, scoreLabel;
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if(evt.getNewValue() instanceof GameState&&evt.getPropertyName().equals("GameStateChange")){
-            if(evt.getNewValue() == GameState.WON){
+        if (evt.getNewValue() instanceof GameState && evt.getPropertyName().equals("GameStateChange")) {
+            if (evt.getNewValue() == GameState.WON) {
                 gameStateLabel.setText("Won");
-            }else if(evt.getNewValue() == GameState.LOST){
+            } else if (evt.getNewValue() == GameState.LOST) {
                 gameStateLabel.setText("Lost");
             }
+        }else if(evt.getPropertyName().equals("ScoreChanged")){
+            scoreLabel.setText(evt.getNewValue().toString());
         }
     }
 
@@ -69,13 +71,13 @@ public class GameScreenController implements PropertyChangeListener {
     /**
      * adds FieldLabels for each Field
      */
-    private void addLabels(){
+    private void addLabels() {
         Board b = Settings.getBoard();
         int x = 0;
-        for(Vector<Field> row:b.getRows()){
+        for (Vector<Field> row : b.getRows()) {
             int y = 0;
-            for(int i = row.size()-1; i>=0;i--){
-                FieldLabel fl = new FieldLabel(x,y);
+            for (int i = row.size() - 1; i >= 0; i--) {
+                FieldLabel fl = new FieldLabel(x, y);
                 fl.setTextAndClass(String.valueOf(row.get(i)));
                 fl.setOnMouseClicked(this::click);
                 //addFadingIn(fl,v);
@@ -84,23 +86,23 @@ public class GameScreenController implements PropertyChangeListener {
             }
             x++;
         }
-        gamePane.setPrefWidth((Settings.getBoardWidth()-1)*Settings.getFieldWidth());
-        gamePane.setPrefHeight((Settings.getBoardHeight()-1)*Settings.getFieldHeight());
+        gamePane.setPrefWidth((Settings.getBoardWidth() - 1) * Settings.getFieldWidth());
+        gamePane.setPrefHeight((Settings.getBoardHeight() - 1) * Settings.getFieldHeight());
     }
 
-    private void removeLabels(ObservableList<Node> tobeRemoved){
+    private void removeLabels(ObservableList<Node> tobeRemoved) {
         gamePane.getChildren().removeAll(tobeRemoved);
     }
 
     @FXML
-    private void click(MouseEvent event){
+    private void click(MouseEvent event) {
         Board b = Settings.getBoard();
         //get coordinates
-        int x = (int) (((FieldLabel)event.getSource()).getLayoutX()/ Settings.getFieldWidth());
-        int y = (int) (Settings.getBoardHeight()-(((FieldLabel)event.getSource()).getLayoutY() / Settings.getFieldWidth())-1);
+        int x = (int) (((FieldLabel) event.getSource()).getLayoutX() / Settings.getFieldWidth());
+        int y = (int) (Settings.getBoardHeight() - (((FieldLabel) event.getSource()).getLayoutY() / Settings.getFieldWidth()) - 1);
         //click in board
         try {
-            b.clickField(x,y);
+            b.clickField(x, y);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -111,12 +113,13 @@ public class GameScreenController implements PropertyChangeListener {
     }
 
     @FXML
-    private void restart(){
+    private void restart() {
         Settings.getBoard().getPcs().removePropertyChangeListener(this);
         Settings.initializeBoard();
         gamePane.getChildren().removeAll(gamePane.getChildren());
         Settings.getBoard().getPcs().addPropertyChangeListener(this);
         addLabels();
         gameStateLabel.setText("");
+        scoreLabel.setText("0");
     }
 }

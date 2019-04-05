@@ -239,6 +239,7 @@ public class Board {
     }
 
     private void increaseScore(){
+        this.pcs.firePropertyChange("ScoreChanged",this.score,this.score+1);
         score++;
     }
 

@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import main.java.ch.bfh.thirteen.settings.Settings;
 
 import java.util.Objects;
 
@@ -21,12 +20,11 @@ public class ThirteenPreloader extends Preloader {
         Scene scene = new Scene(root);
 
 
-        primaryStage.getIcons().add(new Image("images/13_logo.png"));
-        primaryStage.setTitle("");
-        primaryStage.setResizable(false);
-
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        preloaderStage.getIcons().add(new Image("images/13_logo.png"));
+        preloaderStage.setTitle("");
+        preloaderStage.setResizable(false);
+        preloaderStage.setScene(scene);
+        preloaderStage.show();
     }
 
     @Override

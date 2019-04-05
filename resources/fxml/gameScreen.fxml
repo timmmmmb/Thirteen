@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <BorderPane stylesheets="@../css/gameScreen.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ch.bfh.thirteen.controller.GameScreenController">
    <bottom>
@@ -16,11 +17,12 @@
       </HBox>
    </bottom>
    <top>
-      <HBox BorderPane.alignment="CENTER">
+      <VBox BorderPane.alignment="CENTER">
          <children>
+            <Label fx:id="scoreLabel" text="0" />
             <Label fx:id="gameStateLabel" />
          </children>
-      </HBox>
+      </VBox>
    </top>
    <center>
       <AnchorPane fx:id="gamePane" BorderPane.alignment="CENTER">
