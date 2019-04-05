@@ -8,7 +8,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import main.java.ch.bfh.thirteen.model.Board;
@@ -23,11 +23,28 @@ import java.util.Vector;
 
 public class GameScreenController implements PropertyChangeListener {
     @FXML
-    private HBox mainHBox;
+    private AnchorPane gamePane;
     @FXML
     private Label gameStateLabel;
 
-    public static void addFadingIn(final Node node, final VBox parent) {
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if(evt.getNewValue() instanceof GameState&&evt.getPropertyName().equals("GameStateChange")){
+            if(evt.getNewValue() == GameState.WON){
+                gameStateLabel.setText("Won");
+            }else if(evt.getNewValue() == GameState.LOST){
+                gameStateLabel.setText("Lost");
+            }
+        }
+    }
+
+    @FXML
+    private void initialize() {
+        Settings.getBoard().getPcs().addPropertyChangeListener(this);
+        addLabels();
+    }
+
+    private static void addFadingIn(final Node node, final VBox parent) {
         final FadeTransition transition = new FadeTransition(Duration.millis(250), node);
         transition.setFromValue(0);
         transition.setToValue(1);
@@ -36,7 +53,7 @@ public class GameScreenController implements PropertyChangeListener {
         transition.play();
     }
 
-    public static void removeFadingOut(final Node node, final Group parent) {
+    private static void removeFadingOut(final Node node, final Group parent) {
         if (parent.getChildren().contains(node)) {
             final FadeTransition transition = new FadeTransition(Duration.millis(250), node);
             transition.setFromValue(node.getOpacity());
@@ -56,7 +73,6 @@ public class GameScreenController implements PropertyChangeListener {
         Board b = Settings.getBoard();
         int x = 0;
         for(Vector<Field> row:b.getRows()){
-            VBox v = new VBox();
             int y = 0;
             for(int i = row.size()-1; i>=0;i--){
                 FieldLabel fl = new FieldLabel(x,y);
@@ -64,68 +80,47 @@ public class GameScreenController implements PropertyChangeListener {
                 fl.setOnMouseClicked(this::click);
                 fl.setPrefHeight(Settings.getFieldHeight());
                 fl.setPrefWidth(Settings.getFieldWidth());
+                fl.setLayoutX(x*Settings.getFieldWidth());
+                fl.setLayoutY(y*Settings.getFieldHeight());
                 //addFadingIn(fl,v);
-                v.getChildren().add(fl);
+                gamePane.getChildren().add(fl);
                 y++;
             }
             x++;
-            mainHBox.getChildren().add(v);
         }
+        gamePane.setPrefWidth((Settings.getBoardWidth()-1)*Settings.getFieldWidth());
+        gamePane.setPrefHeight((Settings.getBoardHeight()-1)*Settings.getFieldHeight());
     }
 
     private void removeLabels(ObservableList<Node> tobeRemoved){
-        mainHBox.getChildren().removeAll(tobeRemoved);
+        gamePane.getChildren().removeAll(tobeRemoved);
     }
 
     @FXML
     private void click(MouseEvent event){
         Board b = Settings.getBoard();
         //get coordinates
-        int x = ((FieldLabel)event.getSource()).getX();
-        int y = Settings.getBoardHeight()-((FieldLabel)event.getSource()).getY()-1;
+        int x = (int) (((FieldLabel)event.getSource()).getLayoutX()/ Settings.getFieldWidth());
+        int y = (int) (Settings.getBoardHeight()-(((FieldLabel)event.getSource()).getLayoutY() / Settings.getFieldWidth())-1);
         //click in board
         try {
-            Field field = b.getField(x,y);
-            if(!b.isClickable(field)){
-                return;
-            }
-            field.click();
-            //remove all removedLabels
-            removeLabels(mainHBox.getChildren());
-            //add all newLabels
-            addLabels();
+            b.clickField(x,y);
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    void initialize() {
-        Settings.getBoard().getPcs().addPropertyChangeListener(this);
+        //remove all removedLabels
+        removeLabels(gamePane.getChildren());
+        //add all newLabels
         addLabels();
-
     }
-
-
 
     @FXML
     private void restart(){
         Settings.getBoard().getPcs().removePropertyChangeListener(this);
         Settings.initializeBoard();
-        mainHBox.getChildren().removeAll(mainHBox.getChildren());
+        gamePane.getChildren().removeAll(gamePane.getChildren());
         Settings.getBoard().getPcs().addPropertyChangeListener(this);
         addLabels();
         gameStateLabel.setText("");
-    }
-
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        if(evt.getNewValue() instanceof GameState&&evt.getPropertyName().equals("GameStateChange")){
-            if(evt.getNewValue() == GameState.WON){
-                gameStateLabel.setText("Won");
-            }else if(evt.getNewValue() == GameState.LOST){
-                gameStateLabel.setText("Lost");
-            }
-        }
     }
 }

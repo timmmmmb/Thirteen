@@ -12,6 +12,7 @@ public class Board {
     private int current_min = 1;
     private int width;
     private int height;
+    private int score = 0;
     private GameState gameState = GameState.UNINITIALIZED;
     private ArrayList<Vector<Field>> rows = new ArrayList<>();
 
@@ -29,7 +30,7 @@ public class Board {
         int x = 0;
         for (Vector<Field> row : rows) {
             for (int i = 0; i < height; i++) {
-                row.add(new Field(x, i, wrng.getNumber(),this));
+                row.add(new Field(x, i, wrng.getNumber()));
             }
             x++;
         }
@@ -54,7 +55,7 @@ public class Board {
      * @param f the field that gets checkt
      * @return true if the field f can be clicked
      */
-    public boolean isClickable(Field f) {
+    private boolean isClickable(Field f) {
         for(Field neighbor:getNeighbores(f)){
             if(isClickable(f,neighbor)){
                 return true;
@@ -135,7 +136,7 @@ public class Board {
      * checks if the game is won
      * @return true if the current max is 13 else false
      */
-    public boolean isWon(){
+    private boolean isWon(){
         return current_max == 13;
     }
 
@@ -143,7 +144,7 @@ public class Board {
      * checks each field if it is clickable
      * @return true if there is atleast one field clickable
      */
-    public boolean isLost(){
+    private boolean isLost(){
         try {
             for(Vector<Field> row:rows){
                 for(Field f: row){
@@ -158,18 +159,10 @@ public class Board {
     }
 
     /**
-     * checks if the game is finished
-     * @return true if it is won or lost
-     */
-    public boolean isFinished(){
-        return isLost()||isWon();
-    }
-
-    /**
      * removes the neighboring fields of f if they have the same value
      * @param f the field whose neighbores shall get removed
      */
-    void removeNeighbores(Field f){
+    private void removeNeighbores(Field f){
         f.setVisited(true);
         for(Field neighbore:getNeighbores(f)){
             if(!neighbore.isVisited()&&!neighbore.getToBeRemoved()&&isClickable(f,neighbore)){
@@ -191,7 +184,7 @@ public class Board {
         v.remove(f);
     }
 
-    void setGameState(GameState gameState) {
+    private void setGameState(GameState gameState) {
         this.pcs.firePropertyChange("GameStateChange",this.gameState,gameState);
         this.gameState = gameState;
     }
@@ -199,7 +192,7 @@ public class Board {
     /**
      * update all of the positions of the fields to their position in the vector
      */
-    void updateFieldPositions(){
+    private void updateFieldPositions(){
         for(int i = 0; i<rows.size();i++){
             for(int j = 0; j<rows.get(i).size();j++){
                 Field f = rows.get(i).get(j);
@@ -213,10 +206,10 @@ public class Board {
     /**
      * adds new Fields while the rows are not full
      */
-    void addFields(){
+    private void addFields(){
         for(Vector<Field> row:rows){
             while(row.size()<height){
-                row.add(new Field(0, 0, wrng.getNumber(),this));
+                row.add(new Field(0, 0, wrng.getNumber()));
             }
         }
     }
@@ -224,4 +217,29 @@ public class Board {
     public PropertyChangeSupport getPcs() {
         return pcs;
     }
+
+    public void clickField(int x, int y) throws Exception {
+        Field f = getField(x,y);
+        if(isClickable(f)){
+            removeNeighbores(f);
+            addFields();
+            updateFieldPositions();
+            incrementFieldValue(f);
+            if(isWon()){
+                setGameState(GameState.WON);
+            }else if(isLost()){
+                setGameState(GameState.LOST);
+            }
+            increaseScore();
+        }
+    }
+
+    private void incrementFieldValue(Field f){
+        f.incrementValue();
+    }
+
+    private void increaseScore(){
+        score++;
+    }
+
 }

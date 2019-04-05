@@ -1,19 +1,15 @@
 package main.java.ch.bfh.thirteen.model;
 
-import java.lang.reflect.Array;
-
 public class Field {
     private int x, y;
     private int value;
-    private Board parent;
     private boolean tobeRemoved = false;
     private boolean visited = false;
 
-    public Field(int x, int y, int value, Board parent) {
+    public Field(int x, int y, int value) {
         this.x = x;
         this.y = y;
         this.value = value;
-        this.parent = parent;
     }
 
     public int getX() {
@@ -32,26 +28,8 @@ public class Field {
         this.value = value;
     }
 
-    private void incrementValue(){
+    void incrementValue(){
         this.value++;
-    }
-
-    /**
-     * use this function to click this field
-     */
-    public Array[] click(){
-        Array[] returnvalue = new Array[2];
-        parent.removeNeighbores(this);
-        parent.addFields();
-        parent.updateFieldPositions();
-        incrementValue();
-        if(parent.isWon()){
-            parent.setGameState(GameState.WON);
-        }else if(parent.isLost()){
-            parent.setGameState(GameState.LOST);
-        }
-        //System.out.println(parent.toSting());
-        return returnvalue;
     }
 
     public String toString(){

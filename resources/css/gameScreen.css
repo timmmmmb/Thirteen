@@ -4,9 +4,9 @@
     -fx-alignment: center;
 }
 
-HBox {
-    -fx-pref-width: 400px;
-    -fx-pref-height: 500px;
+AnchorPane {
+    -fx-pref-width: 320px;
+    -fx-pref-height: 320px;
 }
 
 Label{

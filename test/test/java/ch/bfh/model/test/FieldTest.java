@@ -1,10 +1,8 @@
 package test.java.ch.bfh.model.test;
 
-import main.java.ch.bfh.thirteen.model.Board;
+import main.java.ch.bfh.thirteen.model.Field;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import main.java.ch.bfh.thirteen.model.Field;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -16,7 +14,7 @@ class FieldTest {
 
     @BeforeAll
     static void initializeTests() {
-        field = new Field(x, y, value,new Board(1,1));
+        field = new Field(x, y, value);
     }
 
     /**
