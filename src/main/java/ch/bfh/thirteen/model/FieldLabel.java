@@ -19,4 +19,8 @@ public class FieldLabel extends Label {
         super.setText(s);
         getStyleClass().add("field"+s);
     }
+
+    public String toString(){
+        return this.getLayoutX()+" "+this.getLayoutY();
+    }
 }

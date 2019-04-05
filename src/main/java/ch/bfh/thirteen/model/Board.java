@@ -3,7 +3,6 @@ package main.java.ch.bfh.thirteen.model;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Vector;
 
 public class Board {
     private WeightedRandomNumberGenerator wrng;
@@ -14,83 +13,14 @@ public class Board {
     private int height;
     private int score = 0;
     private GameState gameState = GameState.UNINITIALIZED;
-    private ArrayList<Vector<Field>> rows = new ArrayList<>();
+    private Field[][] positions;
 
     public Board(int width, int height) {
         this.width = width;
         this.height = height;
         wrng = new WeightedRandomNumberGenerator(current_max - 1, current_min, new int[]{3, 3, 3, 2, 1});
+        positions = new Field[width][height];
         initializeBoard();
-    }
-
-    private void initializeBoard() {
-        for (int i = 0; i < width; i++) {
-            rows.add(new Vector<>());
-        }
-        int x = 0;
-        for (Vector<Field> row : rows) {
-            for (int i = 0; i < height; i++) {
-                row.add(new Field(x, i, wrng.getNumber()));
-            }
-            x++;
-        }
-
-        // once add the maxnumber to the board
-        try {
-            Field f = getField(new Random().nextInt(getWidth()-1),0);
-            f.setValue(current_max);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        //if the game is not playable restart
-        if(isLost()){
-            rows = new ArrayList<>();
-            initializeBoard();
-        }
-        setGameState(GameState.RUNNING);
-    }
-
-    /**
-     * checks if two fields are clickable
-     * @param f the field that gets checkt
-     * @return true if the field f can be clicked
-     */
-    private boolean isClickable(Field f) {
-        for(Field neighbor:getNeighbores(f)){
-            if(isClickable(f,neighbor)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean isClickable(Field f1, Field f2){
-        return f1.getValue() == f2.getValue();
-    }
-
-    /**
-     * this function is used to get all neighbores of a field
-     *
-     * @param f the field which neighbores you need
-     * @return an arraylist with all of the neighbores
-     */
-    public ArrayList<Field> getNeighbores(Field f) {
-        int x = f.getX();
-        int y = f.getY();
-        ArrayList<Field> neighbores = new ArrayList<>();
-        try {
-            if (y+1 < getHeight())
-                neighbores.add(getField(x, y + 1));
-            if (y > 0)
-                neighbores.add(getField(x, y - 1));
-            if (x+1 < getWidth())
-                neighbores.add(getField(x + 1, y));
-            if (x > 0)
-                neighbores.add(getField(x - 1, y));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return neighbores;
     }
 
     /**
@@ -99,12 +29,9 @@ public class Board {
      * @param x the x coordinate of the searched field
      * @param y the y coordinate of the searched field
      * @return the Field at the specified coordinates
-     * @throws Exception if the coordinates are bigger than the board
      */
-    public Field getField(int x, int y) throws Exception {
-        if (x >= rows.size() || y >= rows.get(x).size())
-            throw new Exception("x " + x + " or y " + y + " to high width " + rows.size() + " height " + rows.get(x).size());
-        return rows.get(x).get(y);
+    public Field getField(int x, int y) {
+        return positions[x][y];
     }
 
     public int getWidth() {
@@ -115,61 +42,148 @@ public class Board {
         return height;
     }
 
-    public ArrayList<Vector<Field>> getRows() {
-        return rows;
+    public PropertyChangeSupport getPcs() {
+        return pcs;
     }
 
-    public String toSting(){
-        StringBuilder result = new StringBuilder();
-        for(int i = getWidth()-1;i>=0;i--){
-            for(Vector<Field> row : rows){
-                result.append(row.get(i).toString());
-                result.append(", ");
+    public void clickField(int x, int y) {
+        Field f = getField(x, y);
+        if (isClickable(f)) {
+            removeNeighbors(f);
+            incrementFieldValue(f, x, y);
+            moveFields();
+            if (isWon()) {
+                setGameState(GameState.WON);
+            } else if (isLost()) {
+                setGameState(GameState.LOST);
             }
-            result.replace(result.length()-2,result.length(),"");
+            increaseScore();
+            resetVisited();
+            System.out.println(this.toSting());
+        }
+    }
+
+    public String toSting() {
+        StringBuilder result = new StringBuilder();
+
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                if (positions[x][y] == null) {
+                    result.append("NULL, ");
+                } else {
+                    result.append(positions[x][y].toString());
+                    result.append(", ");
+                }
+            }
+            result.replace(result.length() - 2, result.length(), "");
             result.append("\n");
         }
         return result.toString();
     }
 
+    private void initializeBoard() {
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                positions[x][y] = new Field(wrng.getNumber());
+            }
+        }
+        // once add the maxnumber to the board
+        Field f = positions[new Random().nextInt(getWidth() - 1)][getHeight() - 1];
+        f.setValue(current_max);
+
+        //if the game is not playable restart
+        if (isLost()) {
+            positions = new Field[width][height];
+            initializeBoard();
+        }
+        setGameState(GameState.RUNNING);
+    }
+
+    /**
+     * checks if two fields are clickable
+     *
+     * @param f the field that gets checkt
+     * @return true if the field f can be clicked
+     */
+    private boolean isClickable(Field f) {
+        for (Field neighbor : getNeighbors(f)) {
+            if (isClickable(f, neighbor)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isClickable(Field f1, Field f2) {
+        return f1.getValue() == f2.getValue();
+    }
+
+    /**
+     * this function is used to get all neighbores of a field
+     *
+     * @param f the field which neighbores you need
+     * @return an arraylist with all of the neighbores
+     */
+    private ArrayList<Field> getNeighbors(Field f) {
+
+        ArrayList<Field> neighbors = new ArrayList<>();
+        outer:
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                if (positions[x][y] == f) {
+                    if (y + 1 < positions[x].length)
+                        neighbors.add(positions[x][y + 1]);
+                    if (y > 0)
+                        neighbors.add(positions[x][y - 1]);
+                    if (x + 1 < positions.length)
+                        neighbors.add(positions[x + 1][y]);
+                    if (x > 0)
+                        neighbors.add(positions[x - 1][y]);
+                    break outer;
+                }
+            }
+        }
+        return neighbors;
+    }
+
     /**
      * checks if the game is won
+     *
      * @return true if the current max is 13 else false
      */
-    private boolean isWon(){
+    private boolean isWon() {
         return current_max == 13;
     }
 
     /**
      * checks each field if it is clickable
+     *
      * @return true if there is atleast one field clickable
      */
-    private boolean isLost(){
-        try {
-            for(Vector<Field> row:rows){
-                for(Field f: row){
-                    if(isClickable(f))
-                        return false;
-                }
+    private boolean isLost() {
+        for (int x = 0; x < width; x++) {
+            for (Field f : positions[x]) {
+                if (isClickable(f))
+                    return false;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         return true;
     }
 
     /**
      * removes the neighboring fields of f if they have the same value
+     *
      * @param f the field whose neighbores shall get removed
      */
-    private void removeNeighbores(Field f){
+    private void removeNeighbors(Field f) {
         f.setVisited(true);
-        for(Field neighbore:getNeighbores(f)){
-            if(!neighbore.isVisited()&&!neighbore.getToBeRemoved()&&isClickable(f,neighbore)){
-                neighbore.toBeRemoved();
-                removeNeighbores(neighbore);
-                if(neighbore.getToBeRemoved()){
-                    removeField(neighbore);
+        for (Field neighbor : getNeighbors(f)) {
+            if (!neighbor.isVisited() && !neighbor.getToBeRemoved() && isClickable(f, neighbor)) {
+                neighbor.toBeRemoved();
+                removeNeighbors(neighbor);
+                if (neighbor.getToBeRemoved()) {
+                    removeField(neighbor);
                 }
             }
         }
@@ -177,70 +191,93 @@ public class Board {
 
     /**
      * removes Field f from the board
+     *
      * @param f the field who shall get removed
      */
-    private void removeField(Field f){
-        Vector<Field> v = rows.get(f.getX());
-        v.remove(f);
-    }
-
-    private void setGameState(GameState gameState) {
-        this.pcs.firePropertyChange("GameStateChange",this.gameState,gameState);
-        this.gameState = gameState;
+    private void removeField(Field f) {
+        FieldPosition fp = null;
+        outer:
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                if (positions[x][y] == f) {
+                    positions[x][y] = null;
+                    fp = new FieldPosition(f, x, y);
+                    break outer;
+                }
+            }
+        }
+        this.pcs.firePropertyChange("removedField", fp, null);
     }
 
     /**
-     * update all of the positions of the fields to their position in the vector
+     * moves the field f one column down
      */
-    private void updateFieldPositions(){
-        for(int i = 0; i<rows.size();i++){
-            for(int j = 0; j<rows.get(i).size();j++){
-                Field f = rows.get(i).get(j);
-                f.setPosition(i,j);
-                f.setVisited(false);
-
+    private void moveFields() {
+        boolean repeat = false;
+        for (int x = 0; x < getWidth(); x++) {
+            for (int y = getHeight() - 1; y > 0; y--) {
+                if (positions[x][y] == null) {
+                    int moveamount = 0;
+                    for (int i = y-1; i < getHeight(); i++) {
+                        if(positions[x][i]==null){
+                            moveamount++;
+                        }
+                    }
+                    this.pcs.firePropertyChange("movedField", new FieldPosition(positions[x][y - 1], x, y - 1), moveamount);
+                    positions[x][y] = positions[x][y - 1];
+                    positions[x][y - 1] = null;
+                    repeat = true;
+                }
             }
+        }
+        addFields();
+        if (repeat) {
+            moveFields();
         }
     }
 
     /**
      * adds new Fields while the rows are not full
      */
-    private void addFields(){
-        for(Vector<Field> row:rows){
-            while(row.size()<height){
-                row.add(new Field(0, 0, wrng.getNumber()));
-            }
+    private void addFields() {
+        for (int x = 0; x < width; x++) {
+            if (positions[x][0] == null)
+                addField(x);
         }
     }
 
-    public PropertyChangeSupport getPcs() {
-        return pcs;
+    /**
+     * adds one new field to the board at the top in the row x
+     *
+     * @param x the row where the new field shall get added
+     */
+    private void addField(int x) {
+        positions[x][0] = new Field(wrng.getNumber());
+        this.pcs.firePropertyChange("addedField", new FieldPosition(positions[x][0], x, 0), null);
     }
 
-    public void clickField(int x, int y) throws Exception {
-        Field f = getField(x,y);
-        if(isClickable(f)){
-            removeNeighbores(f);
-            addFields();
-            updateFieldPositions();
-            incrementFieldValue(f);
-            if(isWon()){
-                setGameState(GameState.WON);
-            }else if(isLost()){
-                setGameState(GameState.LOST);
-            }
-            increaseScore();
-        }
+    private void setGameState(GameState gameState) {
+        this.pcs.firePropertyChange("GameStateChange", this.gameState, gameState);
+        this.gameState = gameState;
+
     }
 
-    private void incrementFieldValue(Field f){
+    private void incrementFieldValue(Field f, int x, int y) {
+        this.pcs.firePropertyChange("incrementedFieldValue", new FieldPosition(f, x, y), f.getValue() + 1);
         f.incrementValue();
     }
 
-    private void increaseScore(){
-        this.pcs.firePropertyChange("ScoreChanged",this.score,this.score+1);
+    private void increaseScore() {
+        this.pcs.firePropertyChange("ScoreChanged", this.score, this.score + 1);
         score++;
+    }
+
+    private void resetVisited() {
+        for (int x = 0; x < getWidth(); x++) {
+            for (Field f : positions[x]) {
+                f.setVisited(false);
+            }
+        }
     }
 
 }

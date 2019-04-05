@@ -14,23 +14,7 @@ class FieldTest {
 
     @BeforeAll
     static void initializeTests() {
-        field = new Field(x, y, value);
-    }
-
-    /**
-     * tests if the field x is set correctly
-     */
-    @Test
-    void testConstructorX() {
-        assertEquals(field.getX(), x);
-    }
-
-    /**
-     * tests if the field y is set correctly
-     */
-    @Test
-    void testConstructorY() {
-        assertEquals(field.getY(), y);
+        field = new Field(value);
     }
 
     /**

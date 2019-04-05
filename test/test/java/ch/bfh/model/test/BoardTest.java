@@ -25,7 +25,6 @@ class BoardTest {
      */
     @Test
     void testConstructorHeight() {
-        assertEquals(gameBoard.getRows().get(0).size(), height+1);
         assertEquals(gameBoard.getHeight(), height);
     }
 
@@ -34,45 +33,7 @@ class BoardTest {
      */
     @Test
     void testConstructorWidth() {
-        assertEquals(gameBoard.getRows().size(), width+1);
         assertEquals(gameBoard.getWidth(), width);
     }
 
-    /**
-     * tests if the fields in the rows are all of the Type Field
-     */
-    @Test
-    void testConstructorFields() {
-        for (Vector<Field> column : gameBoard.getRows()) {
-            for (Field field : column) {
-                assertNotNull(field);
-                assertTrue(field.getValue() > 0);
-            }
-        }
-
-    }
-
-    /**
-     * this test tests if the function returns the correct amount of fields
-     */
-    @Test
-    void testGetNeighbores() {
-        try {
-            Field f = gameBoard.getField(0,0);
-            assertEquals(2, gameBoard.getNeighbores(f).size());
-            f = gameBoard.getField(1,0);
-            assertEquals(3, gameBoard.getNeighbores(f).size());
-            f = gameBoard.getField(1,1);
-            assertEquals(4, gameBoard.getNeighbores(f).size());
-
-            f = gameBoard.getField(width,height);
-            assertEquals(2, gameBoard.getNeighbores(f).size());
-            f = gameBoard.getField(width-1,height);
-            assertEquals(3, gameBoard.getNeighbores(f).size());
-            f = gameBoard.getField(width,height-1);
-            assertEquals(3, gameBoard.getNeighbores(f).size());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
