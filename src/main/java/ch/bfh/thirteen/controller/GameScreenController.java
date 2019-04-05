@@ -78,10 +78,6 @@ public class GameScreenController implements PropertyChangeListener {
                 FieldLabel fl = new FieldLabel(x,y);
                 fl.setTextAndClass(String.valueOf(row.get(i)));
                 fl.setOnMouseClicked(this::click);
-                fl.setPrefHeight(Settings.getFieldHeight());
-                fl.setPrefWidth(Settings.getFieldWidth());
-                fl.setLayoutX(x*Settings.getFieldWidth());
-                fl.setLayoutY(y*Settings.getFieldHeight());
                 //addFadingIn(fl,v);
                 gamePane.getChildren().add(fl);
                 y++;
