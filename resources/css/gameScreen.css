@@ -21,7 +21,6 @@ FieldLabel {
     -fx-font-size: 48px;
     -fx-font-family: Arial, serif;
     -fx-text-fill: white;
-
     -fx-text-alignment: center;
     -fx-background-color: #c8d6e5;
 }
@@ -52,4 +51,9 @@ FieldLabel {
 
 .field7 {
     -fx-background-color: #c54740;
+}
+
+.fieldMax {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #000000;
 }

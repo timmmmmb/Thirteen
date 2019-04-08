@@ -24,7 +24,7 @@ public class GameScreenController implements PropertyChangeListener {
     private Label gameStateLabel, scoreLabel;
 
     private ArrayList<FieldLabel> removalList = new ArrayList<>();
-    private ArrayList<Transition> animationList = new ArrayList<>();
+    private ArrayList<ArrayList<Transition>> animationList = new ArrayList<>();
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
@@ -59,13 +59,24 @@ public class GameScreenController implements PropertyChangeListener {
                 TranslateTransition tt = new TranslateTransition(Duration.millis(500), fl);
                 double distance = Settings.getFieldHeight()*(Integer) evt.getNewValue();
                 tt.setByY(distance);
-                animationList.add(tt);
+                animationList.get(1).add(tt);
             }
+        } else if(evt.getPropertyName().equals("newMaxValue")){
+            resetStyle();
+        }
+    }
+
+    private void resetStyle(){
+        for(Node fl:gamePane.getChildren()){
+            ((FieldLabel)fl).setTextAndClass(((FieldLabel) fl).getText());
         }
     }
 
     @FXML
     private void initialize() {
+        animationList.add(new ArrayList<>());
+        animationList.add(new ArrayList<>());
+        animationList.add(new ArrayList<>());
         Settings.getBoard().getPcs().addPropertyChangeListener(this);
         addLabels();
     }
@@ -77,7 +88,7 @@ public class GameScreenController implements PropertyChangeListener {
         transition.setToValue(1);
         transition.setInterpolator(Interpolator.EASE_IN);
         parent.getChildren().add(node);
-        animationList.add(transition);
+        animationList.get(2).add(transition);
     }
 
     private void removeFadingOut(final Node node, final AnchorPane parent) {
@@ -87,7 +98,7 @@ public class GameScreenController implements PropertyChangeListener {
             transition.setToValue(0);
             transition.setInterpolator(Interpolator.EASE_BOTH);
             removalList.add((FieldLabel) node);
-            animationList.add(transition);
+            animationList.get(0).add(transition);
         }
     }
 
@@ -115,24 +126,42 @@ public class GameScreenController implements PropertyChangeListener {
         int y = (int) ((FieldLabel) event.getSource()).getBoundsInParent().getMinY() / Settings.getFieldHeight();
         //click in board
         b.clickField(x, y);
-        playFirstAnimation();
+        playAnimations(0);
     }
 
-    private void playFirstAnimation(){
+    private void playAnimations(int i){
         //this gets executed at the end of all
-        if(animationList.isEmpty()){
+        if(i>=animationList.size()){
             gamePane.getChildren().removeAll(removalList);
             removalList.clear();
             System.out.println("The UI matches the board: "+checkMatch());
             Settings.getBoard().finishAnimation();
             return;
         }
+
+        ArrayList<Transition> animation = animationList.get(i);
+        if(animation.size()!=0){
+            animation.get(animation.size()-1).setOnFinished(actionEvent ->{
+                animationList.get(i).clear();
+                playAnimations(i+1);
+            });
+            for(Transition tt:animation){
+                tt.play();
+            }
+        }else{
+            playAnimations(i+1);
+        }
+
+
+        /*if(animationList.isEmpty()){
+
+        }
         Transition tt = animationList.get(0);
         tt.setOnFinished(actionEvent -> {
             animationList.remove(0);
-            playFirstAnimation();
+            playAnimations();
         });
-        tt.play();
+        tt.play();*/
     }
 
     private boolean checkMatch(){

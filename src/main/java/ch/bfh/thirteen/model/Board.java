@@ -68,6 +68,9 @@ public class Board {
     }
 
     public void finishAnimation(){
+        if(gameState!=GameState.ANIMATING){
+            return;
+        }
         setGameState(GameState.RUNNING);
     }
 
@@ -274,6 +277,7 @@ public class Board {
     private void incrementFieldValue(Field f, int x, int y) {
         this.pcs.firePropertyChange("incrementedFieldValue", new FieldPosition(f, x, y), f.getValue() + 1);
         f.incrementValue();
+        setNewMax(f.getValue());
     }
 
     private void increaseScore() {
@@ -289,4 +293,19 @@ public class Board {
         }
     }
 
+    private void setNewMax(int i){
+        if(i>current_max){
+            int oldmax = current_max;
+            current_max = i;
+            this.pcs.firePropertyChange("newMaxValue", oldmax, current_max);
+        }
+    }
+
+    public int getCurrent_max() {
+        return current_max;
+    }
+
+    public GameState getGameState() {
+        return gameState;
+    }
 }

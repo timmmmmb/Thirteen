@@ -17,7 +17,11 @@ public class FieldLabel extends Label {
 
     public void setTextAndClass(String s){
         super.setText(s);
-        getStyleClass().add("field"+s);
+        if(Integer.parseInt(s)==Settings.getBoard().getCurrent_max()){
+            getStyleClass().add("fieldMax");
+        }else{
+            getStyleClass().add("field"+s);
+        }
     }
 
     public String toString(){
