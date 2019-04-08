@@ -2,6 +2,7 @@ package main.java.ch.bfh.thirteen.controller;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
+import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -14,12 +15,16 @@ import main.java.ch.bfh.thirteen.settings.Settings;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 
 public class GameScreenController implements PropertyChangeListener {
     @FXML
     private AnchorPane gamePane;
     @FXML
     private Label gameStateLabel, scoreLabel;
+
+    private ArrayList<FieldLabel> removalList = new ArrayList<>();
+    private ArrayList<Transition> animationList = new ArrayList<>();
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
@@ -33,18 +38,15 @@ public class GameScreenController implements PropertyChangeListener {
             scoreLabel.setText(evt.getNewValue().toString());
         } else if (evt.getPropertyName().equals("removedField")) {
             FieldPosition fp = (FieldPosition) evt.getOldValue();
-            FieldLabel fl = getFieldLabelByCoordinates(fp.getF(), fp.getX(), fp.getY());
+            FieldLabel fl = getFieldLabelByCoordinates(fp.getF(),fp.getX(), fp.getY());
             if (fl != null) {
-                //removeFadingOut(fl, gamePane);
-                gamePane.getChildren().remove(fl);
+                removeFadingOut(fl, gamePane);
             }
         } else if (evt.getPropertyName().equals("addedField")) {
             FieldPosition fp = (FieldPosition) evt.getOldValue();
             FieldLabel fl = FieldLabelFactory.createFieldLabel(fp);
             fl.setOnMouseClicked(this::click);
             addFadingIn(fl,gamePane);
-            //gamePane.getChildren().add(fl);
-
         } else if (evt.getPropertyName().equals("incrementedFieldValue")) {
             FieldPosition fp = (FieldPosition) evt.getOldValue();
             FieldLabel fl = getFieldLabelByCoordinates(fp.getF(), fp.getX(), fp.getY());
@@ -55,10 +57,9 @@ public class GameScreenController implements PropertyChangeListener {
             FieldLabel fl = getFieldLabelByCoordinates(fp.getF(), fp.getX(), fp.getY());
             if (fl != null) {
                 TranslateTransition tt = new TranslateTransition(Duration.millis(500), fl);
-                tt.setByY(Settings.getFieldHeight()*(Integer) evt.getNewValue());
-                tt.setCycleCount(1);
-                fl.setLayoutY(fl.getLayoutY() + Settings.getFieldHeight());
-                //tt.play();
+                double distance = Settings.getFieldHeight()*(Integer) evt.getNewValue();
+                tt.setByY(distance);
+                animationList.add(tt);
             }
         }
     }
@@ -69,23 +70,24 @@ public class GameScreenController implements PropertyChangeListener {
         addLabels();
     }
 
-    private static void addFadingIn(final Node node, final AnchorPane parent) {
+    private void addFadingIn(final Node node, final AnchorPane parent) {
         final FadeTransition transition = new FadeTransition(Duration.millis(500), node);
+        node.setOpacity(0);
         transition.setFromValue(0);
         transition.setToValue(1);
         transition.setInterpolator(Interpolator.EASE_IN);
         parent.getChildren().add(node);
-        transition.play();
+        animationList.add(transition);
     }
 
-    private static void removeFadingOut(final Node node, final AnchorPane parent) {
+    private void removeFadingOut(final Node node, final AnchorPane parent) {
         if (parent.getChildren().contains(node)) {
             final FadeTransition transition = new FadeTransition(Duration.millis(500), node);
             transition.setFromValue(node.getOpacity());
             transition.setToValue(0);
             transition.setInterpolator(Interpolator.EASE_BOTH);
-            transition.setOnFinished(finishHim -> parent.getChildren().remove(node));
-            transition.play();
+            removalList.add((FieldLabel) node);
+            animationList.add(transition);
         }
     }
 
@@ -98,7 +100,7 @@ public class GameScreenController implements PropertyChangeListener {
             for (int y = 0; y < b.getHeight(); y++) {
                 FieldLabel fl = FieldLabelFactory.createFieldLabel(b.getField(x, y), x, y);
                 fl.setOnMouseClicked(this::click);
-                addFadingIn(fl, gamePane);
+                gamePane.getChildren().add(fl);
             }
         }
         gamePane.setPrefWidth((b.getWidth() - 1) * Settings.getFieldWidth());
@@ -109,18 +111,55 @@ public class GameScreenController implements PropertyChangeListener {
     private void click(MouseEvent event) {
         Board b = Settings.getBoard();
         //get coordinates
-        int x = (int) ((FieldLabel) event.getSource()).getLayoutX() / Settings.getFieldWidth();
-        int y = (int) ((FieldLabel) event.getSource()).getLayoutY() / Settings.getFieldWidth();
+        int x = (int) ((FieldLabel) event.getSource()).getBoundsInParent().getMinX() / Settings.getFieldWidth();
+        int y = (int) ((FieldLabel) event.getSource()).getBoundsInParent().getMinY() / Settings.getFieldHeight();
         //click in board
         b.clickField(x, y);
+        playFirstAnimation();
+    }
+
+    private void playFirstAnimation(){
+        //this gets executed at the end of all
+        if(animationList.isEmpty()){
+            gamePane.getChildren().removeAll(removalList);
+            removalList.clear();
+            System.out.println("The UI matches the board: "+checkMatch());
+            return;
+        }
+        Transition tt = animationList.get(0);
+        tt.setOnFinished(actionEvent -> {
+            animationList.remove(0);
+            playFirstAnimation();
+        });
+        tt.play();
+    }
+
+    private boolean checkMatch(){
+        if(gamePane.getChildren().size()!=25){
+            System.out.println("Size does not match");
+            return false;
+        }
+        Board b = Settings.getBoard();
+        for (int x = 0; x < b.getWidth(); x++) {
+            for (int y = 0; y < b.getHeight(); y++) {
+                if(getFieldLabelByCoordinates(b.getField(x,y),x,y)==null){
+                    System.out.println("Not able to find field: Value:"+b.getField(x,y).toString()+" X:"+x+" Y:"+y);
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private FieldLabel getFieldLabelByCoordinates(Field f, int x, int y) {
-        if (f == null)
-            return null;
         for (Node child : gamePane.getChildren()) {
             FieldLabel fl = (FieldLabel) child;
-            if (((int) fl.getLayoutX() / Settings.getFieldWidth()) == x && ((int) fl.getLayoutY() / Settings.getFieldHeight()) == y && fl.getText().equals(String.valueOf(f.getValue()))) {
+            int layoutX = (int) fl.getBoundsInParent().getMinX() / Settings.getFieldWidth();
+            int layoutY = (int) fl.getBoundsInParent().getMinY() / Settings.getFieldHeight();
+            if (layoutX == x &&  layoutY == y && String.valueOf(f.getValue()).equals(fl.getText())) {
+                if(removalList.contains(child)){
+                    continue;
+                }
                 return fl;
             }
         }

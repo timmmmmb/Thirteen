@@ -210,30 +210,28 @@ public class Board {
     }
 
     /**
-     * moves the field f one column down
+     * moves the field f down until there are no more empty field below
      */
     private void moveFields() {
-        boolean repeat = false;
         for (int x = 0; x < getWidth(); x++) {
-            for (int y = getHeight() - 1; y > 0; y--) {
-                if (positions[x][y] == null) {
+            for (int y = getHeight() - 2; y >= 0; y--) {
+                if(positions[x][y]!=null){
                     int moveamount = 0;
-                    for (int i = y-1; i < getHeight(); i++) {
+                    for (int i = y; i < getHeight(); i++) {
                         if(positions[x][i]==null){
                             moveamount++;
                         }
                     }
-                    this.pcs.firePropertyChange("movedField", new FieldPosition(positions[x][y - 1], x, y - 1), moveamount);
-                    positions[x][y] = positions[x][y - 1];
-                    positions[x][y - 1] = null;
-                    repeat = true;
+                    if(moveamount == 0){
+                        continue;
+                    }
+                    this.pcs.firePropertyChange("movedField", new FieldPosition(positions[x][y], x, y), moveamount);
+                    positions[x][y+moveamount] = positions[x][y];
+                    positions[x][y] = null;
                 }
             }
         }
         addFields();
-        if (repeat) {
-            moveFields();
-        }
     }
 
     /**
@@ -241,8 +239,11 @@ public class Board {
      */
     private void addFields() {
         for (int x = 0; x < width; x++) {
-            if (positions[x][0] == null)
-                addField(x);
+            for(int y = 0; y < height; y++){
+                if (positions[x][y] == null)
+                    addField(x,y);
+            }
+
         }
     }
 
@@ -251,9 +252,9 @@ public class Board {
      *
      * @param x the row where the new field shall get added
      */
-    private void addField(int x) {
-        positions[x][0] = new Field(wrng.getNumber());
-        this.pcs.firePropertyChange("addedField", new FieldPosition(positions[x][0], x, 0), null);
+    private void addField(int x, int y) {
+        positions[x][y] = new Field(wrng.getNumber());
+        this.pcs.firePropertyChange("addedField", new FieldPosition(positions[x][y], x, y), null);
     }
 
     private void setGameState(GameState gameState) {

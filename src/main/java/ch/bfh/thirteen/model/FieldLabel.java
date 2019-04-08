@@ -21,6 +21,6 @@ public class FieldLabel extends Label {
     }
 
     public String toString(){
-        return this.getLayoutX()+" "+this.getLayoutY();
+        return this.getLayoutX()+" "+this.getLayoutY()+" "+this.getText();
     }
 }
