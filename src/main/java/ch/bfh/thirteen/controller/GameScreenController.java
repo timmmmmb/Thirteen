@@ -124,6 +124,7 @@ public class GameScreenController implements PropertyChangeListener {
             gamePane.getChildren().removeAll(removalList);
             removalList.clear();
             System.out.println("The UI matches the board: "+checkMatch());
+            Settings.getBoard().finishAnimation();
             return;
         }
         Transition tt = animationList.get(0);

@@ -47,6 +47,9 @@ public class Board {
     }
 
     public void clickField(int x, int y) {
+        if(gameState!=GameState.RUNNING){
+            return;
+        }
         Field f = getField(x, y);
         if (isClickable(f)) {
             removeNeighbors(f);
@@ -56,11 +59,16 @@ public class Board {
                 setGameState(GameState.WON);
             } else if (isLost()) {
                 setGameState(GameState.LOST);
+            }else{
+                setGameState(GameState.ANIMATING);
             }
             increaseScore();
             resetVisited();
-            System.out.println(this.toSting());
         }
+    }
+
+    public void finishAnimation(){
+        setGameState(GameState.RUNNING);
     }
 
     public String toSting() {
