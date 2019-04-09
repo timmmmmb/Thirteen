@@ -119,7 +119,7 @@ public class Board {
      */
     private boolean isClickable(Field f) {
         for (Field neighbor : getNeighbors(f)) {
-            if (isClickable(f, neighbor)) {
+            if (f.getValue() == neighbor.getValue()) {
                 return true;
             }
         }

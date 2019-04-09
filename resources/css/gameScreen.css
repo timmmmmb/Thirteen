@@ -1,6 +1,6 @@
 
 * {
-    -fx-background-color: #000000;
+    -fx-background-color: transparent;
     -fx-alignment: center;
 }
 
@@ -13,7 +13,6 @@ Label {
     -fx-font-size: 48px;
     -fx-font-family: Arial, serif;
     -fx-text-fill: white;
-
     -fx-text-alignment: center;
 }
 
@@ -23,6 +22,12 @@ FieldLabel {
     -fx-text-fill: white;
     -fx-text-alignment: center;
     -fx-background-color: #c8d6e5;
+    -fx-background-radius: 10 10 10 10;
+    -fx-background-insets: 2px;
+}
+
+.root{
+    -fx-background-color: #000000;
 }
 
 .field1 {

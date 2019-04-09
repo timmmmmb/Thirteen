@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class GameScreenController implements PropertyChangeListener {
     @FXML
-    private AnchorPane gamePane;
+    private AnchorPane gamePane, gameBackground;
     @FXML
     private Label gameStateLabel, scoreLabel;
 
@@ -94,6 +94,7 @@ public class GameScreenController implements PropertyChangeListener {
         animationList.add(new ArrayList<>());
         Settings.getBoard().getPcs().addPropertyChangeListener(this);
         addLabels();
+        createBackground();
     }
 
     /**
@@ -103,6 +104,7 @@ public class GameScreenController implements PropertyChangeListener {
      */
     @FXML
     private void click(MouseEvent event) {
+        gameBackground.getChildren().clear();
         Board b = Settings.getBoard();
         //get coordinates
         int x = (int) ((FieldLabel) event.getSource()).getBoundsInParent().getMinX() / Settings.getFieldWidth();
@@ -118,11 +120,13 @@ public class GameScreenController implements PropertyChangeListener {
      */
     @FXML
     private void restart() {
+        gameBackground.getChildren().clear();
         Settings.getBoard().getPcs().removePropertyChangeListener(this);
         Settings.initializeBoard();
         gamePane.getChildren().removeAll(gamePane.getChildren());
         Settings.getBoard().getPcs().addPropertyChangeListener(this);
         addLabels();
+        createBackground();
         gameStateLabel.setText("");
         scoreLabel.setText("0");
     }
@@ -184,6 +188,8 @@ public class GameScreenController implements PropertyChangeListener {
         }
         gamePane.setPrefWidth((b.getWidth() - 1) * Settings.getFieldWidth());
         gamePane.setPrefHeight((b.getHeight() - 1) * Settings.getFieldHeight());
+        gameBackground.setPrefWidth((b.getWidth() - 1) * Settings.getFieldWidth());
+        gameBackground.setPrefHeight((b.getHeight() - 1) * Settings.getFieldHeight());
     }
 
     /**
@@ -199,6 +205,7 @@ public class GameScreenController implements PropertyChangeListener {
             removalList.clear();
             checkMatch();
             Settings.getBoard().finishAnimation();
+            createBackground();
             return;
         }
 
@@ -256,5 +263,29 @@ public class GameScreenController implements PropertyChangeListener {
             }
         }
         return null;
+    }
+
+    /**
+     * this function connects fieldLabels creating connector elements in the background
+     */
+    private void createBackground(){
+        Board b = Settings.getBoard();
+        for(int x = 0; x < b.getWidth(); x++){
+            for(int y = 0; y < b.getHeight(); y++){
+                Field f = b.getField(x,y);
+                if(y != b.getHeight()-1){
+                    Field fh = b.getField(x,y+1); // get the field below
+                    if(fh.getValue()==f.getValue()){
+                        gameBackground.getChildren().add(FieldLabelFactory.createFieldLabel(f,x,y,2,1));
+                    }
+                }
+                if(x != b.getWidth()-1){
+                    Field fr = b.getField(x+1,y); // get the field right
+                    if(fr.getValue()==f.getValue()){
+                        gameBackground.getChildren().add(FieldLabelFactory.createFieldLabel(f,x,y,1,2));
+                    }
+                }
+            }
+        }
     }
 }
