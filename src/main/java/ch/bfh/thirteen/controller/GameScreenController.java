@@ -17,6 +17,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
+import static main.java.ch.bfh.thirteen.settings.Settings.changeStage;
+
 public class GameScreenController implements PropertyChangeListener {
     @FXML
     private AnchorPane gamePane, gameBackground;
@@ -287,5 +289,10 @@ public class GameScreenController implements PropertyChangeListener {
                 }
             }
         }
+    }
+
+    @FXML
+    private void switchMenu(MouseEvent event){
+        changeStage(event,"fxml/menuScreen.fxml");
     }
 }
