@@ -27,11 +27,11 @@ public class Settings {
         return fieldHeight;
     }
 
-    public static int getBoardHeight() {
+    private static int getBoardHeight() {
         return boardHeight;
     }
 
-    public static int getBoardWidth() {
+    private static int getBoardWidth() {
         return boardWidth;
     }
 

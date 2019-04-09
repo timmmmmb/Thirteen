@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class ThirteenApplication extends Application {
     @Override
-    public void init() throws Exception{
+    public void init() throws Exception {
         Settings.loadResources();
         Settings.initializeBoard();
         Thread.sleep(1000);

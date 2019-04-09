@@ -8,8 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FieldTest {
     private static int value = 1;
-    private static int x = 5;
-    private static int y = 6;
     private static Field field;
 
     @BeforeAll
