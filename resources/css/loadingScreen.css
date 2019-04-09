@@ -5,8 +5,8 @@
 }
 
 HBox {
-    -fx-pref-width: 320px;
-    -fx-pref-height: 340px;
+    -fx-pref-width: 400px;
+    -fx-pref-height: 500px;
 }
 
 Label {

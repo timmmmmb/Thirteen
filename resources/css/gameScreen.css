@@ -32,8 +32,10 @@ FieldLabel:hover {
     -fx-background-color: derive(base-color, -10%);
 }
 
-.root{
+.root {
     -fx-background-color: #000000;
+    -fx-pref-width: 400px;
+    -fx-pref-height: 500px;
 }
 
 .field1 {
