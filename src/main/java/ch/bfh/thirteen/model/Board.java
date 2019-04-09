@@ -295,9 +295,22 @@ public class Board {
 
     private void setNewMax(int i) {
         if (i > current_max) {
+            //remove all tiles with the lowest number
+            for (int x = 0; x < getWidth(); x++) {
+                for (Field f : positions[x]) {
+                    if(f == null){
+                        continue;
+                    }
+                    if(f.getValue() == this.current_min){
+                        removeField(f);
+                    }
+                }
+            }
+
             int oldmax = current_max;
             current_max = i;
             this.pcs.firePropertyChange("newMaxValue", oldmax, current_max);
+
         }
     }
 
