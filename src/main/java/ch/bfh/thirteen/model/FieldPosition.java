@@ -2,9 +2,9 @@ package main.java.ch.bfh.thirteen.model;
 
 public class FieldPosition {
     private Field f;
-    private int x,y;
+    private int x, y;
 
-    public FieldPosition(Field f,int x, int y) {
+    FieldPosition(Field f, int x, int y) {
         this.f = f;
         this.x = x;
         this.y = y;

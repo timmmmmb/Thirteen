@@ -13,24 +13,23 @@ public class Field {
         return value;
     }
 
-    void setValue(int value){
+    void setValue(int value) {
         this.value = value;
     }
 
-    int incrementValue(){
+    void incrementValue() {
         this.value++;
-        return this.value;
     }
 
-    public String toString(){
+    public String toString() {
         return String.valueOf(value);//+" "+String.valueOf(x)+" "+String.valueOf(y);
     }
 
-    boolean getToBeRemoved(){
+    boolean getToBeRemoved() {
         return tobeRemoved;
     }
 
-    void toBeRemoved(){
+    void toBeRemoved() {
         tobeRemoved = true;
     }
 

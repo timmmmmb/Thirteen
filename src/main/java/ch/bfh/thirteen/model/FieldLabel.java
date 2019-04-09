@@ -6,26 +6,26 @@ import main.java.ch.bfh.thirteen.settings.Settings;
 
 public class FieldLabel extends Label {
 
-    public FieldLabel(int x, int y) {
+    FieldLabel(int x, int y) {
         super();
 
         this.setPrefHeight(Settings.getFieldHeight());
         this.setPrefWidth(Settings.getFieldWidth());
-        this.setLayoutX(x*Settings.getFieldWidth());
-        this.setLayoutY(y*Settings.getFieldHeight());
+        this.setLayoutX(x * Settings.getFieldWidth());
+        this.setLayoutY(y * Settings.getFieldHeight());
     }
 
-    public void setTextAndClass(String s){
+    public void setTextAndClass(String s) {
         super.setText(s);
         getStyleClass().clear();
-        if(Integer.parseInt(s)==Settings.getBoard().getCurrent_max()){
+        if (Integer.parseInt(s) == Settings.getBoard().getCurrent_max()) {
             getStyleClass().add("fieldMax");
-        }else{
-            getStyleClass().add("field"+s);
+        } else {
+            getStyleClass().add("field" + s);
         }
     }
 
-    public String toString(){
-        return this.getLayoutX()+" "+this.getLayoutY()+" "+this.getText();
+    public String toString() {
+        return this.getLayoutX() + " " + this.getLayoutY() + " " + this.getText();
     }
 }

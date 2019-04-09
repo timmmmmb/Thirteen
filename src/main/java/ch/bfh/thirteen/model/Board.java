@@ -47,7 +47,7 @@ public class Board {
     }
 
     public void clickField(int x, int y) {
-        if(gameState!=GameState.RUNNING){
+        if (gameState != GameState.RUNNING) {
             return;
         }
         Field f = getField(x, y);
@@ -59,7 +59,7 @@ public class Board {
                 setGameState(GameState.WON);
             } else if (isLost()) {
                 setGameState(GameState.LOST);
-            }else{
+            } else {
                 setGameState(GameState.ANIMATING);
             }
             increaseScore();
@@ -67,8 +67,8 @@ public class Board {
         }
     }
 
-    public void finishAnimation(){
-        if(gameState!=GameState.ANIMATING){
+    public void finishAnimation() {
+        if (gameState != GameState.ANIMATING) {
             return;
         }
         setGameState(GameState.RUNNING);
@@ -226,18 +226,18 @@ public class Board {
     private void moveFields() {
         for (int x = 0; x < getWidth(); x++) {
             for (int y = getHeight() - 2; y >= 0; y--) {
-                if(positions[x][y]!=null){
+                if (positions[x][y] != null) {
                     int moveamount = 0;
                     for (int i = y; i < getHeight(); i++) {
-                        if(positions[x][i]==null){
+                        if (positions[x][i] == null) {
                             moveamount++;
                         }
                     }
-                    if(moveamount == 0){
+                    if (moveamount == 0) {
                         continue;
                     }
                     this.pcs.firePropertyChange("movedField", new FieldPosition(positions[x][y], x, y), moveamount);
-                    positions[x][y+moveamount] = positions[x][y];
+                    positions[x][y + moveamount] = positions[x][y];
                     positions[x][y] = null;
                 }
             }
@@ -250,9 +250,9 @@ public class Board {
      */
     private void addFields() {
         for (int x = 0; x < width; x++) {
-            for(int y = 0; y < height; y++){
+            for (int y = 0; y < height; y++) {
                 if (positions[x][y] == null)
-                    addField(x,y);
+                    addField(x, y);
             }
 
         }
@@ -293,19 +293,16 @@ public class Board {
         }
     }
 
-    private void setNewMax(int i){
-        if(i>current_max){
+    private void setNewMax(int i) {
+        if (i > current_max) {
             int oldmax = current_max;
             current_max = i;
             this.pcs.firePropertyChange("newMaxValue", oldmax, current_max);
         }
     }
 
-    public int getCurrent_max() {
+    int getCurrent_max() {
         return current_max;
     }
 
-    public GameState getGameState() {
-        return gameState;
-    }
 }
