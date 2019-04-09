@@ -17,6 +17,7 @@ public class FieldLabel extends Label {
 
     public void setTextAndClass(String s){
         super.setText(s);
+        getStyleClass().clear();
         if(Integer.parseInt(s)==Settings.getBoard().getCurrent_max()){
             getStyleClass().add("fieldMax");
         }else{
