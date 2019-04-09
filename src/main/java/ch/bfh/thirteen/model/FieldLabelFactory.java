@@ -18,7 +18,7 @@ public class FieldLabelFactory {
         fl.setPrefHeight(Settings.getFieldHeight()*height);
         fl.setPrefWidth(Settings.getFieldWidth()*width);
         fl.setText("");
-        fl.setStyle("-fx-background-radius: 10 10 10 10; -fx-background-insets: 0px;");
+        fl.setStyle("-fx-background-radius: 10 10 10 10; -fx-background-insets: 1px;");
         return fl;
     }
 }

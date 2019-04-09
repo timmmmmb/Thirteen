@@ -17,13 +17,19 @@ Label {
 }
 
 FieldLabel {
+
+    base-color: #c8d6e5;
+    -fx-background-color: base-color;
     -fx-font-size: 48px;
     -fx-font-family: Arial, serif;
     -fx-text-fill: white;
     -fx-text-alignment: center;
-    -fx-background-color: #c8d6e5;
     -fx-background-radius: 10 10 10 10;
     -fx-background-insets: 2px;
+}
+
+FieldLabel:hover {
+    -fx-background-color: derive(base-color, -10%);
 }
 
 .root{
@@ -31,34 +37,34 @@ FieldLabel {
 }
 
 .field1 {
-    -fx-background-color: #feca57;
+    base-color: #feca57;
 }
 
 .field2 {
-    -fx-background-color: #1dd1a1;
+    base-color: #1dd1a1;
 }
 
 .field3 {
-    -fx-background-color: #ff9f43;
+    base-color: #ff9f43;
 }
 
 .field4 {
-    -fx-background-color: #ee5253;
+    base-color: #ee5253;
 }
 
 .field5 {
-    -fx-background-color: #f368e0;
+    base-color: #f368e0;
 }
 
 .field6 {
-    -fx-background-color: #5f27cd;
+    base-color: #5f27cd;
 }
 
 .field7 {
-    -fx-background-color: #c54740;
+    base-color: #c54740;
 }
 
 .fieldMax {
-    -fx-background-color: #ffffff;
+    base-color: #ffffff;
     -fx-text-fill: #000000;
 }
