@@ -26,7 +26,7 @@
             <children>
                 <HBox>
                     <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#switchMenu" text="Menu"/>
+                        <Button mnemonicParsing="false" onAction="#switchMenu" text="Menu"/>
                         <Label fx:id="scoreLabel" text="0"/>
                     </children>
                 </HBox>

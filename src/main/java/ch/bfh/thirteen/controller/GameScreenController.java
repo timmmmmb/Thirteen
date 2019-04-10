@@ -4,6 +4,7 @@ import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -292,7 +293,7 @@ public class GameScreenController implements PropertyChangeListener {
     }
 
     @FXML
-    private void switchMenu(MouseEvent event) {
+    private void switchMenu(ActionEvent event) {
         changeStage(event, "fxml/menuScreen.fxml");
     }
 

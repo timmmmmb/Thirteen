@@ -2,18 +2,10 @@ package main.java.ch.bfh.thirteen.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static main.java.ch.bfh.thirteen.settings.Settings.changeStage;
@@ -42,16 +34,6 @@ public class MenuScreenController {
     private Button infoButton;
 
     @FXML
-    void autoplayEvent(ActionEvent event) {
-
-    }
-
-    @FXML
-    void startEvent(ActionEvent event) {
-
-    }
-
-    @FXML
     void hiScoreEvent(ActionEvent event) {
 
     }
@@ -62,37 +44,23 @@ public class MenuScreenController {
     }
 
     @FXML
-    void switchGame(MouseEvent event){
+    void switchGame(ActionEvent event){
         changeStage(event,"fxml/gameScreen.fxml");
     }
 
     @FXML
-    void switchAutoplay(MouseEvent event){
+    void switchAutoplay(ActionEvent event){
 
     }
 
     @FXML
-    void switchHighScore(MouseEvent event){
-
-        try {
-            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            Parent newroot = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("fxml/HighScoreScreen.fxml")));
-            stage.setScene(new Scene(newroot));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    void switchHighScore(ActionEvent event){
+        changeStage(event,"fxml/HighScoreScreen.fxml");
     }
 
     @FXML
-    void switchSettings(MouseEvent event){
-
-        try {
-            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            Parent newroot = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("fxml/SettingsScreen.fxml")));
-            stage.setScene(new Scene(newroot));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    void switchSettings(ActionEvent event){
+        changeStage(event,"fxml/SettingsScreen.fxml");
     }
 
 

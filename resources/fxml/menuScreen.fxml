@@ -5,16 +5,23 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="pane" fx:id="pane" prefHeight="500.0" prefWidth="400.0" stylesheets="@../css/menuScreen.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ch.bfh.thirteen.controller.MenuScreenController">
+<AnchorPane id="pane" fx:id="pane" prefHeight="500.0" prefWidth="400.0" stylesheets="@../css/menuScreen.css"
+            xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="main.java.ch.bfh.thirteen.controller.MenuScreenController">
     <children>
-        <Button fx:id="startButton" layoutX="125.0" layoutY="225.0" mnemonicParsing="false" onAction="#startEvent" onMouseClicked="#switchGame" prefHeight="50.0" prefWidth="150.0" text="Start" />
-        <Button fx:id="autoplayButton" layoutX="125.0" layoutY="313.0" mnemonicParsing="false" onAction="#autoplayEvent" onMouseClicked="#switchAutoplay" prefHeight="50.0" prefWidth="150.0" text="Autoplay" />
-        <ImageView fx:id="image" fitHeight="148.0" fitWidth="139.0" layoutX="131.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+        <Button fx:id="startButton" layoutX="125.0" layoutY="225.0" mnemonicParsing="false" onAction="#switchGame"
+                prefHeight="50.0" prefWidth="150.0" text="Start"/>
+        <Button fx:id="autoplayButton" layoutX="125.0" layoutY="313.0" mnemonicParsing="false"
+                onAction="#switchAutoplay" prefHeight="50.0" prefWidth="150.0" text="Autoplay"/>
+        <Button fx:id="hiScoreButton" layoutX="106.0" layoutY="415.0" mnemonicParsing="false"
+                onAction="#switchHighScore" prefHeight="44.0" prefWidth="71.0"/>
+        <Button fx:id="infoButton" layoutX="221.0" layoutY="415.0" mnemonicParsing="false" onAction="#switchSettings"
+                prefHeight="44.0" prefWidth="71.0"/>
+        <ImageView fx:id="image" fitHeight="148.0" fitWidth="139.0" layoutX="131.0" layoutY="41.0" pickOnBounds="true"
+                   preserveRatio="true">
             <image>
-                <Image url="@../images/13_logo.png" />
+                <Image url="@../images/13_logo.png"/>
             </image>
         </ImageView>
-      <Button fx:id="hiScoreButton" layoutX="106.0" layoutY="415.0" mnemonicParsing="false" onAction="#hiScoreEvent" onMouseClicked="#switchHighScore" prefHeight="44.0" prefWidth="71.0" />
-      <Button fx:id="infoButton" layoutX="221.0" layoutY="415.0" mnemonicParsing="false" onAction="#infoEvent" onMouseClicked="#switchSettings" prefHeight="44.0" prefWidth="71.0" />
     </children>
 </AnchorPane>
