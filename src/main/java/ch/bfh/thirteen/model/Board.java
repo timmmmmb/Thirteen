@@ -18,7 +18,7 @@ public class Board {
     public Board(int width, int height) {
         this.width = width;
         this.height = height;
-        wrng = new WeightedRandomNumberGenerator(current_max - 1, current_min, new int[]{3, 3, 3, 2, 1});
+        wrng = new WeightedRandomNumberGenerator(current_max - 1, current_min);
         positions = new Field[width][height];
         initializeBoard();
     }
@@ -310,7 +310,7 @@ public class Board {
             int oldmax = current_max;
             current_max = i;
             this.pcs.firePropertyChange("newMaxValue", oldmax, current_max);
-
+            wrng.increaseMax();
         }
     }
 

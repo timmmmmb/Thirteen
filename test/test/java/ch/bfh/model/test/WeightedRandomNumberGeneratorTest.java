@@ -10,12 +10,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class WeightedRandomNumberGeneratorTest {
     private static int min = 1;
     private static int max = 6;
-    private static int[] weight = {1, 2, 2, 3, 3, 1};
     private static WeightedRandomNumberGenerator wrng;
 
     @BeforeAll
     static void initializeTests() {
-        wrng = new WeightedRandomNumberGenerator(max, min, weight);
+        wrng = new WeightedRandomNumberGenerator(max, min);
     }
 
     /**
