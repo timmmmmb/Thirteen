@@ -245,7 +245,7 @@ public class GameScreenController implements PropertyChangeListener {
      * @throws UINotMatchingModelException if the field was not found in the ui
      */
     private void checkMatch() throws UINotMatchingModelException {
-        if (gamePane.getChildren().size() != 25) {
+        if (gamePane.getChildren().size() != Settings.getFieldHeight()*Settings.getFieldWidth()) {
             throw new UINotMatchingModelException("Size does not match");
         }
         try {
