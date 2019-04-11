@@ -17,7 +17,6 @@ Label {
 }
 
 FieldLabel {
-
     base-color: #c8d6e5;
     -fx-background-color: base-color;
     -fx-font-size: 48px;
@@ -64,6 +63,30 @@ FieldLabel:hover {
 
 .field7 {
     base-color: #c54740;
+}
+
+.field8 {
+    base-color: #bdc547;
+}
+
+.field9 {
+    base-color: #67a0c5;
+}
+
+.field10 {
+    base-color: #9f45c5;
+}
+
+.field11 {
+    base-color: #2dc52a;
+}
+
+.field12 {
+    base-color: #c5c008;
+}
+
+.field13 {
+    base-color: #c000c5;
 }
 
 .fieldMax {
