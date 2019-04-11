@@ -18,7 +18,7 @@ public class Board {
     public Board(int width, int height) {
         this.width = width;
         this.height = height;
-        wrng = new WeightedRandomNumberGenerator(current_max - 1, current_min);
+        wrng = new WeightedRandomNumberGenerator(current_max - 1, current_min,0.3);
         positions = new Field[width][height];
         initializeBoard();
     }

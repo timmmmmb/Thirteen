@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.java.ch.bfh.thirteen.model.Game;
 import main.java.ch.bfh.thirteen.settings.Settings;
 
 import java.util.Objects;
@@ -13,7 +14,6 @@ public class ThirteenApplication extends Application {
     @Override
     public void init() throws Exception {
         Settings.loadResources();
-        Settings.initializeBoard();
         Thread.sleep(1000);
     }
 

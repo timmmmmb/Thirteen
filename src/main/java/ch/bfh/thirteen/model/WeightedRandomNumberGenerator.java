@@ -8,14 +8,15 @@ import java.util.Random;
  */
 public class WeightedRandomNumberGenerator {
     private int lb, ub;
-    private double p = 0.3;
+    private double p ;
     private int w;
     private ArrayList<Double> klist = new ArrayList<>();
 
-    public WeightedRandomNumberGenerator(int max, int min) throws IllegalArgumentException {
+    public WeightedRandomNumberGenerator(int max, int min, double p) throws IllegalArgumentException {
         this.lb = min;
         this.ub = max;
         this.w = ub-lb;
+        this.p = p;
         generateKlist();
     }
 

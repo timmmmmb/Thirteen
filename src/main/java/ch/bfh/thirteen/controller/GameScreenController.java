@@ -20,6 +20,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
+import static main.java.ch.bfh.thirteen.model.Game.getBoard;
+import static main.java.ch.bfh.thirteen.model.Game.restartGame;
 import static main.java.ch.bfh.thirteen.stagechanger.StageChanger.changeStage;
 
 public class GameScreenController implements PropertyChangeListener {
@@ -104,7 +106,7 @@ public class GameScreenController implements PropertyChangeListener {
         animationList.add(new ArrayList<>());
         animationList.add(new ArrayList<>());
         animationList.add(new ArrayList<>());
-        Settings.getBoard().getPcs().addPropertyChangeListener(this);
+        getBoard().getPcs().addPropertyChangeListener(this);
         addLabels();
         createBackground();
     }
@@ -117,7 +119,7 @@ public class GameScreenController implements PropertyChangeListener {
     @FXML
     private void click(MouseEvent event) {
         gameBackground.getChildren().clear();
-        Board b = Settings.getBoard();
+        Board b = getBoard();
         //get coordinates
         int x = (int) ((FieldLabel) event.getSource()).getBoundsInParent().getMinX() / Settings.getFieldWidth();
         int y = (int) ((FieldLabel) event.getSource()).getBoundsInParent().getMinY() / Settings.getFieldHeight();
@@ -133,10 +135,10 @@ public class GameScreenController implements PropertyChangeListener {
     @FXML
     private void restart() {
         gameBackground.getChildren().clear();
-        Settings.getBoard().getPcs().removePropertyChangeListener(this);
-        Settings.initializeBoard();
+        getBoard().getPcs().removePropertyChangeListener(this);
+        restartGame();
         gamePane.getChildren().removeAll(gamePane.getChildren());
-        Settings.getBoard().getPcs().addPropertyChangeListener(this);
+        getBoard().getPcs().addPropertyChangeListener(this);
         addLabels();
         createBackground();
         gameStateLabel.setText("");
@@ -190,7 +192,7 @@ public class GameScreenController implements PropertyChangeListener {
      * this function creates labels for all of the fields in the board and adds them to the gamePane
      */
     private void addLabels() {
-        Board b = Settings.getBoard();
+        Board b = getBoard();
         for (int x = 0; x < b.getWidth(); x++) {
             for (int y = 0; y < b.getHeight(); y++) {
                 FieldLabel fl = FieldLabelFactory.createFieldLabel(b.getField(x, y), x, y);
@@ -220,7 +222,7 @@ public class GameScreenController implements PropertyChangeListener {
             } catch (UINotMatchingModelException e) {
                 e.printStackTrace();
             }
-            Settings.getBoard().finishAnimation();
+            getBoard().finishAnimation();
             createBackground();
             return;
         }
@@ -245,11 +247,11 @@ public class GameScreenController implements PropertyChangeListener {
      * @throws UINotMatchingModelException if the field was not found in the ui
      */
     private void checkMatch() throws UINotMatchingModelException {
-        if (gamePane.getChildren().size() != Settings.getBoard().getHeight()*Settings.getBoard().getWidth()) {
+        if (gamePane.getChildren().size() != getBoard().getHeight()*getBoard().getWidth()) {
             throw new UINotMatchingModelException("Size does not match");
         }
         try {
-            Board b = Settings.getBoard();
+            Board b = getBoard();
             for (int x = 0; x < b.getWidth(); x++) {
                 for (int y = 0; y < b.getHeight(); y++) {
                     getFieldLabelByCoordinates(b.getField(x, y), x, y);
@@ -288,7 +290,7 @@ public class GameScreenController implements PropertyChangeListener {
      * this function connects fieldLabels creating connector elements in the background
      */
     private void createBackground() {
-        Board b = Settings.getBoard();
+        Board b = getBoard();
         for (int x = 0; x < b.getWidth(); x++) {
             for (int y = 0; y < b.getHeight(); y++) {
                 Field f = b.getField(x, y);

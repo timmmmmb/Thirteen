@@ -14,7 +14,7 @@ class WeightedRandomNumberGeneratorTest {
 
     @BeforeAll
     static void initializeTests() {
-        wrng = new WeightedRandomNumberGenerator(max, min);
+        wrng = new WeightedRandomNumberGenerator(max, min,0.3);
     }
 
     /**
