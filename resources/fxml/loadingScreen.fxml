@@ -5,13 +5,12 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox id="root" fx:id="hbox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ch.bfh.thirteen.controller.LoadingScreenController">
+<HBox id="root" fx:id="hbox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="main.java.ch.bfh.thirteen.controller.LoadingScreenController">
     <stylesheets>
-        <URL value="@../css/loadingScreen.css" />
+        <URL value="@../css/loadingScreen.css"/>
     </stylesheets>
-   <ImageView fx:id="loadImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/loading.gif" />
-      </image>
-   </ImageView>
+    <ImageView fx:id="loadImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../images/loading.gif"/>
+    </ImageView>
 </HBox>
