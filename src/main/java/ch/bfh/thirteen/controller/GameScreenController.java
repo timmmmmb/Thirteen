@@ -18,7 +18,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
-import static main.java.ch.bfh.thirteen.settings.Settings.changeStage;
+import static main.java.ch.bfh.thirteen.stagechanger.StageChanger.changeStage;
 
 public class GameScreenController implements PropertyChangeListener {
     @FXML

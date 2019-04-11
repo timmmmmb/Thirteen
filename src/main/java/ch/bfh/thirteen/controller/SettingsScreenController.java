@@ -10,7 +10,7 @@ import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static main.java.ch.bfh.thirteen.settings.Settings.changeStage;
+import static main.java.ch.bfh.thirteen.stagechanger.StageChanger.changeStage;
 
 public class SettingsScreenController {
 

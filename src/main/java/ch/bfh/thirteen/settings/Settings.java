@@ -1,16 +1,7 @@
 package main.java.ch.bfh.thirteen.settings;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.stage.Stage;
 import main.java.ch.bfh.thirteen.model.Board;
-
-import java.io.IOException;
-import java.util.Objects;
 
 public class Settings {
 
@@ -54,15 +45,5 @@ public class Settings {
 
     public static Board getBoard() {
         return gameBoard;
-    }
-
-    public static void changeStage(ActionEvent event, String filename){
-        try {
-            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            Parent newroot = FXMLLoader.load(Objects.requireNonNull(Settings.class.getClassLoader().getResource(filename)));
-            stage.setScene(new Scene(newroot));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
