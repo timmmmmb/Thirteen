@@ -11,6 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import main.java.ch.bfh.thirteen.exception.FieldLabelNotFoundException;
+import main.java.ch.bfh.thirteen.exception.UINotMatchingModelException;
 import main.java.ch.bfh.thirteen.model.*;
 import main.java.ch.bfh.thirteen.settings.Settings;
 
@@ -49,10 +51,12 @@ public class GameScreenController implements PropertyChangeListener {
                 scoreLabel.setText(evt.getNewValue().toString());
                 break;
             case "removedField": {
-                FieldPosition fp = (FieldPosition) evt.getOldValue();
-                FieldLabel fl = getFieldLabelByCoordinates(fp.getF(), fp.getX(), fp.getY());
-                if (fl != null) {
+                try {
+                    FieldPosition fp = (FieldPosition) evt.getOldValue();
+                    FieldLabel fl = getFieldLabelByCoordinates(fp.getF(), fp.getX(), fp.getY());
                     removeFadingOut(fl, gamePane);
+                } catch (FieldLabelNotFoundException e) {
+                    e.printStackTrace();
                 }
                 break;
             }
@@ -64,20 +68,25 @@ public class GameScreenController implements PropertyChangeListener {
                 break;
             }
             case "incrementedFieldValue": {
-                FieldPosition fp = (FieldPosition) evt.getOldValue();
-                FieldLabel fl = getFieldLabelByCoordinates(fp.getF(), fp.getX(), fp.getY());
-                if (fl != null)
+                try {
+                    FieldPosition fp = (FieldPosition) evt.getOldValue();
+                    FieldLabel fl = getFieldLabelByCoordinates(fp.getF(), fp.getX(), fp.getY());
                     fl.setTextAndClass(String.valueOf(evt.getNewValue()));
+                } catch (FieldLabelNotFoundException e) {
+                    e.printStackTrace();
+                }
                 break;
             }
             case "movedField": {
-                FieldPosition fp = (FieldPosition) evt.getOldValue();
-                FieldLabel fl = getFieldLabelByCoordinates(fp.getF(), fp.getX(), fp.getY());
-                if (fl != null) {
+                try {
+                    FieldPosition fp = (FieldPosition) evt.getOldValue();
+                    FieldLabel fl = getFieldLabelByCoordinates(fp.getF(), fp.getX(), fp.getY());
                     TranslateTransition tt = new TranslateTransition(Duration.millis(500), fl);
                     double distance = Settings.getFieldHeight() * (Integer) evt.getNewValue();
                     tt.setByY(distance);
                     animationList.get(1).add(tt);
+                } catch (FieldLabelNotFoundException e) {
+                    e.printStackTrace();
                 }
                 break;
             }
@@ -206,7 +215,11 @@ public class GameScreenController implements PropertyChangeListener {
         if (i >= animationList.size()) {
             gamePane.getChildren().removeAll(removalList);
             removalList.clear();
-            checkMatch();
+            try {
+                checkMatch();
+            } catch (UINotMatchingModelException e) {
+                e.printStackTrace();
+            }
             Settings.getBoard().finishAnimation();
             createBackground();
             return;
@@ -227,21 +240,23 @@ public class GameScreenController implements PropertyChangeListener {
     }
 
     /**
-     * compares the board with the ui and says if they are in sync or not
+     * compares the board with the ui and says throws an exception if they are not in sync
+     *
+     * @throws UINotMatchingModelException if the field was not found in the ui
      */
-    private void checkMatch() {
+    private void checkMatch() throws UINotMatchingModelException {
         if (gamePane.getChildren().size() != 25) {
-            System.out.println("Size does not match");
-            return;
+            throw new UINotMatchingModelException("Size does not match");
         }
-        Board b = Settings.getBoard();
-        for (int x = 0; x < b.getWidth(); x++) {
-            for (int y = 0; y < b.getHeight(); y++) {
-                if (getFieldLabelByCoordinates(b.getField(x, y), x, y) == null) {
-                    System.out.println("Not able to find field: Value:" + b.getField(x, y).toString() + " X:" + x + " Y:" + y);
-                    return;
+        try {
+            Board b = Settings.getBoard();
+            for (int x = 0; x < b.getWidth(); x++) {
+                for (int y = 0; y < b.getHeight(); y++) {
+                    getFieldLabelByCoordinates(b.getField(x, y), x, y);
                 }
             }
+        } catch (FieldLabelNotFoundException e) {
+            throw new UINotMatchingModelException(e.getMessage());
         }
     }
 
@@ -252,8 +267,9 @@ public class GameScreenController implements PropertyChangeListener {
      * @param x the x coordinate of the field in the board
      * @param y the y coordinate of the field in the board
      * @return the fieldlabel in the ui
+     * @throws FieldLabelNotFoundException if the field was not found in the ui
      */
-    private FieldLabel getFieldLabelByCoordinates(Field f, int x, int y) {
+    private FieldLabel getFieldLabelByCoordinates(Field f, int x, int y) throws FieldLabelNotFoundException {
         for (Node child : gamePane.getChildren()) {
             FieldLabel fl = (FieldLabel) child;
             int layoutX = (int) fl.getBoundsInParent().getMinX() / Settings.getFieldWidth();
@@ -265,7 +281,7 @@ public class GameScreenController implements PropertyChangeListener {
                 return fl;
             }
         }
-        return null;
+        throw new FieldLabelNotFoundException("The following field was not found in the ui" + f.toString() + " X:" + x + " Y:" + y);
     }
 
     /**
