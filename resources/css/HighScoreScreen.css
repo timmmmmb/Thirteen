@@ -3,11 +3,14 @@
     -fx-alignment: center;
 }
 
-#pane{
+pane{
+    -fx-pref-width: 400px;
+    -fx-pref-height: 500px;
     -fx-background-color: lightgray;
     -fx-background-image: url("../images/background.png");
     -fx-background-repeat: no-repeat;
-    -fx-background-size: cover; }
+    -fx-background-size: cover;
+}
 
 Button{
     -fx-text-fill: white;

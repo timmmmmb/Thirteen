@@ -14,6 +14,8 @@ import static main.java.ch.bfh.thirteen.stagechanger.StageChanger.changeStage;
 
 public class SettingsScreenController {
 
+    boolean musicOn = false;
+
     @FXML
     private ResourceBundle resources;
 
@@ -40,6 +42,17 @@ public class SettingsScreenController {
 
     @FXML
     void musicOnOff(MouseEvent event) {
+
+
+        if(!musicOn) {
+            musicButton.setText("on");
+            musicOn = true;
+        }
+
+       else if(musicOn){
+            musicButton.setText("off");
+            musicOn = false;
+        }
 
     }
 

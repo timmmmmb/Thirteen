@@ -1,30 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="main.java.ch.bfh.thirteen.controller.SettingsScreenController">
-    <Label layoutX="132.0" layoutY="44.0" text="Settings">
+<AnchorPane fx:id="pane" prefHeight="500.0" prefWidth="400.0" stylesheets="@../css/SettingScreen.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ch.bfh.thirteen.controller.SettingsScreenController">
+    <Label layoutX="132.0" layoutY="44.0" text="Settings" textFill="#ffa100">
         <font>
-            <Font size="38.0"/>
+            <Font size="38.0" />
         </font>
     </Label>
-    <ChoiceBox id="languageMenu" layoutX="200.0" layoutY="155.0" onMouseClicked="#selectLanguage" prefHeight="25.0"
-               prefWidth="109.0"/>
-    <Label fx:id="langageLabel" layoutX="87.0" layoutY="159.0" text="Language"/>
-    <Label fx:id="musicLabel" layoutX="79.0" layoutY="241.0" text="Music on/off"/>
-    <ToggleButton fx:id="musicButton" layoutX="219.0" layoutY="238.0" mnemonicParsing="false"
-                  onMouseClicked="#musicOnOff" prefHeight="25.0" prefWidth="84.0" text="ToggleButton"/>
-    <Button fx:id="infoButton" layoutX="256.0" layoutY="315.0" mnemonicParsing="false"
-            onMouseClicked="#switchInfoScreen"
-            text="?"/>
-    <Label fx:id="infoLabel" layoutX="78.0" layoutY="319.0" text="How to play?"/>
-    <Button fx:id="backButton" layoutX="174.0" layoutY="414.0" mnemonicParsing="false" onAction="#switchMenuScreen"
-            text="Back"/>
+    <Label fx:id="musicLabel" layoutX="79.0" layoutY="168.0" text="Music on/off" textFill="#ffa100">
+      <font>
+         <Font size="14.0" />
+      </font></Label>
+    <ToggleButton fx:id="musicButton" layoutX="225.0" layoutY="163.0" mnemonicParsing="false" onMouseClicked="#musicOnOff" prefHeight="33.0" prefWidth="51.0" text="off">
+      <font>
+         <Font size="14.0" />
+      </font></ToggleButton>
+    <Button fx:id="infoButton" layoutX="225.0" layoutY="268.0" mnemonicParsing="false" onMouseClicked="#switchInfoScreen" prefHeight="44.0" prefWidth="51.0" text="?" />
+    <Label fx:id="infoLabel" layoutX="78.0" layoutY="280.0" text="How to play?" textFill="#ffa100">
+      <font>
+         <Font size="14.0" />
+      </font></Label>
+    <Button fx:id="backButton" layoutX="164.0" layoutY="388.0" mnemonicParsing="false" onAction="#switchMenuScreen" text="Back" />
 </AnchorPane>

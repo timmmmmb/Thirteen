@@ -1,0 +1,57 @@
+* {
+    -fx-alignment: center;
+}
+
+#pane {
+    -fx-pref-width: 400px;
+    -fx-pref-height: 500px;
+    -fx-background-image: url("../images/background.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;}
+
+Button {
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+}
+
+#backButton {
+
+    -fx-background-color: linear-gradient(#cca119, #ee8900);
+
+}
+
+#backButton:hover {
+
+    -fx-background-color: linear-gradient(#ffe73a, #ffa22c);
+}
+
+#infoButton {
+
+    -fx-background-color: linear-gradient(#5f83ff, #2f54f9);
+
+}
+
+#infoButton:hover{
+
+    -fx-background-color: linear-gradient(#759bff, #476bff);
+
+}
+
+#musicButton{
+
+    -fx-background-color: linear-gradient(#ff5839, #eb2e05);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+#musicButton:selected{
+
+    -fx-background-color: linear-gradient(#5def4e, #66d65f);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
