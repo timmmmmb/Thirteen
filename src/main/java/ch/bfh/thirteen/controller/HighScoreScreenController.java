@@ -35,8 +35,8 @@ public class HighScoreScreenController {
 
     @FXML
     void initialize() {
-        assert pane != null : "fx:id=\"pane\" was not injected: check your FXML file 'HighScoreScreen.fxml'.";
-        assert title != null : "fx:id=\"title\" was not injected: check your FXML file 'HighScoreScreen.fxml'.";
+        assert pane != null : "fx:id=\"pane\" was not injected: check your FXML file 'highScoreScreen.fxml'.";
+        assert title != null : "fx:id=\"title\" was not injected: check your FXML file 'highScoreScreen.fxml'.";
 
     }
 }

@@ -73,12 +73,12 @@ public class SettingsScreenController {
 
     @FXML
     void initialize() {
-        assert langageLabel != null : "fx:id=\"langageLabel\" was not injected: check your FXML file 'SettingsScreen.fxml'.";
-        assert musicLabel != null : "fx:id=\"musicLabel\" was not injected: check your FXML file 'SettingsScreen.fxml'.";
-        assert musicButton != null : "fx:id=\"musicButton\" was not injected: check your FXML file 'SettingsScreen.fxml'.";
-        assert infoButton != null : "fx:id=\"infoButton\" was not injected: check your FXML file 'SettingsScreen.fxml'.";
-        assert infoLabel != null : "fx:id=\"infoLabel\" was not injected: check your FXML file 'SettingsScreen.fxml'.";
-        assert backButton != null : "fx:id=\"backButton\" was not injected: check your FXML file 'SettingsScreen.fxml'.";
+        assert langageLabel != null : "fx:id=\"langageLabel\" was not injected: check your FXML file 'settingsScreen.fxml'.";
+        assert musicLabel != null : "fx:id=\"musicLabel\" was not injected: check your FXML file 'settingsScreen.fxml'.";
+        assert musicButton != null : "fx:id=\"musicButton\" was not injected: check your FXML file 'settingsScreen.fxml'.";
+        assert infoButton != null : "fx:id=\"infoButton\" was not injected: check your FXML file 'settingsScreen.fxml'.";
+        assert infoLabel != null : "fx:id=\"infoLabel\" was not injected: check your FXML file 'settingsScreen.fxml'.";
+        assert backButton != null : "fx:id=\"backButton\" was not injected: check your FXML file 'settingsScreen.fxml'.";
 
     }
 }

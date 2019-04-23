@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" prefHeight="500.0" prefWidth="400.0" stylesheets="@../css/HighScoreScreen.css"
+<AnchorPane fx:id="pane" prefHeight="500.0" prefWidth="400.0" stylesheets="@../css/highScoreScreen.css"
             xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="main.java.ch.bfh.thirteen.controller.HighScoreScreenController">
     <Label fx:id="title" layoutX="95.0" layoutY="49.0" text="High Scores" textFill="#ff9200">

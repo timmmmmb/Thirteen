@@ -9,6 +9,57 @@ AnchorPane {
     -fx-pref-height: 320px;
 }
 
+Button{
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+}
+
+#buttonBox{
+    -fx-spacing: 10;
+    -fx-padding: 10;
+}
+
+#menuBox{
+    -fx-spacing: 10;
+    -fx-padding: 10;
+}
+
+#menuButton{
+    -fx-background-color: linear-gradient(#4aee49, #0a8a0a);
+}
+
+#menuButton:hover{
+    -fx-background-color: linear-gradient(#5def4e, #66d65f);
+}
+
+#restartButton{
+
+    -fx-background-color: linear-gradient(#5f83ff, #2f54f9);
+}
+
+#restartButton:hover{
+    -fx-background-color: linear-gradient(#759bff, #476bff);
+}
+
+#undoButton{
+    -fx-background-color: linear-gradient(#cca119, #ee8900);
+}
+
+#undoButton:hover{
+    -fx-background-color: linear-gradient(#ffe73a, #ffa22c);
+}
+
+#deleteButton{
+    -fx-background-color: linear-gradient(#eb2e05, #bf2805);
+}
+
+#deleteButton:hover{
+    -fx-background-color: linear-gradient(#eb5a2e, #bf4b27);
+}
+
 Label {
     -fx-font-size: 48px;
     -fx-font-family: Arial, serif;

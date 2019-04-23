@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" prefHeight="500.0" prefWidth="400.0" stylesheets="@../css/SettingScreen.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ch.bfh.thirteen.controller.SettingsScreenController">
+<AnchorPane fx:id="pane" prefHeight="500.0" prefWidth="400.0" stylesheets="@../css/settingScreen.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ch.bfh.thirteen.controller.SettingsScreenController">
     <Label layoutX="132.0" layoutY="44.0" text="Settings" textFill="#ffa100">
         <font>
             <Font size="38.0" />

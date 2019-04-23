@@ -55,12 +55,12 @@ public class MenuScreenController {
 
     @FXML
     void switchHighScore(ActionEvent event){
-        changeStage(event,"fxml/HighScoreScreen.fxml");
+        changeStage(event, "fxml/highScoreScreen.fxml");
     }
 
     @FXML
     void switchSettings(ActionEvent event){
-        changeStage(event,"fxml/SettingsScreen.fxml");
+        changeStage(event, "fxml/settingsScreen.fxml");
     }
 
 
