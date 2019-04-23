@@ -11,9 +11,11 @@ import main.java.ch.bfh.thirteen.settings.Settings;
 import java.util.Objects;
 
 public class ThirteenApplication extends Application {
+    public static Game game;
     @Override
     public void init() throws Exception {
         Settings.loadResources();
+        game = new Game();
         Thread.sleep(1000);
     }
 

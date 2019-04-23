@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import main.java.ch.bfh.thirteen.application.ThirteenApplication;
 import main.java.ch.bfh.thirteen.exception.FieldLabelNotFoundException;
 import main.java.ch.bfh.thirteen.exception.UINotMatchingModelException;
 import main.java.ch.bfh.thirteen.model.*;
@@ -20,8 +21,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
-import static main.java.ch.bfh.thirteen.model.Game.getBoard;
-import static main.java.ch.bfh.thirteen.model.Game.restartGame;
 import static main.java.ch.bfh.thirteen.stagechanger.StageChanger.changeStage;
 
 public class GameScreenController implements PropertyChangeListener {
@@ -32,7 +31,7 @@ public class GameScreenController implements PropertyChangeListener {
 
     private ArrayList<FieldLabel> removalList = new ArrayList<>();
     private ArrayList<ArrayList<Transition>> animationList = new ArrayList<>();
-
+    private boolean isRemovalMode = false;
 
     /**
      * This function is called when the observed board fires a change
@@ -106,26 +105,9 @@ public class GameScreenController implements PropertyChangeListener {
         animationList.add(new ArrayList<>());
         animationList.add(new ArrayList<>());
         animationList.add(new ArrayList<>());
-        getBoard().getPcs().addPropertyChangeListener(this);
+        ThirteenApplication.game.getBoard().getPcs().addPropertyChangeListener(this);
         addLabels();
         createBackground();
-    }
-
-    /**
-     * this function gets called when a field gets clicked
-     *
-     * @param event the mouseEvent that was triggered when clicking the field
-     */
-    @FXML
-    private void click(MouseEvent event) {
-        gameBackground.getChildren().clear();
-        Board b = getBoard();
-        //get coordinates
-        int x = (int) ((FieldLabel) event.getSource()).getBoundsInParent().getMinX() / Settings.getFieldWidth();
-        int y = (int) ((FieldLabel) event.getSource()).getBoundsInParent().getMinY() / Settings.getFieldHeight();
-        //click in board
-        b.clickField(x, y);
-        playAnimations(0);
     }
 
     /**
@@ -135,14 +117,26 @@ public class GameScreenController implements PropertyChangeListener {
     @FXML
     private void restart() {
         gameBackground.getChildren().clear();
-        getBoard().getPcs().removePropertyChangeListener(this);
-        restartGame();
+        ThirteenApplication.game.getBoard().getPcs().removePropertyChangeListener(this);
+        ThirteenApplication.game.restartGame();
         gamePane.getChildren().removeAll(gamePane.getChildren());
-        getBoard().getPcs().addPropertyChangeListener(this);
+        ThirteenApplication.game.getBoard().getPcs().addPropertyChangeListener(this);
         addLabels();
         createBackground();
         gameStateLabel.setText("");
         scoreLabel.setText("0");
+    }
+
+    /**
+     * this function gets called when the restart button is pressed
+     * it creates a new board and resets all of the game variables
+     */
+    @FXML
+    private void reload() {
+        gameBackground.getChildren().clear();
+        gamePane.getChildren().removeAll(gamePane.getChildren());
+        addLabels();
+        createBackground();
     }
 
     /**
@@ -192,7 +186,7 @@ public class GameScreenController implements PropertyChangeListener {
      * this function creates labels for all of the fields in the board and adds them to the gamePane
      */
     private void addLabels() {
-        Board b = getBoard();
+        Board b = ThirteenApplication.game.getBoard();
         for (int x = 0; x < b.getWidth(); x++) {
             for (int y = 0; y < b.getHeight(); y++) {
                 FieldLabel fl = FieldLabelFactory.createFieldLabel(b.getField(x, y), x, y);
@@ -222,7 +216,7 @@ public class GameScreenController implements PropertyChangeListener {
             } catch (UINotMatchingModelException e) {
                 e.printStackTrace();
             }
-            getBoard().finishAnimation();
+            ThirteenApplication.game.getBoard().finishAnimation();
             createBackground();
             return;
         }
@@ -247,11 +241,11 @@ public class GameScreenController implements PropertyChangeListener {
      * @throws UINotMatchingModelException if the field was not found in the ui
      */
     private void checkMatch() throws UINotMatchingModelException {
-        if (gamePane.getChildren().size() != getBoard().getHeight()*getBoard().getWidth()) {
+        if (gamePane.getChildren().size() != ThirteenApplication.game.getBoard().getHeight()*ThirteenApplication.game.getBoard().getWidth()) {
             throw new UINotMatchingModelException("Size does not match");
         }
         try {
-            Board b = getBoard();
+            Board b = ThirteenApplication.game.getBoard();
             for (int x = 0; x < b.getWidth(); x++) {
                 for (int y = 0; y < b.getHeight(); y++) {
                     getFieldLabelByCoordinates(b.getField(x, y), x, y);
@@ -290,7 +284,7 @@ public class GameScreenController implements PropertyChangeListener {
      * this function connects fieldLabels creating connector elements in the background
      */
     private void createBackground() {
-        Board b = getBoard();
+        Board b = ThirteenApplication.game.getBoard();
         for (int x = 0; x < b.getWidth(); x++) {
             for (int y = 0; y < b.getHeight(); y++) {
                 Field f = b.getField(x, y);
@@ -316,12 +310,31 @@ public class GameScreenController implements PropertyChangeListener {
     }
 
     @FXML
-    private void remove(MouseEvent event) {
-
+    private void switchRemovalMode() {
+        isRemovalMode = !isRemovalMode;
     }
 
     @FXML
-    private void undo(MouseEvent event) {
+    private void undo() {
+        ThirteenApplication.game.undo();
+        reload();
+    }
 
+    /**
+     * this function gets called when a field gets clicked
+     *
+     * @param event the mouseEvent that was triggered when clicking the field
+     */
+    @FXML
+    private void click(MouseEvent event) {
+        gameBackground.getChildren().clear();
+        FieldLabel fl = (FieldLabel)event.getSource();
+        if(isRemovalMode){
+            ThirteenApplication.game.removeField(fl);
+            switchRemovalMode();
+        }else{
+            ThirteenApplication.game.clickField(fl);
+        }
+        playAnimations(0);
     }
 }

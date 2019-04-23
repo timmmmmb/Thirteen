@@ -1,12 +1,16 @@
 package main.java.ch.bfh.thirteen.model;
 
-public class Field {
+public class Field{
     private int value;
     private boolean tobeRemoved = false;
     private boolean visited = false;
 
     public Field(int value) {
         this.value = value;
+    }
+
+    Field(Field field) {
+        this.value = field.value;
     }
 
     public int getValue() {
