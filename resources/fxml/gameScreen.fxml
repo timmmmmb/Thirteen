@@ -14,9 +14,9 @@
             fx:controller="main.java.ch.bfh.thirteen.controller.GameScreenController">
     <bottom>
         <HBox BorderPane.alignment="CENTER">
-            <Button mnemonicParsing="false" text="Undo"/>
+            <Button mnemonicParsing="false" onAction="#undo" text="Undo"/>
             <Button mnemonicParsing="false" onAction="#restart" text="Restart"/>
-            <Button mnemonicParsing="false" text="Delete"/>
+            <Button mnemonicParsing="false" onAction="#switchRemovalMode" text="Delete"/>
         </HBox>
     </bottom>
     <top>

@@ -4,7 +4,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Board {
+public class Board{
     private WeightedRandomNumberGenerator wrng;
     private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
     private int current_max = 6;
@@ -21,6 +21,21 @@ public class Board {
         wrng = new WeightedRandomNumberGenerator(current_max - 1, current_min,0.3);
         positions = new Field[width][height];
         initializeBoard();
+    }
+
+    public Board(Board b) {
+        this.score = b.score;
+        this.gameState = GameState.RUNNING;
+        this.width = b.width;
+        this.height = b.height;
+        wrng = b.wrng;
+        positions = new Field[width][height];
+        pcs = b.getPcs();
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                positions[x][y] = new Field(b.positions[x][y]);
+            }
+        }
     }
 
     /**
@@ -46,7 +61,7 @@ public class Board {
         return pcs;
     }
 
-    public void clickField(int x, int y) {
+    void clickField(int x, int y) {
         if (gameState != GameState.RUNNING) {
             return;
         }
@@ -55,13 +70,7 @@ public class Board {
             removeNeighbors(f);
             incrementFieldValue(f, x, y);
             moveFields();
-            if (isWon()) {
-                setGameState(GameState.WON);
-            } else if (isLost()) {
-                setGameState(GameState.LOST);
-            } else {
-                setGameState(GameState.ANIMATING);
-            }
+            checkGamestate();
             increaseScore();
             resetVisited();
         }
@@ -318,4 +327,19 @@ public class Board {
         return current_max;
     }
 
+    void removeSingleField(Field f) {
+        removeField(f);
+        moveFields();
+        checkGamestate();
+    }
+
+    private void checkGamestate(){
+        if (isWon()) {
+            setGameState(GameState.WON);
+        } else if (isLost()) {
+            setGameState(GameState.LOST);
+        } else {
+            setGameState(GameState.ANIMATING);
+        }
+    }
 }
