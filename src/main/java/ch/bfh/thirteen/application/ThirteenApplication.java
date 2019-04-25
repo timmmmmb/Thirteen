@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.java.ch.bfh.thirteen.model.Game;
+import main.java.ch.bfh.thirteen.model.MusicPlayer;
 import main.java.ch.bfh.thirteen.settings.Settings;
 
 import java.util.Objects;
@@ -16,6 +17,7 @@ public class ThirteenApplication extends Application {
     public void init() throws Exception {
         Settings.loadResources();
         game = new Game();
+        MusicPlayer music = new MusicPlayer("../resources/music/bensound-dreams.mp3");
         Thread.sleep(1000);
     }
 

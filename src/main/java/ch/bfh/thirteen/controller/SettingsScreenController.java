@@ -14,7 +14,8 @@ import static main.java.ch.bfh.thirteen.stagechanger.StageChanger.changeStage;
 
 public class SettingsScreenController {
 
-    boolean musicOn = false;
+    boolean musicOn;
+    //MusicPlayer music = new MusicPlayer();
 
     @FXML
     private ResourceBundle resources;
@@ -47,11 +48,13 @@ public class SettingsScreenController {
         if(!musicOn) {
             musicButton.setText("on");
             musicOn = true;
+           // music.play();
         }
 
        else if(musicOn){
             musicButton.setText("off");
             musicOn = false;
+            //music.stop();
         }
 
     }
@@ -73,6 +76,7 @@ public class SettingsScreenController {
 
     @FXML
     void initialize() {
+
         assert langageLabel != null : "fx:id=\"langageLabel\" was not injected: check your FXML file 'settingsScreen.fxml'.";
         assert musicLabel != null : "fx:id=\"musicLabel\" was not injected: check your FXML file 'settingsScreen.fxml'.";
         assert musicButton != null : "fx:id=\"musicButton\" was not injected: check your FXML file 'settingsScreen.fxml'.";
