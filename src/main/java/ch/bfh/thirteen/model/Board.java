@@ -1,26 +1,36 @@
 package main.java.ch.bfh.thirteen.model;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Random;
 
 @XmlRootElement(namespace = "board")
-public class Board{
+public class Board {
     private WeightedRandomNumberGenerator wrng;
     private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
     private int current_max = 6;
     private int current_min = 1;
     private int width;
     private int height;
+    @XmlElement(name = "score")
     private int score = 0;
     private GameState gameState = GameState.UNINITIALIZED;
     private Field[][] positions;
 
+    public Board(){
+        this.width = 5;
+        this.height = 5;
+        wrng = new WeightedRandomNumberGenerator(current_max - 1, current_min, 0.3);
+        positions = new Field[width][height];
+        initializeBoard();
+    }
+
     public Board(int width, int height) {
         this.width = width;
         this.height = height;
-        wrng = new WeightedRandomNumberGenerator(current_max - 1, current_min,0.3);
+        wrng = new WeightedRandomNumberGenerator(current_max - 1, current_min, 0.3);
         positions = new Field[width][height];
         initializeBoard();
     }
@@ -309,10 +319,10 @@ public class Board{
             //remove all tiles with the lowest number
             for (int x = 0; x < getWidth(); x++) {
                 for (Field f : positions[x]) {
-                    if(f == null){
+                    if (f == null) {
                         continue;
                     }
-                    if(f.getValue() == this.current_min){
+                    if (f.getValue() == this.current_min) {
                         removeField(f);
                     }
                 }
@@ -335,7 +345,7 @@ public class Board{
         checkGamestate();
     }
 
-    private void checkGamestate(){
+    private void checkGamestate() {
         if (isWon()) {
             setGameState(GameState.WON);
         } else if (isLost()) {
