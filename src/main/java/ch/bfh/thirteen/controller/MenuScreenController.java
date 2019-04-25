@@ -4,7 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import main.java.ch.bfh.thirteen.application.ThirteenApplication;
+import main.java.ch.bfh.thirteen.saver.Saver;
 
+import javax.xml.bind.JAXBException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -19,19 +22,11 @@ public class MenuScreenController {
     private URL location;
 
     @FXML
-    private Button startButton;
+    private Button startButton, loadButton, autoplayButton, hiScoreButton, infoButton, saveButton;
 
-    @FXML
-    private Button autoplayButton;
 
     @FXML
     private ImageView image;
-
-    @FXML
-    private Button hiScoreButton;
-
-    @FXML
-    private Button infoButton;
 
     @FXML
     void hiScoreEvent(ActionEvent event) {
@@ -44,26 +39,33 @@ public class MenuScreenController {
     }
 
     @FXML
-    void switchGame(ActionEvent event){
-        changeStage(event,"fxml/gameScreen.fxml");
+    void switchGame(ActionEvent event) {
+        changeStage(event, "fxml/gameScreen.fxml");
     }
 
     @FXML
-    void switchAutoplay(ActionEvent event){
+    void switchAutoplay(ActionEvent event) {
 
     }
 
     @FXML
-    void switchHighScore(ActionEvent event){
+    void switchHighScore(ActionEvent event) {
         changeStage(event, "fxml/highScoreScreen.fxml");
     }
 
     @FXML
-    void switchSettings(ActionEvent event){
+    void switchSettings(ActionEvent event) {
         changeStage(event, "fxml/settingsScreen.fxml");
     }
 
-
+    @FXML
+    void save(ActionEvent event) {
+        try {
+            Saver.save(ThirteenApplication.game);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     @FXML

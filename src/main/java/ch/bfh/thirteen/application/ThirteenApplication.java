@@ -13,11 +13,12 @@ import java.util.Objects;
 
 public class ThirteenApplication extends Application {
     public static Game game;
+    public static MusicPlayer music;
     @Override
     public void init() throws Exception {
         Settings.loadResources();
         game = new Game();
-        MusicPlayer music = new MusicPlayer("../resources/music/bensound-dreams.mp3");
+        music = new MusicPlayer("resources/music/bensound-dreams.mp3");
         Thread.sleep(1000);
     }
 

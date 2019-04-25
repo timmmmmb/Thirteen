@@ -1,9 +1,11 @@
 package main.java.ch.bfh.thirteen.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Random;
 
+@XmlRootElement(namespace = "board")
 public class Board{
     private WeightedRandomNumberGenerator wrng;
     private PropertyChangeSupport pcs = new PropertyChangeSupport(this);

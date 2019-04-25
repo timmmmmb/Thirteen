@@ -7,8 +7,8 @@ import javafx.scene.media.MediaPlayer;
 import java.io.File;
 
 public class MusicPlayer {
-    Media sound;
-    MediaPlayer mediaPlayer;
+    private Media sound;
+    private MediaPlayer mediaPlayer;
 
     public MusicPlayer(String musicFile) {
         sound = new Media(new File(musicFile).toURI().toString());

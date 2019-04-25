@@ -21,7 +21,6 @@ Button {
 
 #startButton {
     -fx-background-color: linear-gradient(#4aee49, #0a8a0a);
-
 }
 
 #startButton:hover {
@@ -29,13 +28,10 @@ Button {
 }
 
 #autoplayButton {
-
     -fx-background-color: linear-gradient(#cca119, #ee8900);
-
 }
 
 #autoplayButton:hover {
-
     -fx-background-color: linear-gradient(#ffe73a, #ffa22c);
 }
 
@@ -52,7 +48,6 @@ Button {
 }
 
 #infoButton {
-
     -fx-background-color: linear-gradient(#5f83ff, #2f54f9);
     -fx-background-image: url("../images/gears.png");
     -fx-background-size: 35 35;
@@ -60,7 +55,6 @@ Button {
     -fx-background-position: center;
 }
 
-#infoButton:hover{
+#infoButton:hover {
     -fx-background-color: linear-gradient(#7297ff, #5b77f9);
-
 }

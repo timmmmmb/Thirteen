@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
+import main.java.ch.bfh.thirteen.application.ThirteenApplication;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,8 +15,7 @@ import static main.java.ch.bfh.thirteen.stagechanger.StageChanger.changeStage;
 
 public class SettingsScreenController {
 
-    boolean musicOn;
-    //MusicPlayer music = new MusicPlayer();
+    boolean musicOn = false;
 
     @FXML
     private ResourceBundle resources;
@@ -43,19 +43,15 @@ public class SettingsScreenController {
 
     @FXML
     void musicOnOff(MouseEvent event) {
-
-
-        if(!musicOn) {
+        if (!musicOn) {
             musicButton.setText("on");
-            musicOn = true;
-           // music.play();
+            ThirteenApplication.music.play();
+        } else if (musicOn) {
+            musicButton.setText("off");
+            ThirteenApplication.music.stop();
         }
 
-       else if(musicOn){
-            musicButton.setText("off");
-            musicOn = false;
-            //music.stop();
-        }
+        musicOn = !musicOn;
 
     }
 
