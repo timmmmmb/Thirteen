@@ -3,11 +3,13 @@ package main.java.ch.bfh.thirteen.model;
 import main.java.ch.bfh.thirteen.settings.Settings;
 import main.java.ch.bfh.thirteen.stack.SizedStack;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "game")
 public class Game {
     private SizedStack<Board> history = new SizedStack<>(10);
+    @XmlElement(name = "board")
     private Board gameBoard = new Board(Settings.getBoardWidth(), Settings.getBoardHeight());
 
     public void restartGame() {
