@@ -313,9 +313,15 @@ public class GameScreenController implements PropertyChangeListener {
     }
 
     @FXML
-    private void switchRemovalMode() {
+    private void switchRemovalMode(){
+        switchRemovalMode(false);
+    }
+
+    private void switchRemovalMode(boolean click) {
         if(isRemovalMode){
-            createBackground();
+            if(!click){
+                createBackground();
+            }
             resetStyle();
         }else{
             gameBackground.getChildren().clear();
@@ -343,7 +349,7 @@ public class GameScreenController implements PropertyChangeListener {
         FieldLabel fl = (FieldLabel)event.getSource();
         if(isRemovalMode){
             ThirteenApplication.game.removeField(fl);
-            switchRemovalMode();
+            switchRemovalMode(true);
         }else{
             ThirteenApplication.game.clickField(fl);
         }
