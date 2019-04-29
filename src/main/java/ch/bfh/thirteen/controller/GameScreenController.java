@@ -44,8 +44,10 @@ public class GameScreenController implements PropertyChangeListener {
             case "GameStateChange":
                 if (evt.getNewValue() == GameState.WON) {
                     gameStateLabel.setText("Won");
+                    gameStateLabel.setVisible(true);
                 } else if (evt.getNewValue() == GameState.LOST) {
                     gameStateLabel.setText("Lost");
+                    gameStateLabel.setVisible(true);
                 }
                 break;
             case "ScoreChanged":
@@ -126,6 +128,7 @@ public class GameScreenController implements PropertyChangeListener {
         addLabels();
         createBackground();
         gameStateLabel.setText("");
+        gameStateLabel.setVisible(false);
         scoreLabel.setText("0");
     }
 

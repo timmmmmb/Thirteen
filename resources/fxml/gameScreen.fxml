@@ -10,31 +10,31 @@
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane styleClass="root" stylesheets="@../css/gameScreen.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ch.bfh.thirteen.controller.GameScreenController">
-    <bottom>
-        <HBox fx:id="buttonBox" BorderPane.alignment="CENTER">
-            <Button fx:id="undoButton" mnemonicParsing="false" onAction="#undo" text="Undo" />
-            <Button fx:id="restartButton" mnemonicParsing="false" onAction="#restart" text="Restart" />
-            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#switchRemovalMode" prefHeight="44.0" prefWidth="57.0" text=" " />
-        </HBox>
-    </bottom>
-    <top>
-        <VBox>
-            <HBox fx:id="menuBox">
-                <Button fx:id="menuButton" mnemonicParsing="false" onAction="#switchMenu" text="Menu" />
-                <Label fx:id="scoreLabel" text="0" />
-            </HBox>
-            <Label fx:id="gameStateLabel" />
-        </VBox>
-    </top>
-    <center>
-        <HBox BorderPane.alignment="CENTER">
-            <BorderPane.margin>
-                <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
-            </BorderPane.margin>
-            <Group>
-                <AnchorPane fx:id="gameBackground" prefHeight="200.0" prefWidth="200.0" />
-                <AnchorPane fx:id="gamePane" />
-            </Group>
-        </HBox>
-    </center>
-</BorderPane>
+     <bottom>
+         <HBox fx:id="buttonBox" BorderPane.alignment="CENTER">
+             <Button fx:id="undoButton" mnemonicParsing="false" onAction="#undo" text="Undo" />
+             <Button fx:id="restartButton" mnemonicParsing="false" onAction="#restart" text="Restart" />
+             <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#switchRemovalMode" prefHeight="44.0" prefWidth="57.0" text=" " />
+         </HBox>
+     </bottom>
+     <top>
+         <VBox>
+             <HBox fx:id="menuBox">
+                 <Button fx:id="menuButton" mnemonicParsing="false" onAction="#switchMenu" text="Menu" />
+                 <Label fx:id="scoreLabel" text="0" />
+             </HBox>
+         </VBox>
+     </top>
+     <center>
+         <HBox BorderPane.alignment="CENTER">
+             <BorderPane.margin>
+                 <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+             </BorderPane.margin>
+             <Group>
+                 <AnchorPane fx:id="gameBackground" />
+                 <AnchorPane fx:id="gamePane" styleClass="gamePane" />
+              <Label fx:id="gameStateLabel" layoutX="60.0" layoutY="128.0" styleClass="stateLabel" visible="false" />
+             </Group>
+         </HBox>
+     </center>
+ </BorderPane>

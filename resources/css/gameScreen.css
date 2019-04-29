@@ -4,9 +4,20 @@
     -fx-alignment: center;
 }
 
-AnchorPane {
+.gamePane {
     -fx-pref-width: 320px;
     -fx-pref-height: 320px;
+}
+
+.stateLabel{
+    -fx-pref-width: 200px;
+    -fx-pref-height: 60px;
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+    -fx-background-color: linear-gradient(#4aee49, #0a8a0a);
+    -fx-border-width: 5px;
+    -fx-border-color: black;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
 }
 
 Button {
@@ -95,7 +106,9 @@ FieldLabel:hover {
 .fieldBombMode {
     -fx-border-color: #ffffff;
     -fx-border-radius: 10px;
-    -fx-border-width: 2px;
+    -fx-border-width: 3px;
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
 }
 
 .field1 {
