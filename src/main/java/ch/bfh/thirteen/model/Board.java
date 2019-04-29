@@ -40,6 +40,10 @@ public class Board {
         initializeBoard();
     }
 
+    public GameState getGameState() {
+        return gameState;
+    }
+
     public Board(Board b) {
         this.score = b.score;
         this.gameState = GameState.RUNNING;

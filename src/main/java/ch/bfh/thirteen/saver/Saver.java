@@ -1,6 +1,7 @@
 package main.java.ch.bfh.thirteen.saver;
 
 import main.java.ch.bfh.thirteen.model.Game;
+import main.java.ch.bfh.thirteen.model.GameState;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -24,6 +25,9 @@ public class Saver {
      * @param filename the name of the file that shall get saved
      */
     public static void save(Game game, String filename) throws JAXBException {
+        if(game.getBoard().getGameState() != GameState.RUNNING){
+            return;
+        }
         // create JAXB context and instantiate marshaller
         JAXBContext context = JAXBContext.newInstance(game.getClass());
         Marshaller m = context.createMarshaller();
