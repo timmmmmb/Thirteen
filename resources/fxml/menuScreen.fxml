@@ -7,7 +7,7 @@
 
 <AnchorPane id="pane" prefHeight="500.0" prefWidth="400.0" stylesheets="@../css/menuScreen.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ch.bfh.thirteen.controller.MenuScreenController">
     <Button fx:id="saveButton" layoutX="125.0" layoutY="352.0" mnemonicParsing="false" onAction="#save" text="Save" />
-    <Button fx:id="loadButton" layoutX="201.0" layoutY="352.0" mnemonicParsing="false" text="Load" />
+    <Button fx:id="loadButton" layoutX="201.0" layoutY="352.0" mnemonicParsing="false" onAction="#load" text="Load" />
     <Button fx:id="startButton" layoutX="125.0" layoutY="225.0" mnemonicParsing="false" onAction="#switchGame" prefHeight="50.0" prefWidth="150.0" text="Start" />
     <Button fx:id="autoplayButton" layoutX="126.0" layoutY="287.0" mnemonicParsing="false" onAction="#switchAutoplay" prefHeight="50.0" prefWidth="150.0" text="Autoplay" />
     <Button fx:id="hiScoreButton" layoutX="106.0" layoutY="415.0" mnemonicParsing="false" onAction="#switchHighScore" prefHeight="44.0" prefWidth="71.0" />

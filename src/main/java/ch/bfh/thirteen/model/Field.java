@@ -1,9 +1,22 @@
 package main.java.ch.bfh.thirteen.model;
 
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(namespace = "field")
 public class Field{
+    @XmlElement(name = "value")
     private int value;
     private boolean tobeRemoved = false;
     private boolean visited = false;
+
+    /**
+     * this is only used for the xml
+     */
+    public Field(){
+
+    }
 
     public Field(int value) {
         this.value = value;

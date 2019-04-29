@@ -10,13 +10,18 @@ import java.util.Random;
 public class Board {
     private WeightedRandomNumberGenerator wrng;
     private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+    @XmlElement(name = "max")
     private int current_max = 6;
+    @XmlElement(name = "min")
     private int current_min = 1;
+    @XmlElement(name = "width")
     private int width;
+    @XmlElement(name = "height")
     private int height;
     @XmlElement(name = "score")
     private int score = 0;
     private GameState gameState = GameState.UNINITIALIZED;
+    @XmlElement(name = "positions")
     private Field[][] positions;
 
     public Board(){
@@ -48,6 +53,10 @@ public class Board {
                 positions[x][y] = new Field(b.positions[x][y]);
             }
         }
+    }
+
+    public int getScore() {
+        return score;
     }
 
     /**

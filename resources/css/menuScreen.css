@@ -35,6 +35,22 @@ Button {
     -fx-background-color: linear-gradient(#ffe73a, #ffa22c);
 }
 
+#loadButton {
+    -fx-background-color: linear-gradient(#4aee49, #0a8a0a);
+}
+
+#loadButton:hover {
+    -fx-background-color: linear-gradient(#5def4e, #66d65f);
+}
+
+#saveButton {
+    -fx-background-color: linear-gradient(#cca119, #ee8900);
+}
+
+#saveButton:hover {
+    -fx-background-color: linear-gradient(#ffe73a, #ffa22c);
+}
+
 #hiScoreButton {
     -fx-background-color: linear-gradient(#ff5839, #bf2805);
     -fx-background-image: url("../images/trophy.png");

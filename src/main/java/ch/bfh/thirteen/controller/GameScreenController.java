@@ -106,6 +106,7 @@ public class GameScreenController implements PropertyChangeListener {
         animationList.add(new ArrayList<>());
         animationList.add(new ArrayList<>());
         ThirteenApplication.game.getBoard().getPcs().addPropertyChangeListener(this);
+        scoreLabel.setText(String.valueOf(ThirteenApplication.game.getBoard().getScore()));
         addLabels();
         createBackground();
     }

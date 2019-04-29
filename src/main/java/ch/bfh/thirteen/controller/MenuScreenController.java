@@ -5,9 +5,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import main.java.ch.bfh.thirteen.application.ThirteenApplication;
+import main.java.ch.bfh.thirteen.loader.Loader;
 import main.java.ch.bfh.thirteen.saver.Saver;
 
 import javax.xml.bind.JAXBException;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -59,10 +61,19 @@ public class MenuScreenController {
     }
 
     @FXML
-    void save(ActionEvent event) {
+    void save() {
         try {
             Saver.save(ThirteenApplication.game);
         } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void load() {
+        try {
+            ThirteenApplication.game = Loader.load();
+        } catch (JAXBException | FileNotFoundException e) {
             e.printStackTrace();
         }
     }
