@@ -14,7 +14,7 @@
         <HBox fx:id="buttonBox" BorderPane.alignment="CENTER">
             <Button fx:id="undoButton" mnemonicParsing="false" onAction="#undo" text="Undo" />
             <Button fx:id="restartButton" mnemonicParsing="false" onAction="#restart" text="Restart" />
-            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#switchRemovalMode" text="Delete" />
+            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#switchRemovalMode" prefHeight="44.0" prefWidth="57.0" text=" " />
         </HBox>
     </bottom>
     <top>
