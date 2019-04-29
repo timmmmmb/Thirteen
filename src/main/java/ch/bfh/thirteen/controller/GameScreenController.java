@@ -72,6 +72,7 @@ public class GameScreenController implements PropertyChangeListener {
                 try {
                     FieldPosition fp = (FieldPosition) evt.getOldValue();
                     FieldLabel fl = getFieldLabelByCoordinates(fp.getF(), fp.getX(), fp.getY());
+                    fl.getStyleClass().clear();
                     fl.setTextAndClass(String.valueOf(evt.getNewValue()));
                 } catch (FieldLabelNotFoundException e) {
                     e.printStackTrace();
@@ -146,6 +147,7 @@ public class GameScreenController implements PropertyChangeListener {
      */
     private void resetStyle() {
         for (Node fl : gamePane.getChildren()) {
+            fl.getStyleClass().clear();
             ((FieldLabel) fl).setTextAndClass(((FieldLabel) fl).getText());
         }
     }
@@ -312,6 +314,15 @@ public class GameScreenController implements PropertyChangeListener {
 
     @FXML
     private void switchRemovalMode() {
+        if(isRemovalMode){
+            createBackground();
+            resetStyle();
+        }else{
+            gameBackground.getChildren().clear();
+            for (Node fl : gamePane.getChildren()) {
+                fl.getStyleClass().add("fieldBombMode");
+            }
+        }
         isRemovalMode = !isRemovalMode;
     }
 
