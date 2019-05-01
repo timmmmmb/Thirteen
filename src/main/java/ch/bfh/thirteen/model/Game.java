@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "game")
 public class Game {
+    @XmlElement(name = "history")
     private SizedStack<Board> history = new SizedStack<>(10);
     @XmlElement(name = "board")
     private Board gameBoard = new Board(Settings.getBoardWidth(), Settings.getBoardHeight());

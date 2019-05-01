@@ -1,13 +1,19 @@
 package main.java.ch.bfh.thirteen.stack;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Stack;
 
+@XmlRootElement(name = "SizedStack")
 public class SizedStack<T> extends Stack<T> {
     private int maxSize;
 
     public SizedStack(int size) {
         super();
         this.maxSize = size;
+    }
+
+    public SizedStack() {
+        this(10);
     }
 
     @Override
