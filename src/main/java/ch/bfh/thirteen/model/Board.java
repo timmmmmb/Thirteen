@@ -25,11 +25,7 @@ public class Board {
     private Field[][] positions;
 
     public Board(){
-        this.width = 5;
-        this.height = 5;
-        wrng = new WeightedRandomNumberGenerator(current_max - 1, current_min, 0.3);
-        positions = new Field[width][height];
-        initializeBoard();
+        this(5,5);
     }
 
     public Board(int width, int height) {
@@ -40,23 +36,24 @@ public class Board {
         initializeBoard();
     }
 
-    public GameState getGameState() {
-        return gameState;
-    }
-
     public Board(Board b) {
+        this.current_min = b.current_min;
+        this.current_max = b.current_max;
         this.score = b.score;
         this.gameState = GameState.RUNNING;
         this.width = b.width;
         this.height = b.height;
         wrng = b.wrng;
         positions = new Field[width][height];
-        pcs = b.getPcs();
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 positions[x][y] = new Field(b.positions[x][y]);
             }
         }
+    }
+
+    public GameState getGameState() {
+        return gameState;
     }
 
     public int getScore() {

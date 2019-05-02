@@ -73,6 +73,7 @@ public class MenuScreenController {
     void load() {
         try {
             ThirteenApplication.game = Loader.load();
+            ThirteenApplication.game.addPCL();
         } catch (JAXBException | FileNotFoundException e) {
             e.printStackTrace();
         }

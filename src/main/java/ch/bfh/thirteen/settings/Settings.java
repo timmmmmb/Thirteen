@@ -1,11 +1,9 @@
 package main.java.ch.bfh.thirteen.settings;
 
 import javafx.scene.image.Image;
-import main.java.ch.bfh.thirteen.model.Game;
 
 public class Settings {
 
-    private static Game game = new Game();
     private static final int fieldWidth = 64;
     private static final int fieldHeight = 64;
     private static final int boardHeight = 5;
@@ -37,9 +35,5 @@ public class Settings {
 
     public static Image getGameIcon() {
         return gameIcon;
-    }
-
-    public static Game getGame() {
-        return game;
     }
 }

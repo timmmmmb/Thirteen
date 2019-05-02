@@ -108,7 +108,7 @@ public class GameScreenController implements PropertyChangeListener {
         animationList.add(new ArrayList<>());
         animationList.add(new ArrayList<>());
         animationList.add(new ArrayList<>());
-        ThirteenApplication.game.getBoard().getPcs().addPropertyChangeListener(this);
+        ThirteenApplication.game.getPcs().addPropertyChangeListener(this);
         scoreLabel.setText(String.valueOf(ThirteenApplication.game.getBoard().getScore()));
         addLabels();
         createBackground();
@@ -121,10 +121,8 @@ public class GameScreenController implements PropertyChangeListener {
     @FXML
     private void restart() {
         gameBackground.getChildren().clear();
-        ThirteenApplication.game.getBoard().getPcs().removePropertyChangeListener(this);
         ThirteenApplication.game.restartGame();
         gamePane.getChildren().removeAll(gamePane.getChildren());
-        ThirteenApplication.game.getBoard().getPcs().addPropertyChangeListener(this);
         addLabels();
         createBackground();
         gameStateLabel.setText("");
