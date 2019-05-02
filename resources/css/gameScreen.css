@@ -38,41 +38,45 @@ Button {
     -fx-padding: 10;
 }
 
-#menuButton {
-    -fx-background-color: linear-gradient(#4aee49, #0a8a0a);
+#menuButton{
+    -fx-background-color: #00a8b5;
 }
 
-#menuButton:hover {
-    -fx-background-color: linear-gradient(#5def4e, #66d65f);
+#menuButton:hover{
+    -fx-background-color: #00ccd9;
 }
 
 #restartButton {
 
-    -fx-background-color: linear-gradient(#5f83ff, #2f54f9);
+    -fx-background-color: #bcd574;
 }
 
-#restartButton:hover {
-    -fx-background-color: linear-gradient(#759bff, #476bff);
+#restartButton:hover{
+    -fx-background-color: #e3ff8b;
 }
 
-#undoButton {
-    -fx-background-color: linear-gradient(#cca119, #ee8900);
+#undoButton{
+    -fx-background-color: #e4734f;
+    -fx-background-image: url("../images/undo-arrow.png");
+    -fx-background-size: 35 35;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
 }
 
-#undoButton:hover {
-    -fx-background-color: linear-gradient(#ffe73a, #ffa22c);
+#undoButton:hover{
+    -fx-background-color: #ff8c64;
 }
 
-#deleteButton {
-    -fx-background-color: linear-gradient(#eb2e05, #bf2805);
+#deleteButton{
+    -fx-background-color: #de4383;
     -fx-background-image: url("../images/bomb.png");
     -fx-background-size: 35 35;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
 
-#deleteButton:hover {
-    -fx-background-color: linear-gradient(#eb5a2e, #bf4b27);
+#deleteButton:hover{
+    -fx-background-color: #ff4e97;
 }
 
 Label {

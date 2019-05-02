@@ -1,14 +1,13 @@
 * {
     -fx-alignment: center;
+
 }
 
 #pane {
     -fx-pref-width: 400px;
     -fx-pref-height: 500px;
-    -fx-background-color: lightgray;
-    -fx-background-image: url("../images/background.png");
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: cover;
+    -fx-background-color: #191919;
+
 }
 
 Button {
@@ -20,39 +19,25 @@ Button {
 }
 
 #startButton {
-    -fx-background-color: linear-gradient(#4aee49, #0a8a0a);
+    -fx-background-color: #00a8b5;
 }
 
 #startButton:hover {
-    -fx-background-color: linear-gradient(#5def4e, #66d65f);
+    -fx-background-color: #00ccd9;
 }
 
 #autoplayButton {
-    -fx-background-color: linear-gradient(#cca119, #ee8900);
+    -fx-background-color: #f3ae4b;
 }
 
 #autoplayButton:hover {
-    -fx-background-color: linear-gradient(#ffe73a, #ffa22c);
+    -fx-background-color: #ffbf6a;
 }
 
-#loadButton {
-    -fx-background-color: linear-gradient(#4aee49, #0a8a0a);
-}
 
-#loadButton:hover {
-    -fx-background-color: linear-gradient(#5def4e, #66d65f);
-}
-
-#saveButton {
-    -fx-background-color: linear-gradient(#cca119, #ee8900);
-}
-
-#saveButton:hover {
-    -fx-background-color: linear-gradient(#ffe73a, #ffa22c);
-}
 
 #hiScoreButton {
-    -fx-background-color: linear-gradient(#ff5839, #bf2805);
+    -fx-background-color: #de4383;
     -fx-background-image: url("../images/trophy.png");
     -fx-background-size: 35 35;
     -fx-background-repeat: no-repeat;
@@ -60,11 +45,11 @@ Button {
 }
 
 #hiScoreButton:hover {
-    -fx-background-color: #ff5839;
+    -fx-background-color: #ff4e97;
 }
 
 #infoButton {
-    -fx-background-color: linear-gradient(#5f83ff, #2f54f9);
+    -fx-background-color: #774898;
     -fx-background-image: url("../images/gears.png");
     -fx-background-size: 35 35;
     -fx-background-repeat: no-repeat;
@@ -72,5 +57,29 @@ Button {
 }
 
 #infoButton:hover {
-    -fx-background-color: linear-gradient(#7297ff, #5b77f9);
+    -fx-background-color: #9754bf;
+}
+
+#saveButton{
+    -fx-background-color: #e4734f;
+    -fx-background-image: url("../images/diskette.png");
+    -fx-background-size: 35 35;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#saveButton:hover{
+    -fx-background-color: #ff8c64;
+}
+
+#loadButton{
+    -fx-background-color: #bcd574;
+    -fx-background-image: url("../images/upload.png");
+    -fx-background-size: 35 35;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#loadButton:hover{
+    -fx-background-color: #e3ff8b;
 }

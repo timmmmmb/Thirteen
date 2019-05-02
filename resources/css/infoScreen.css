@@ -1,23 +1,29 @@
 * {
-
     -fx-alignment: center;
 }
 
-pane{
+#pane {
     -fx-pref-width: 400px;
     -fx-pref-height: 500px;
     -fx-background-color: #191919;
-
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
 }
 
-Button{
+Button {
     -fx-text-fill: white;
     -fx-font-size: 20px;
     -fx-font-weight: bold;
-    -fx-background-color: #f3ae4b;
     -fx-border-radius: 10 10 10 10;
-    -fx-background-radius: 10 10 10 10;}
+    -fx-background-radius: 10 10 10 10;
+}
 
-Button:hover{
+#backButton {
 
-    -fx-background-color: #ffbf6a;;}
+    -fx-background-color: #f3ae4b;
+
+}
+
+#backButton:hover {
+
+    -fx-background-color: #ffbf6a; }
