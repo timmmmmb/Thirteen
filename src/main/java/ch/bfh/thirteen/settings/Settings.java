@@ -8,6 +8,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "Settings")
 public class Settings {
 
+    @XmlElement(name = "BOMBINCREMENTCOST")
+    private final int BOMBINCREMENTCOST = 50;
+    @XmlElement(name = "UNDOINCREMENTCOST")
+    private final int UNDOINCREMENTCOST = 50;
+
     @XmlElement(name = "fieldWidth")
     private final int fieldWidth = 64;
     @XmlElement(name = "fieldHeight")
@@ -24,13 +29,16 @@ public class Settings {
 
     }
 
-
-
     public int getStars() {
         return this.stars;
     }
 
-    public boolean decreaseScore(int stars) {
+    /**
+     * decreses the stars with the amount specified and returns true if there are enough stars and false if there aren't
+     * @param stars the amount of stars to decrease the stars with
+     * @return true if the stars were decreased and false if there are not enough stars
+     */
+    public boolean decreaseStars(int stars) {
         if(this.stars >= stars){
             return false;
         }
@@ -68,5 +76,13 @@ public class Settings {
 
     public Image getGameIcon() {
         return gameIcon;
+    }
+
+    public int getBOMBINCREMENTCOST() {
+        return BOMBINCREMENTCOST;
+    }
+
+    public int getUNDOINCREMENTCOST() {
+        return UNDOINCREMENTCOST;
     }
 }
