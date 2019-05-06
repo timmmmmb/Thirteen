@@ -1,5 +1,7 @@
 package main.java.ch.bfh.thirteen.model;
 
+import main.java.ch.bfh.thirteen.application.ThirteenApplication;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.beans.PropertyChangeSupport;
@@ -345,7 +347,7 @@ public class Board {
         }
     }
 
-    int getCurrent_max() {
+    public int getCurrent_max() {
         return current_max;
     }
 
@@ -358,8 +360,10 @@ public class Board {
     private void checkGamestate() {
         if (isWon()) {
             setGameState(GameState.WON);
+            ThirteenApplication.getSettings().setHighscore();
         } else if (isLost()) {
             setGameState(GameState.LOST);
+            ThirteenApplication.getSettings().setHighscore();
         } else {
             setGameState(GameState.ANIMATING);
         }

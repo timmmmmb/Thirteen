@@ -90,4 +90,8 @@ public class Game implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         this.pcs.firePropertyChange(evt);
     }
+
+    public int getTime() {
+        return 1;
+    }
 }

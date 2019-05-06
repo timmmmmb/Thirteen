@@ -1,9 +1,14 @@
 package main.java.ch.bfh.thirteen.settings;
 
 import javafx.scene.image.Image;
+import main.java.ch.bfh.thirteen.application.ThirteenApplication;
+import main.java.ch.bfh.thirteen.model.GameState;
+import main.java.ch.bfh.thirteen.score.Score;
+import main.java.ch.bfh.thirteen.score.ScoreComparator;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
 
 @XmlRootElement(name = "Settings")
 public class Settings {
@@ -22,9 +27,11 @@ public class Settings {
     @XmlElement(name = "boardWidth")
     private final int boardWidth = 5;
     private Image gameIcon;
-
     @XmlElement(name = "Stars")
     private int stars = 0;
+
+    @XmlElement(name = "scores")
+    private ArrayList<Score> scores;
     public Settings(){
 
     }
@@ -84,5 +91,14 @@ public class Settings {
 
     public int getUNDOINCREMENTCOST() {
         return UNDOINCREMENTCOST;
+    }
+
+    public int getHighscore() {
+        return scores.get(0).getMoves();
+    }
+
+    public void setHighscore() {
+        scores.add(new Score(ThirteenApplication.getGame().getBoard().getScore(),ThirteenApplication.getGame().getBoard().getCurrent_max(),ThirteenApplication.getGame().getTime(),ThirteenApplication.getGame().getBoard().getGameState()== GameState.WON));
+        scores.sort(new ScoreComparator());
     }
 }
