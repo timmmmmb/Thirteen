@@ -47,12 +47,12 @@ public class SettingsScreenController {
         if (musicOn) {
 
             musicButton.setText("on");
-            ThirteenApplication.music.stop();
+            ThirteenApplication.getMusic().stop();
 
 
         } else if (!musicOn) {
             musicButton.setText("off");
-            ThirteenApplication.music.play();
+            ThirteenApplication.getMusic().play();
         }
 
         musicOn = !musicOn;

@@ -1,6 +1,7 @@
 package main.java.ch.bfh.thirteen.loader;
 
 import main.java.ch.bfh.thirteen.model.Game;
+import main.java.ch.bfh.thirteen.settings.Settings;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -21,5 +22,11 @@ public class Loader {
         JAXBContext context = JAXBContext.newInstance(Game.class);
         Unmarshaller um = context.createUnmarshaller();
         return (Game) um.unmarshal(new FileReader(filename));
+    }
+
+    public static Settings loadSettings() throws JAXBException, FileNotFoundException {
+        JAXBContext context = JAXBContext.newInstance(Settings.class);
+        Unmarshaller um = context.createUnmarshaller();
+        return (Settings) um.unmarshal(new FileReader("Settings.xml"));
     }
 }

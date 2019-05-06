@@ -15,12 +15,12 @@ import main.java.ch.bfh.thirteen.application.ThirteenApplication;
 import main.java.ch.bfh.thirteen.exception.FieldLabelNotFoundException;
 import main.java.ch.bfh.thirteen.exception.UINotMatchingModelException;
 import main.java.ch.bfh.thirteen.model.*;
-import main.java.ch.bfh.thirteen.settings.Settings;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
+import static main.java.ch.bfh.thirteen.application.ThirteenApplication.getGame;
 import static main.java.ch.bfh.thirteen.stagechanger.StageChanger.changeStage;
 
 public class GameScreenController implements PropertyChangeListener {
@@ -86,7 +86,7 @@ public class GameScreenController implements PropertyChangeListener {
                     FieldPosition fp = (FieldPosition) evt.getOldValue();
                     FieldLabel fl = getFieldLabelByCoordinates(fp.getF(), fp.getX(), fp.getY());
                     TranslateTransition tt = new TranslateTransition(Duration.millis(500), fl);
-                    double distance = Settings.getFieldHeight() * (Integer) evt.getNewValue();
+                    double distance = ThirteenApplication.getSettings().getFieldHeight() * (Integer) evt.getNewValue();
                     tt.setByY(distance);
                     animationList.get(1).add(tt);
                 } catch (FieldLabelNotFoundException e) {
@@ -108,8 +108,8 @@ public class GameScreenController implements PropertyChangeListener {
         animationList.add(new ArrayList<>());
         animationList.add(new ArrayList<>());
         animationList.add(new ArrayList<>());
-        ThirteenApplication.game.getPcs().addPropertyChangeListener(this);
-        scoreLabel.setText(String.valueOf(ThirteenApplication.game.getBoard().getScore()));
+        getGame().getPcs().addPropertyChangeListener(this);
+        scoreLabel.setText(String.valueOf(getGame().getBoard().getScore()));
         addLabels();
         createBackground();
     }
@@ -121,7 +121,7 @@ public class GameScreenController implements PropertyChangeListener {
     @FXML
     private void restart() {
         gameBackground.getChildren().clear();
-        ThirteenApplication.game.restartGame();
+        getGame().restartGame();
         gamePane.getChildren().removeAll(gamePane.getChildren());
         addLabels();
         createBackground();
@@ -190,7 +190,7 @@ public class GameScreenController implements PropertyChangeListener {
      * this function creates labels for all of the fields in the board and adds them to the gamePane
      */
     private void addLabels() {
-        Board b = ThirteenApplication.game.getBoard();
+        Board b = getGame().getBoard();
         for (int x = 0; x < b.getWidth(); x++) {
             for (int y = 0; y < b.getHeight(); y++) {
                 FieldLabel fl = FieldLabelFactory.createFieldLabel(b.getField(x, y), x, y);
@@ -198,10 +198,10 @@ public class GameScreenController implements PropertyChangeListener {
                 gamePane.getChildren().add(fl);
             }
         }
-        gamePane.setPrefWidth((b.getWidth() - 1) * Settings.getFieldWidth());
-        gamePane.setPrefHeight((b.getHeight() - 1) * Settings.getFieldHeight());
-        gameBackground.setPrefWidth((b.getWidth() - 1) * Settings.getFieldWidth());
-        gameBackground.setPrefHeight((b.getHeight() - 1) * Settings.getFieldHeight());
+        gamePane.setPrefWidth((b.getWidth() - 1) * ThirteenApplication.getSettings().getFieldWidth());
+        gamePane.setPrefHeight((b.getHeight() - 1) * ThirteenApplication.getSettings().getFieldHeight());
+        gameBackground.setPrefWidth((b.getWidth() - 1) * ThirteenApplication.getSettings().getFieldWidth());
+        gameBackground.setPrefHeight((b.getHeight() - 1) * ThirteenApplication.getSettings().getFieldHeight());
     }
 
     /**
@@ -220,7 +220,7 @@ public class GameScreenController implements PropertyChangeListener {
             } catch (UINotMatchingModelException e) {
                 e.printStackTrace();
             }
-            ThirteenApplication.game.getBoard().finishAnimation();
+            getGame().getBoard().finishAnimation();
             createBackground();
             return;
         }
@@ -245,11 +245,11 @@ public class GameScreenController implements PropertyChangeListener {
      * @throws UINotMatchingModelException if the field was not found in the ui
      */
     private void checkMatch() throws UINotMatchingModelException {
-        if (gamePane.getChildren().size() != ThirteenApplication.game.getBoard().getHeight()*ThirteenApplication.game.getBoard().getWidth()) {
+        if (gamePane.getChildren().size() != getGame().getBoard().getHeight()*getGame().getBoard().getWidth()) {
             throw new UINotMatchingModelException("Size does not match");
         }
         try {
-            Board b = ThirteenApplication.game.getBoard();
+            Board b = getGame().getBoard();
             for (int x = 0; x < b.getWidth(); x++) {
                 for (int y = 0; y < b.getHeight(); y++) {
                     getFieldLabelByCoordinates(b.getField(x, y), x, y);
@@ -272,8 +272,8 @@ public class GameScreenController implements PropertyChangeListener {
     private FieldLabel getFieldLabelByCoordinates(Field f, int x, int y) throws FieldLabelNotFoundException {
         for (Node child : gamePane.getChildren()) {
             FieldLabel fl = (FieldLabel) child;
-            int layoutX = (int) fl.getBoundsInParent().getMinX() / Settings.getFieldWidth();
-            int layoutY = (int) fl.getBoundsInParent().getMinY() / Settings.getFieldHeight();
+            int layoutX = (int) fl.getBoundsInParent().getMinX() / ThirteenApplication.getSettings().getFieldWidth();
+            int layoutY = (int) fl.getBoundsInParent().getMinY() / ThirteenApplication.getSettings().getFieldHeight();
             if (layoutX == x && layoutY == y && String.valueOf(f.getValue()).equals(fl.getText())) {
                 if (removalList.contains(child)) {
                     continue;
@@ -288,7 +288,7 @@ public class GameScreenController implements PropertyChangeListener {
      * this function connects fieldLabels creating connector elements in the background
      */
     private void createBackground() {
-        Board b = ThirteenApplication.game.getBoard();
+        Board b = getGame().getBoard();
         for (int x = 0; x < b.getWidth(); x++) {
             for (int y = 0; y < b.getHeight(); y++) {
                 Field f = b.getField(x, y);
@@ -335,7 +335,7 @@ public class GameScreenController implements PropertyChangeListener {
 
     @FXML
     private void undo() {
-        ThirteenApplication.game.undo();
+        getGame().undo();
         reload();
     }
 
@@ -349,10 +349,10 @@ public class GameScreenController implements PropertyChangeListener {
         gameBackground.getChildren().clear();
         FieldLabel fl = (FieldLabel)event.getSource();
         if(isRemovalMode){
-            ThirteenApplication.game.removeField(fl);
+            getGame().removeField(fl);
             switchRemovalMode(true);
         }else{
-            ThirteenApplication.game.clickField(fl);
+            getGame().clickField(fl);
         }
         playAnimations(0);
     }

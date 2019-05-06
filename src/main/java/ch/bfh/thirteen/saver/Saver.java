@@ -2,6 +2,7 @@ package main.java.ch.bfh.thirteen.saver;
 
 import main.java.ch.bfh.thirteen.model.Game;
 import main.java.ch.bfh.thirteen.model.GameState;
+import main.java.ch.bfh.thirteen.settings.Settings;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -35,5 +36,19 @@ public class Saver {
 
         // Write to File
         m.marshal(game, new File(filename));
+    }
+
+    /**
+     * saves the game as xml
+     * @param settings the game that shall get saved
+     */
+    public static void saveSettings(Settings settings) throws JAXBException {
+        // create JAXB context and instantiate marshaller
+        JAXBContext context = JAXBContext.newInstance(settings.getClass());
+        Marshaller m = context.createMarshaller();
+        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+        // Write to File
+        m.marshal(settings, new File("Settings.xml"));
     }
 }

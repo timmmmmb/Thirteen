@@ -1,6 +1,6 @@
 package main.java.ch.bfh.thirteen.model;
 
-import main.java.ch.bfh.thirteen.settings.Settings;
+import main.java.ch.bfh.thirteen.application.ThirteenApplication;
 
 public class FieldLabelFactory {
     public static FieldLabel createFieldLabel(Field f, int x, int y) {
@@ -15,8 +15,8 @@ public class FieldLabelFactory {
 
     public static FieldLabel createFieldLabel(Field f, int x, int y, int height, int width) {
         FieldLabel fl = createFieldLabel(f, x, y);
-        fl.setPrefHeight(Settings.getFieldHeight() * height);
-        fl.setPrefWidth(Settings.getFieldWidth() * width);
+        fl.setPrefHeight(ThirteenApplication.getSettings().getFieldHeight() * height);
+        fl.setPrefWidth(ThirteenApplication.getSettings().getFieldWidth() * width);
         fl.setText("");
         fl.setStyle("-fx-background-radius: 10 10 10 10; -fx-background-insets: 1px;");
         return fl;

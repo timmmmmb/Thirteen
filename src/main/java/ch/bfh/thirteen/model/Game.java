@@ -1,6 +1,6 @@
 package main.java.ch.bfh.thirteen.model;
 
-import main.java.ch.bfh.thirteen.settings.Settings;
+import main.java.ch.bfh.thirteen.application.ThirteenApplication;
 import main.java.ch.bfh.thirteen.stack.SizedStack;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -17,13 +17,18 @@ public class Game implements PropertyChangeListener {
     @XmlElement(name = "board")
     private Board gameBoard;
 
+    private int bombcost = 50;
+    private int undocost = 50;
+    private final int BOMBINCREMENTCOST = 50;
+    private final int UNDOINCREMENTCOST = 50;
+
     public Game(){
         restartGame();
     }
 
     public void restartGame() {
         history.clear();
-        setGameBoard(new Board(Settings.getBoardWidth(), Settings.getBoardHeight()));
+        setGameBoard(new Board(ThirteenApplication.getSettings().getBoardWidth(), ThirteenApplication.getSettings().getBoardHeight()));
     }
 
     public PropertyChangeSupport getPcs() {
@@ -41,8 +46,8 @@ public class Game implements PropertyChangeListener {
 
     public void clickField(FieldLabel fl) {
         addHistory();
-        int x = (int) fl.getBoundsInParent().getMinX() / Settings.getFieldWidth();
-        int y = (int) fl.getBoundsInParent().getMinY() / Settings.getFieldHeight();
+        int x = (int) fl.getBoundsInParent().getMinX() / ThirteenApplication.getSettings().getFieldWidth();
+        int y = (int) fl.getBoundsInParent().getMinY() / ThirteenApplication.getSettings().getFieldHeight();
         gameBoard.clickField(x, y);
     }
 
@@ -71,8 +76,8 @@ public class Game implements PropertyChangeListener {
 
     private Field getFieldFromFieldLabel(FieldLabel fl) {
         //get coordinates
-        int x = (int) fl.getBoundsInParent().getMinX() / Settings.getFieldWidth();
-        int y = (int) fl.getBoundsInParent().getMinY() / Settings.getFieldHeight();
+        int x = (int) fl.getBoundsInParent().getMinX() / ThirteenApplication.getSettings().getFieldWidth();
+        int y = (int) fl.getBoundsInParent().getMinY() / ThirteenApplication.getSettings().getFieldHeight();
         return gameBoard.getField(x, y);
     }
 

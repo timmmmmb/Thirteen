@@ -63,7 +63,7 @@ public class MenuScreenController {
     @FXML
     void save() {
         try {
-            Saver.save(ThirteenApplication.game);
+            Saver.save(ThirteenApplication.getGame());
         } catch (JAXBException e) {
             e.printStackTrace();
         }
@@ -72,8 +72,8 @@ public class MenuScreenController {
     @FXML
     void load() {
         try {
-            ThirteenApplication.game = Loader.load();
-            ThirteenApplication.game.addPCL();
+            ThirteenApplication.setGame(Loader.load());
+            ThirteenApplication.getGame().addPCL();
         } catch (JAXBException | FileNotFoundException e) {
             e.printStackTrace();
         }

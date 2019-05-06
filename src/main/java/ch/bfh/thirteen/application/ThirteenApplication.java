@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.java.ch.bfh.thirteen.loader.Loader;
 import main.java.ch.bfh.thirteen.model.Game;
 import main.java.ch.bfh.thirteen.model.MusicPlayer;
 import main.java.ch.bfh.thirteen.settings.Settings;
@@ -12,11 +13,13 @@ import main.java.ch.bfh.thirteen.settings.Settings;
 import java.util.Objects;
 
 public class ThirteenApplication extends Application {
-    public static Game game;
-    public static MusicPlayer music;
+    private static Game game;
+    private static MusicPlayer music;
+    private static Settings settings;
     @Override
     public void init() throws Exception {
-        Settings.loadResources();
+        settings = Loader.loadSettings();
+        settings.loadResources();
         game = new Game();
         music = new MusicPlayer("resources/music/bensound-dreams.mp3");
         music.play();
@@ -30,11 +33,26 @@ public class ThirteenApplication extends Application {
 
         Scene gameScene = new Scene(root);
 
-        gameStage.getIcons().add(Settings.getGameIcon());
+        gameStage.getIcons().add(settings.getGameIcon());
         gameStage.setTitle("");
         gameStage.setResizable(false);
         gameStage.setScene(gameScene);
         gameStage.show();
     }
 
+    public static MusicPlayer getMusic() {
+        return music;
+    }
+
+    public static Settings getSettings() {
+        return settings;
+    }
+
+    public static Game getGame() {
+        return game;
+    }
+
+    public static void setGame(Game game) {
+        ThirteenApplication.game =game;
+    }
 }
