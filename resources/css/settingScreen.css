@@ -5,7 +5,7 @@
 #pane {
     -fx-pref-width: 400px;
     -fx-pref-height: 500px;
-    -fx-background-image: url("../images/background.png");
+    -fx-background-color: #191919;
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;}
 
@@ -19,30 +19,30 @@ Button {
 
 #backButton {
 
-    -fx-background-color: linear-gradient(#cca119, #ee8900);
+    -fx-background-color: #f3ae4b;
 
 }
 
 #backButton:hover {
 
-    -fx-background-color: linear-gradient(#ffe73a, #ffa22c);
+    -fx-background-color: #ffbf6a;
 }
 
 #infoButton {
 
-    -fx-background-color: linear-gradient(#5f83ff, #2f54f9);
+    -fx-background-color: #00a8b5;
 
 }
 
 #infoButton:hover{
 
-    -fx-background-color: linear-gradient(#759bff, #476bff);
+    -fx-background-color: #00ccd9;
 
 }
 
 #musicButton{
 
-    -fx-background-color: linear-gradient(#ff5839, #eb2e05);
+    -fx-background-color: #ff5839;
     -fx-text-fill: white;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
@@ -50,7 +50,7 @@ Button {
 
 #musicButton:selected{
 
-    -fx-background-color: linear-gradient(#5def4e, #66d65f);
+    -fx-background-color: #66d65f;
     -fx-text-fill: white;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
