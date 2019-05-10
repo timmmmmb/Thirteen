@@ -27,7 +27,7 @@ public class GameScreenController implements PropertyChangeListener {
     @FXML
     private AnchorPane gamePane, gameBackground;
     @FXML
-    private Label gameStateLabel,timerLabel, starLabel;
+    private Label gameStateLabel, timerLabel, starLabel;
 
     private ArrayList<FieldLabel> removalList = new ArrayList<>();
     private ArrayList<ArrayList<Transition>> animationList = new ArrayList<>();
@@ -112,7 +112,8 @@ public class GameScreenController implements PropertyChangeListener {
         animationList.add(new ArrayList<>());
         animationList.add(new ArrayList<>());
         getGame().getPcs().addPropertyChangeListener(this);
-        timerLabel.setText(String.valueOf(getGame().getTime()));
+        timerLabel.setText(String.valueOf(getGame().getTimer().getTime()));
+        getGame().getTimer().play();
         addLabels();
         createBackground();
         starLabel.setText(String.valueOf(ThirteenApplication.getSettings().getStars()));
@@ -250,7 +251,7 @@ public class GameScreenController implements PropertyChangeListener {
      * @throws UINotMatchingModelException if the field was not found in the ui
      */
     private void checkMatch() throws UINotMatchingModelException {
-        if (gamePane.getChildren().size() != getGame().getBoard().getHeight()*getGame().getBoard().getWidth()) {
+        if (gamePane.getChildren().size() != getGame().getBoard().getHeight() * getGame().getBoard().getWidth()) {
             throw new UINotMatchingModelException("Size does not match");
         }
         try {
@@ -315,21 +316,22 @@ public class GameScreenController implements PropertyChangeListener {
 
     @FXML
     private void switchMenu(ActionEvent event) {
+        getGame().getTimer().pause();
         changeStage(event, "fxml/menuScreen.fxml");
     }
 
     @FXML
-    private void switchRemovalMode(){
+    private void switchRemovalMode() {
         switchRemovalMode(false);
     }
 
     private void switchRemovalMode(boolean click) {
-        if(isRemovalMode){
-            if(!click){
+        if (isRemovalMode) {
+            if (!click) {
                 createBackground();
             }
             resetStyle();
-        }else{
+        } else {
             gameBackground.getChildren().clear();
             for (Node fl : gamePane.getChildren()) {
                 fl.getStyleClass().add("fieldBombMode");
@@ -352,11 +354,11 @@ public class GameScreenController implements PropertyChangeListener {
     @FXML
     private void click(MouseEvent event) {
         gameBackground.getChildren().clear();
-        FieldLabel fl = (FieldLabel)event.getSource();
-        if(isRemovalMode){
+        FieldLabel fl = (FieldLabel) event.getSource();
+        if (isRemovalMode) {
             getGame().removeField(fl);
             switchRemovalMode(true);
-        }else{
+        } else {
             getGame().clickField(fl);
         }
         playAnimations(0);

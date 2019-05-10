@@ -14,12 +14,11 @@ public class Timer {
     private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
     @XmlElement(name = "t")
     private int t = 0;
-    Timeline tl;
+    private Timeline tl;
 
     public Timer() {
         tl = new Timeline(new KeyFrame(Duration.millis(1000), e -> pcs.firePropertyChange("t", t, ++t)));
         tl.setCycleCount(Animation.INDEFINITE);
-        tl.play();
     }
 
     public void restart() {
@@ -38,11 +37,11 @@ public class Timer {
         return t;
     }
 
-    public void pause(){
+    public void pause() {
         tl.pause();
     }
 
-    public void play(){
+    public void play() {
         tl.play();
     }
 }

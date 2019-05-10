@@ -103,8 +103,8 @@ public class Game implements PropertyChangeListener {
         this.pcs.firePropertyChange(evt);
     }
 
-    public int getTime() {
-        return timer.getTime();
+    public Timer getTimer() {
+        return timer;
     }
 
     public int getMoves() {

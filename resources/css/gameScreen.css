@@ -9,7 +9,7 @@
     -fx-pref-height: 320px;
 }
 
-.stateLabel{
+.stateLabel {
     -fx-pref-width: 200px;
     -fx-pref-height: 60px;
     -fx-border-radius: 10 10 10 10;
@@ -38,7 +38,7 @@ Button {
     -fx-padding: 10;
 }
 
-#menuButton{
+#menuButton {
     -fx-background-color: #00a8b5;
     -fx-background-image: url("../images/menu.png");
     -fx-background-size: 35 35;
@@ -46,7 +46,7 @@ Button {
     -fx-background-position: center;
 }
 
-#menuButton:hover{
+#menuButton:hover {
     -fx-background-color: #00ccd9;
 }
 
@@ -55,11 +55,11 @@ Button {
     -fx-background-color: #bcd574;
 }
 
-#restartButton:hover{
+#restartButton:hover {
     -fx-background-color: #e3ff8b;
 }
 
-#undoButton{
+#undoButton {
     -fx-background-color: #e4734f;
     -fx-background-image: url("../images/undo-arrow.png");
     -fx-background-size: 35 35;
@@ -67,11 +67,11 @@ Button {
     -fx-background-position: center;
 }
 
-#undoButton:hover{
+#undoButton:hover {
     -fx-background-color: #ff8c64;
 }
 
-#deleteButton{
+#deleteButton {
     -fx-background-color: #de4383;
     -fx-background-image: url("../images/bomb.png");
     -fx-background-size: 35 35;
@@ -79,7 +79,7 @@ Button {
     -fx-background-position: center;
 }
 
-#deleteButton:hover{
+#deleteButton:hover {
     -fx-background-color: #ff4e97;
 }
 

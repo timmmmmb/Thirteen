@@ -24,8 +24,8 @@ public class Board {
     @XmlElement(name = "positions")
     private Field[][] positions;
 
-    public Board(){
-        this(5,5);
+    public Board() {
+        this(5, 5);
     }
 
     public Board(int width, int height) {
@@ -74,7 +74,7 @@ public class Board {
         return height;
     }
 
-    public PropertyChangeSupport getPcs() {
+    PropertyChangeSupport getPcs() {
         return pcs;
     }
 
@@ -101,7 +101,6 @@ public class Board {
 
     public String toSting() {
         StringBuilder result = new StringBuilder();
-
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
