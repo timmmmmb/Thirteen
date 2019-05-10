@@ -20,8 +20,6 @@ public class Board {
     private int width;
     @XmlElement(name = "height")
     private int height;
-    @XmlElement(name = "score")
-    private int score = 0;
     private GameState gameState = GameState.UNINITIALIZED;
     @XmlElement(name = "positions")
     private Field[][] positions;
@@ -41,7 +39,6 @@ public class Board {
     public Board(Board b) {
         this.current_min = b.current_min;
         this.current_max = b.current_max;
-        this.score = b.score;
         this.gameState = GameState.RUNNING;
         this.width = b.width;
         this.height = b.height;
@@ -56,10 +53,6 @@ public class Board {
 
     public GameState getGameState() {
         return gameState;
-    }
-
-    public int getScore() {
-        return score;
     }
 
     /**
@@ -95,7 +88,6 @@ public class Board {
             incrementFieldValue(f, x, y);
             moveFields();
             checkGamestate();
-            increaseScore();
             resetVisited();
         }
     }
@@ -311,11 +303,6 @@ public class Board {
         this.pcs.firePropertyChange("incrementedFieldValue", new FieldPosition(f, x, y), f.getValue() + 1);
         f.incrementValue();
         setNewMax(f.getValue());
-    }
-
-    private void increaseScore() {
-        this.pcs.firePropertyChange("ScoreChanged", this.score, this.score + 1);
-        score++;
     }
 
     private void resetVisited() {

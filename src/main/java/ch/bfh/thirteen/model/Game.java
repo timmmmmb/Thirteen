@@ -1,6 +1,7 @@
 package main.java.ch.bfh.thirteen.model;
 
 import main.java.ch.bfh.thirteen.stack.SizedStack;
+import main.java.ch.bfh.thirteen.timer.Timer;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -17,17 +18,25 @@ public class Game implements PropertyChangeListener {
     private SizedStack<Board> history = new SizedStack<>(10);
     @XmlElement(name = "board")
     private Board gameBoard;
+    @XmlElement(name = "timer")
+    private Timer timer;
+    @XmlElement(name = "moves")
+    private int moves = 0;
 
     private int bombcost = 50;
     private int undocost = 50;
 
     public Game(){
+        timer = new Timer();
+        timer.getPcs().addPropertyChangeListener(this);
         restartGame();
     }
 
     public void restartGame() {
         history.clear();
         setGameBoard(new Board(getSettings().getBoardWidth(), getSettings().getBoardHeight()));
+        timer.restart();
+        moves = 0;
     }
 
     public PropertyChangeSupport getPcs() {
@@ -46,6 +55,7 @@ public class Game implements PropertyChangeListener {
         }
         bombcost+=getSettings().getBOMBINCREMENTCOST();
         gameBoard.removeSingleField(getFieldFromFieldLabel(fl));
+        moves++;
     }
 
     public void clickField(FieldLabel fl) {
@@ -53,6 +63,7 @@ public class Game implements PropertyChangeListener {
         int x = (int) fl.getBoundsInParent().getMinX() / getSettings().getFieldWidth();
         int y = (int) fl.getBoundsInParent().getMinY() / getSettings().getFieldHeight();
         gameBoard.clickField(x, y);
+        moves++;
     }
 
     public void undo() {
@@ -61,6 +72,7 @@ public class Game implements PropertyChangeListener {
         }
         undocost+=getSettings().getUNDOINCREMENTCOST();
         setGameBoard(history.pop());
+        moves++;
     }
 
     private void setGameBoard(Board b){
@@ -92,6 +104,10 @@ public class Game implements PropertyChangeListener {
     }
 
     public int getTime() {
-        return 1;
+        return timer.getTime();
+    }
+
+    public int getMoves() {
+        return moves;
     }
 }

@@ -27,7 +27,7 @@ public class GameScreenController implements PropertyChangeListener {
     @FXML
     private AnchorPane gamePane, gameBackground;
     @FXML
-    private Label gameStateLabel, scoreLabel;
+    private Label gameStateLabel,timerLabel, starLabel;
 
     private ArrayList<FieldLabel> removalList = new ArrayList<>();
     private ArrayList<ArrayList<Transition>> animationList = new ArrayList<>();
@@ -50,8 +50,8 @@ public class GameScreenController implements PropertyChangeListener {
                     gameStateLabel.setVisible(true);
                 }
                 break;
-            case "ScoreChanged":
-                scoreLabel.setText(evt.getNewValue().toString());
+            case "StarsChanged":
+                starLabel.setText(evt.getNewValue().toString());
                 break;
             case "removedField": {
                 try {
@@ -97,6 +97,9 @@ public class GameScreenController implements PropertyChangeListener {
             case "newMaxValue":
                 resetStyle();
                 break;
+            case "t":
+                timerLabel.setText(evt.getNewValue().toString());
+                break;
         }
     }
 
@@ -109,9 +112,10 @@ public class GameScreenController implements PropertyChangeListener {
         animationList.add(new ArrayList<>());
         animationList.add(new ArrayList<>());
         getGame().getPcs().addPropertyChangeListener(this);
-        scoreLabel.setText(String.valueOf(getGame().getBoard().getScore()));
+        timerLabel.setText(String.valueOf(getGame().getTime()));
         addLabels();
         createBackground();
+        starLabel.setText(String.valueOf(ThirteenApplication.getSettings().getStars()));
     }
 
     /**
@@ -127,7 +131,8 @@ public class GameScreenController implements PropertyChangeListener {
         createBackground();
         gameStateLabel.setText("");
         gameStateLabel.setVisible(false);
-        scoreLabel.setText("0");
+        starLabel.setText(String.valueOf(ThirteenApplication.getSettings().getStars()));
+        timerLabel.setText("0");
     }
 
     /**

@@ -98,7 +98,7 @@ public class Settings {
     }
 
     public void setHighscore() {
-        scores.add(new Score(ThirteenApplication.getGame().getBoard().getScore(),ThirteenApplication.getGame().getBoard().getCurrent_max(),ThirteenApplication.getGame().getTime(),ThirteenApplication.getGame().getBoard().getGameState()== GameState.WON));
+        scores.add(new Score(ThirteenApplication.getGame().getMoves(),ThirteenApplication.getGame().getBoard().getCurrent_max(),ThirteenApplication.getGame().getTime(),ThirteenApplication.getGame().getBoard().getGameState()== GameState.WON));
         scores.sort(new ScoreComparator());
     }
 }

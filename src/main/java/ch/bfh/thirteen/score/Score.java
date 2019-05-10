@@ -17,6 +17,10 @@ public class Score {
         this.win = win;
     }
 
+    public Score() {
+        this(0,0,0,false);
+    }
+
     public int getHighestnumber() {
         return highestnumber;
     }
