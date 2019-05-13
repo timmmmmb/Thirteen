@@ -66,6 +66,12 @@ public class Game implements PropertyChangeListener {
         moves++;
     }
 
+    public void clickField(Field f) {
+        addHistory();
+        gameBoard.clickField(f);
+        moves++;
+    }
+
     public void undo() {
         if (history.isEmpty()||getSettings().decreaseStars(undocost)) {
             return;

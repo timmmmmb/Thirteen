@@ -10,6 +10,8 @@ public class Field{
     private int value;
     private boolean tobeRemoved = false;
     private boolean visited = false;
+    @XmlElement(name = "coordinate")
+    private Coordinate coordinate;
 
     /**
      * this is only used for the xml
@@ -18,12 +20,14 @@ public class Field{
 
     }
 
-    public Field(int value) {
+    public Field(int value, Coordinate coordinate) {
         this.value = value;
+        this.coordinate = coordinate;
     }
 
     Field(Field field) {
         this.value = field.value;
+        this.coordinate = field.getCoordinate();
     }
 
     public int getValue() {
@@ -56,5 +60,13 @@ public class Field{
 
     void setVisited(boolean visited) {
         this.visited = visited;
+    }
+
+    public Coordinate getCoordinate() {
+        return coordinate;
+    }
+
+    public void setCoordinate(Coordinate coordinate) {
+        this.coordinate = coordinate;
     }
 }

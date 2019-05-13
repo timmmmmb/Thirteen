@@ -24,6 +24,8 @@ public class Board {
     @XmlElement(name = "positions")
     private Field[][] positions;
 
+    private ArrayList<Field> clickableFields = new ArrayList<>();
+
     public Board() {
         this(5, 5);
     }
@@ -79,17 +81,25 @@ public class Board {
     }
 
     void clickField(int x, int y) {
+        Field f = getField(x, y);
+        clickField(f);
+    }
+
+    void clickField(Field f) {
         if (gameState != GameState.RUNNING) {
             return;
         }
-        Field f = getField(x, y);
         if (isClickable(f)) {
             removeNeighbors(f);
-            incrementFieldValue(f, x, y);
+            incrementFieldValue(f, f.getCoordinate().getX(), f.getCoordinate().getY());
             moveFields();
             checkGamestate();
             resetVisited();
         }
+    }
+
+    void clickField(Coordinate c) {
+        this.clickField(c.getX(),c.getY());
     }
 
     public void finishAnimation() {
@@ -120,7 +130,7 @@ public class Board {
     private void initializeBoard() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                positions[x][y] = new Field(wrng.getNumber());
+                addField(x,y);
             }
         }
         // once add the maxnumber to the board
@@ -193,17 +203,19 @@ public class Board {
 
     /**
      * checks each field if it is clickable
-     *
+     * also adds all of the clickable fields to the clickableField ArrayList
      * @return true if there is atleast one field clickable
      */
     private boolean isLost() {
+        clickableFields.clear();
         for (int x = 0; x < width; x++) {
-            for (Field f : positions[x]) {
-                if (isClickable(f))
-                    return false;
+            for (int y = 0; y < height; y++) {
+                if (isClickable(positions[x][y]))
+                    clickableFields.add(positions[x][y]);
+                    positions[x][y].setCoordinate(new Coordinate(x,y));
             }
         }
-        return true;
+        return clickableFields.isEmpty();
     }
 
     /**
@@ -288,7 +300,7 @@ public class Board {
      * @param x the row where the new field shall get added
      */
     private void addField(int x, int y) {
-        positions[x][y] = new Field(wrng.getNumber());
+        positions[x][y] = new Field(wrng.getNumber(),new Coordinate(x,y));
         this.pcs.firePropertyChange("addedField", new FieldPosition(positions[x][y], x, y), null);
     }
 
@@ -306,8 +318,9 @@ public class Board {
 
     private void resetVisited() {
         for (int x = 0; x < getWidth(); x++) {
-            for (Field f : positions[x]) {
-                f.setVisited(false);
+            for (int y = 0; y < height; y++) {
+                positions[x][y].setCoordinate(new Coordinate(x,y));
+                positions[x][y].setVisited(false);
             }
         }
     }
@@ -354,4 +367,10 @@ public class Board {
             setGameState(GameState.ANIMATING);
         }
     }
+
+    public ArrayList<Field> getClickableFields() {
+        return clickableFields;
+    }
+
+
 }

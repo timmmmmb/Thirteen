@@ -1,5 +1,6 @@
 package test.java.ch.bfh.model.test;
 
+import main.java.ch.bfh.thirteen.model.Coordinate;
 import main.java.ch.bfh.thirteen.model.Field;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ class FieldTest {
 
     @BeforeAll
     static void initializeTests() {
-        field = new Field(value);
+        field = new Field(value,new Coordinate(0,0));
     }
 
     /**
