@@ -31,7 +31,7 @@ public class Settings {
     private int stars = 0;
 
     @XmlElement(name = "scores")
-    private ArrayList<Score> scores;
+    private ArrayList<Score> scores = new ArrayList<>();
     public Settings(){
 
     }
@@ -46,7 +46,7 @@ public class Settings {
      * @return true if the stars were decreased and false if there are not enough stars
      */
     public boolean decreaseStars(int stars) {
-        if(this.stars >= stars){
+        if(this.stars < stars){
             return false;
         }
         this.stars += stars;

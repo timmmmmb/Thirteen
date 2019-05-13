@@ -39,13 +39,19 @@ public class ThirteenApplication extends Application {
         // loads the fxml from the resources
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("fxml/menuScreen.fxml")));
 
-        Scene gameScene = new Scene(root);
+        Scene menuScene = new Scene(root);
 
         gameStage.getIcons().add(settings.getGameIcon());
         gameStage.setTitle("");
         gameStage.setResizable(false);
-        gameStage.setScene(gameScene);
+        gameStage.setScene(menuScene);
         gameStage.show();
+        /*RandomBot rb = new RandomBot();
+        System.out.println(game.toString());
+        while(game.getBoard().getGameState()!= GameState.LOST&&game.getBoard().getGameState()!=GameState.WON){
+            rb.doTurn(game);
+            System.out.println(game.toString());
+        }*/
     }
 
     public static MusicPlayer getMusic() {
@@ -63,4 +69,5 @@ public class ThirteenApplication extends Application {
     public static void setGame(Game game) {
         ThirteenApplication.game =game;
     }
+
 }

@@ -43,7 +43,7 @@ public class Field{
     }
 
     public String toString() {
-        return String.valueOf(value);//+" "+String.valueOf(x)+" "+String.valueOf(y);
+        return String.valueOf(value)+" "+String.valueOf(coordinate.getX())+" "+String.valueOf(coordinate.getY());
     }
 
     boolean getToBeRemoved() {
@@ -62,11 +62,12 @@ public class Field{
         this.visited = visited;
     }
 
-    public Coordinate getCoordinate() {
+    Coordinate getCoordinate() {
         return coordinate;
     }
 
-    public void setCoordinate(Coordinate coordinate) {
+    void setCoordinate(Coordinate coordinate) {
         this.coordinate = coordinate;
     }
+
 }

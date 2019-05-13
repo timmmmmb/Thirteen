@@ -12,7 +12,8 @@ public class RandomBot implements BotInterface{
     public void doTurn(Game game) {
         ArrayList<Field> cf = game.getBoard().getClickableFields();
         Field f = cf.get(r.nextInt(cf.size()));
+        System.out.println("RandomBot clicked Field: "+f.toString());
         game.clickField(f);
-        System.out.println(game.getBoard().toSting());
+        game.getBoard().finishAnimation();
     }
 }

@@ -94,7 +94,6 @@ public class Board {
             incrementFieldValue(f, f.getCoordinate().getX(), f.getCoordinate().getY());
             moveFields();
             checkGamestate();
-            resetVisited();
         }
     }
 
@@ -210,9 +209,11 @@ public class Board {
         clickableFields.clear();
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                if (isClickable(positions[x][y]))
+                if (isClickable(positions[x][y])){
                     clickableFields.add(positions[x][y]);
-                    positions[x][y].setCoordinate(new Coordinate(x,y));
+                }
+                resetVisited(x,y);
+                positions[x][y].setCoordinate(new Coordinate(x,y));
             }
         }
         return clickableFields.isEmpty();
@@ -316,13 +317,9 @@ public class Board {
         setNewMax(f.getValue());
     }
 
-    private void resetVisited() {
-        for (int x = 0; x < getWidth(); x++) {
-            for (int y = 0; y < height; y++) {
+    private void resetVisited(int x,int y) {
                 positions[x][y].setCoordinate(new Coordinate(x,y));
                 positions[x][y].setVisited(false);
-            }
-        }
     }
 
     private void setNewMax(int i) {
