@@ -8,7 +8,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import main.java.ch.bfh.thirteen.application.ThirteenApplication;
 import main.java.ch.bfh.thirteen.bots.BotInterface;
+import main.java.ch.bfh.thirteen.bots.BottomUpBot;
 import main.java.ch.bfh.thirteen.bots.RandomBot;
+import main.java.ch.bfh.thirteen.bots.TopDownBot;
 import main.java.ch.bfh.thirteen.model.GameState;
 
 import static main.java.ch.bfh.thirteen.application.ThirteenApplication.getGame;
@@ -18,10 +20,16 @@ public class SimulationGameController extends GameScreenController {
     private BotInterface bot;
     @FXML
     private ChoiceBox botSelector;
-    private final Duration animationTime = Duration.millis(50);
+
     private boolean running = false;
     @FXML
     private Button startButton;
+
+    @FXML
+    protected void initialize() {
+        super.initialize();
+        animationTime = Duration.millis(5);
+    }
 
     @FXML
     public void runSimulation() {
@@ -29,12 +37,12 @@ public class SimulationGameController extends GameScreenController {
             switchRunning();
             return;
         }
-        if (botSelector.getValue().equals("RandomBot")) {
+        if (botSelector.getValue().equals("Random")) {
             bot = new RandomBot();
         } else if (botSelector.getValue().equals("TopDown")) {
-            bot = new RandomBot();
+            bot = new TopDownBot();
         } else if (botSelector.getValue().equals("BottomUp")) {
-            bot = new RandomBot();
+            bot = new BottomUpBot();
         }
         switchRunning();
         doTurn();
@@ -56,7 +64,6 @@ public class SimulationGameController extends GameScreenController {
     }
 
     private void doTurn() {
-        System.out.println(getGame().toString());
         if (running && ThirteenApplication.getGame().getBoard().getGameState() != GameState.LOST && ThirteenApplication.getGame().getBoard().getGameState() != GameState.WON) {
             bot.doTurn(ThirteenApplication.getGame());
             super.playAnimations(0);

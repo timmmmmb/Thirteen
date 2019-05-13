@@ -32,7 +32,7 @@ public class GameScreenController implements PropertyChangeListener {
     private ArrayList<FieldLabel> removalList = new ArrayList<>();
     private ArrayList<ArrayList<Transition>> animationList = new ArrayList<>();
     private boolean isRemovalMode = false;
-    private final Duration animationTime = Duration.millis(250);
+    protected Duration animationTime = Duration.millis(250);
 
     /**
      * This function is called when the observed board fires a change
@@ -108,7 +108,7 @@ public class GameScreenController implements PropertyChangeListener {
      * this fxml function is called at the initialization of the fxml
      */
     @FXML
-    private void initialize() {
+    protected void initialize() {
         animationList.add(new ArrayList<>());
         animationList.add(new ArrayList<>());
         animationList.add(new ArrayList<>());
