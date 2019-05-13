@@ -97,10 +97,6 @@ public class Board {
         }
     }
 
-    void clickField(Coordinate c) {
-        this.clickField(c.getX(),c.getY());
-    }
-
     public void finishAnimation() {
         if (gameState != GameState.ANIMATING) {
             return;
@@ -129,7 +125,7 @@ public class Board {
     private void initializeBoard() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                addField(x,y);
+                addField(x, y);
             }
         }
         // once add the maxnumber to the board
@@ -203,17 +199,18 @@ public class Board {
     /**
      * checks each field if it is clickable
      * also adds all of the clickable fields to the clickableField ArrayList
+     *
      * @return true if there is atleast one field clickable
      */
     private boolean isLost() {
         clickableFields.clear();
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                if (isClickable(positions[x][y])){
+                if (isClickable(positions[x][y])) {
                     clickableFields.add(positions[x][y]);
                 }
-                resetVisited(x,y);
-                positions[x][y].setCoordinate(new Coordinate(x,y));
+                resetVisited(x, y);
+                positions[x][y].setCoordinate(new Coordinate(x, y));
             }
         }
         return clickableFields.isEmpty();
@@ -254,8 +251,6 @@ public class Board {
                 }
             }
         }
-
-        System.out.println("Remove Board");
         this.pcs.firePropertyChange("removedField", fp, null);
     }
 
@@ -303,7 +298,7 @@ public class Board {
      * @param x the row where the new field shall get added
      */
     private void addField(int x, int y) {
-        positions[x][y] = new Field(wrng.getNumber(),new Coordinate(x,y));
+        positions[x][y] = new Field(wrng.getNumber(), new Coordinate(x, y));
         this.pcs.firePropertyChange("addedField", new FieldPosition(positions[x][y], x, y), null);
     }
 
@@ -319,9 +314,9 @@ public class Board {
         setNewMax(f.getValue());
     }
 
-    private void resetVisited(int x,int y) {
-                positions[x][y].setCoordinate(new Coordinate(x,y));
-                positions[x][y].setVisited(false);
+    private void resetVisited(int x, int y) {
+        positions[x][y].setCoordinate(new Coordinate(x, y));
+        positions[x][y].setVisited(false);
     }
 
     private void setNewMax(int i) {

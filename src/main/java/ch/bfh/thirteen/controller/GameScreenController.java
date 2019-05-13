@@ -55,7 +55,6 @@ public class GameScreenController implements PropertyChangeListener {
                 starLabel.setText(evt.getNewValue().toString());
                 break;
             case "removedField": {
-                System.out.println("Remove Controller");
                 try {
                     FieldPosition fp = (FieldPosition) evt.getOldValue();
                     FieldLabel fl = getFieldLabelByCoordinates(fp.getF(), fp.getX(), fp.getY());
@@ -239,7 +238,7 @@ public class GameScreenController implements PropertyChangeListener {
         }
     }
 
-    public void endTurn(){
+    public void endTurn() {
         gamePane.getChildren().removeAll(removalList);
         removalList.clear();
         try {
