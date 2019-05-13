@@ -8,8 +8,10 @@ import javafx.stage.Stage;
 import main.java.ch.bfh.thirteen.loader.Loader;
 import main.java.ch.bfh.thirteen.model.Game;
 import main.java.ch.bfh.thirteen.model.MusicPlayer;
+import main.java.ch.bfh.thirteen.saver.Saver;
 import main.java.ch.bfh.thirteen.settings.Settings;
 
+import java.io.FileNotFoundException;
 import java.util.Objects;
 
 public class ThirteenApplication extends Application {
@@ -18,7 +20,13 @@ public class ThirteenApplication extends Application {
     private static Settings settings;
     @Override
     public void init() throws Exception {
-        settings = Loader.loadSettings();
+        try{
+            settings = Loader.loadSettings();
+        }catch (FileNotFoundException fe){
+            System.out.println("Settings File not found");
+            settings = new Settings();
+            Saver.saveSettings(settings);
+        }
         settings.loadResources();
         game = new Game();
         music = new MusicPlayer("resources/music/bensound-dreams.mp3");
