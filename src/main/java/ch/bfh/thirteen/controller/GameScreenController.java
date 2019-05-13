@@ -25,13 +25,14 @@ import static main.java.ch.bfh.thirteen.stagechanger.StageChanger.changeStage;
 
 public class GameScreenController implements PropertyChangeListener {
     @FXML
-    private AnchorPane gamePane, gameBackground;
+    protected AnchorPane gamePane, gameBackground;
     @FXML
     private Label gameStateLabel, timerLabel, starLabel;
 
     private ArrayList<FieldLabel> removalList = new ArrayList<>();
     private ArrayList<ArrayList<Transition>> animationList = new ArrayList<>();
     private boolean isRemovalMode = false;
+    private final Duration animationTime = Duration.millis(250);
 
     /**
      * This function is called when the observed board fires a change
@@ -85,7 +86,7 @@ public class GameScreenController implements PropertyChangeListener {
                 try {
                     FieldPosition fp = (FieldPosition) evt.getOldValue();
                     FieldLabel fl = getFieldLabelByCoordinates(fp.getF(), fp.getX(), fp.getY());
-                    TranslateTransition tt = new TranslateTransition(Duration.millis(500), fl);
+                    TranslateTransition tt = new TranslateTransition(animationTime.multiply(2), fl);
                     double distance = ThirteenApplication.getSettings().getFieldHeight() * (Integer) evt.getNewValue();
                     tt.setByY(distance);
                     animationList.get(1).add(tt);
@@ -166,7 +167,7 @@ public class GameScreenController implements PropertyChangeListener {
      * @param parent the parent of the new node
      */
     private void addFadingIn(final Node node, final AnchorPane parent) {
-        final FadeTransition transition = new FadeTransition(Duration.millis(250), node);
+        final FadeTransition transition = new FadeTransition(animationTime, node);
         node.setOpacity(0);
         transition.setFromValue(0);
         transition.setToValue(1);
@@ -183,7 +184,7 @@ public class GameScreenController implements PropertyChangeListener {
      */
     private void removeFadingOut(final Node node, final AnchorPane parent) {
         if (parent.getChildren().contains(node)) {
-            final FadeTransition transition = new FadeTransition(Duration.millis(250), node);
+            final FadeTransition transition = new FadeTransition(animationTime, node);
             transition.setFromValue(node.getOpacity());
             transition.setToValue(0);
             transition.setInterpolator(Interpolator.EASE_BOTH);
@@ -216,18 +217,10 @@ public class GameScreenController implements PropertyChangeListener {
      *
      * @param i the position of the animations
      */
-    private void playAnimations(int i) {
+    void playAnimations(int i) {
         //this gets executed at the end of all
         if (i >= animationList.size()) {
-            gamePane.getChildren().removeAll(removalList);
-            removalList.clear();
-            try {
-                checkMatch();
-            } catch (UINotMatchingModelException e) {
-                e.printStackTrace();
-            }
-            getGame().getBoard().finishAnimation();
-            createBackground();
+            endTurn();
             return;
         }
 
@@ -243,6 +236,18 @@ public class GameScreenController implements PropertyChangeListener {
         } else {
             playAnimations(i + 1);
         }
+    }
+
+    public void endTurn(){
+        gamePane.getChildren().removeAll(removalList);
+        removalList.clear();
+        try {
+            checkMatch();
+        } catch (UINotMatchingModelException e) {
+            e.printStackTrace();
+        }
+        getGame().getBoard().finishAnimation();
+        createBackground();
     }
 
     /**
@@ -352,7 +357,7 @@ public class GameScreenController implements PropertyChangeListener {
      * @param event the mouseEvent that was triggered when clicking the field
      */
     @FXML
-    private void click(MouseEvent event) {
+    protected void click(MouseEvent event) {
         gameBackground.getChildren().clear();
         FieldLabel fl = (FieldLabel) event.getSource();
         if (isRemovalMode) {

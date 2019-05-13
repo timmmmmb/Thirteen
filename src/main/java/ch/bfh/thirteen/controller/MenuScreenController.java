@@ -47,7 +47,7 @@ public class MenuScreenController {
 
     @FXML
     void switchAutoplay(ActionEvent event) {
-
+        changeStage(event, "fxml/simulationScreen.fxml");
     }
 
     @FXML

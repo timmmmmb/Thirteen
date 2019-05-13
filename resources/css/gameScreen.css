@@ -83,8 +83,33 @@ Button {
     -fx-background-color: #ff4e97;
 }
 
+.settings-choice-box > .Label {
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+}
+
+.settings-choice-box {
+    -fx-mark-color: black;
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ba9e00, gold);
+    -fx-text-fill: black;
+    -fx-font-weight: BOLD;
+    -fx-background-radius: 30;
+}
+
+.settings-choice-box .context-menu {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ba9e00, gold);
+    -fx-text-fill: black;
+    -fx-font-weight: BOLD;
+    -fx-background-radius: 20;
+}
+
+.settings-choice-box .menu-item:focused {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #9d8100, #ba9700);
+    -fx-background-radius: 50;
+}
+
 Label {
-    -fx-font-size: 48px;
+    -fx-font-size: 16px;
     -fx-font-family: Arial, serif;
     -fx-text-fill: white;
     -fx-text-alignment: center;

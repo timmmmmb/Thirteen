@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane styleClass="root" stylesheets="@../css/gameScreen.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ch.bfh.thirteen.controller.SimulationGameController">
+    <top>
+        <AnchorPane>
+            <Button id="menuButton" layoutX="14.0" layoutY="6.0" mnemonicParsing="false" onAction="#switchMenu" prefHeight="44.0" prefWidth="58.0" />
+         <Button id="restartButton" layoutX="312.0" layoutY="6.0" mnemonicParsing="false" onAction="#runSimulation" text="Start" />
+         <ChoiceBox fx:id="botSelector" value="RandomBot" layoutX="128.0" layoutY="12.0" minHeight="25.0" prefHeight="32.0" prefWidth="145.0" styleClass="settings-choice-box">
+             <items>
+                 <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="RandomBot" />
+                     <String fx:value="TopDown" />
+                     <String fx:value="BottomUp" />
+                 </FXCollections>
+             </items>
+             <cursor>
+                 <Cursor fx:constant="HAND" />
+             </cursor>
+         </ChoiceBox>
+         <Label fx:id="timerLabel" visible="false" />
+         <Label fx:id="starLabel" visible="false" />
+        </AnchorPane>
+    </top>
+    <center>
+        <HBox BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+            </BorderPane.margin>
+            <Group>
+                <AnchorPane fx:id="gameBackground" />
+                <AnchorPane fx:id="gamePane" styleClass="gamePane" />
+                <Label fx:id="gameStateLabel" layoutX="60.0" layoutY="128.0" styleClass="stateLabel" visible="false" />
+            </Group>
+        </HBox>
+    </center>
+    <bottom>
+        <HBox id="buttonBox" BorderPane.alignment="CENTER">
+            <Button id="restartButton" mnemonicParsing="false" onAction="#restart" text="Restart" />
+        </HBox>
+    </bottom>
+</BorderPane>

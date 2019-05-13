@@ -46,12 +46,6 @@ public class ThirteenApplication extends Application {
         gameStage.setResizable(false);
         gameStage.setScene(menuScene);
         gameStage.show();
-        /*RandomBot rb = new RandomBot();
-        System.out.println(game.toString());
-        while(game.getBoard().getGameState()!= GameState.LOST&&game.getBoard().getGameState()!=GameState.WON){
-            rb.doTurn(game);
-            System.out.println(game.toString());
-        }*/
     }
 
     public static MusicPlayer getMusic() {
