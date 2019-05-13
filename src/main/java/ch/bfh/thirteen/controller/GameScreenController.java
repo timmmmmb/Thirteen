@@ -55,6 +55,7 @@ public class GameScreenController implements PropertyChangeListener {
                 starLabel.setText(evt.getNewValue().toString());
                 break;
             case "removedField": {
+                System.out.println("Remove Controller");
                 try {
                     FieldPosition fp = (FieldPosition) evt.getOldValue();
                     FieldLabel fl = getFieldLabelByCoordinates(fp.getF(), fp.getX(), fp.getY());
@@ -125,7 +126,7 @@ public class GameScreenController implements PropertyChangeListener {
      * it creates a new board and resets all of the game variables
      */
     @FXML
-    private void restart() {
+    protected void restart() {
         gameBackground.getChildren().clear();
         getGame().restartGame();
         gamePane.getChildren().removeAll(gamePane.getChildren());
@@ -292,7 +293,7 @@ public class GameScreenController implements PropertyChangeListener {
                 return fl;
             }
         }
-        throw new FieldLabelNotFoundException("The following field was not found in the ui" + f.toString() + " X:" + x + " Y:" + y);
+        throw new FieldLabelNotFoundException("The following field was not found in the ui " + f.toString() + " X:" + x + " Y:" + y);
     }
 
     /**
@@ -320,7 +321,7 @@ public class GameScreenController implements PropertyChangeListener {
     }
 
     @FXML
-    private void switchMenu(ActionEvent event) {
+    protected void switchMenu(ActionEvent event) {
         getGame().getTimer().pause();
         changeStage(event, "fxml/menuScreen.fxml");
     }

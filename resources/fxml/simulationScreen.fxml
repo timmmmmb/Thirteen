@@ -16,7 +16,7 @@
     <top>
         <AnchorPane>
             <Button id="menuButton" layoutX="14.0" layoutY="6.0" mnemonicParsing="false" onAction="#switchMenu" prefHeight="44.0" prefWidth="58.0" />
-         <Button id="restartButton" layoutX="312.0" layoutY="6.0" mnemonicParsing="false" onAction="#runSimulation" text="Start" />
+         <Button fx:id="startButton" id="restartButton" layoutX="312.0" layoutY="6.0" mnemonicParsing="false" onAction="#runSimulation" text="Start" />
          <ChoiceBox fx:id="botSelector" value="RandomBot" layoutX="128.0" layoutY="12.0" minHeight="25.0" prefHeight="32.0" prefWidth="145.0" styleClass="settings-choice-box">
              <items>
                  <FXCollections fx:factory="observableArrayList">

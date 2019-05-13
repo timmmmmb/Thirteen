@@ -254,6 +254,8 @@ public class Board {
                 }
             }
         }
+
+        System.out.println("Remove Board");
         this.pcs.firePropertyChange("removedField", fp, null);
     }
 

@@ -83,7 +83,7 @@ Button {
     -fx-background-color: #ff4e97;
 }
 
-.settings-choice-box > .Label {
+.settings-choice-box > Label {
     -fx-text-fill: black;
     -fx-font-size: 16px;
 }
@@ -109,7 +109,7 @@ Button {
 }
 
 Label {
-    -fx-font-size: 16px;
+    -fx-font-size: 48px;
     -fx-font-family: Arial, serif;
     -fx-text-fill: white;
     -fx-text-alignment: center;
