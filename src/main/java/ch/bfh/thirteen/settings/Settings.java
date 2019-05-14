@@ -35,7 +35,8 @@ public class Settings {
     @XmlElement(name = "scores")
     private ArrayList<Score> scores = new ArrayList<>();
     private CustomPropertyChangeSupport pcs = new CustomPropertyChangeSupport(this);
-    public Settings(){
+
+    public Settings() {
 
     }
 
@@ -45,14 +46,15 @@ public class Settings {
 
     /**
      * decreases the stars with the amount specified and returns true if there are enough stars and false if there aren't
+     *
      * @param stars the amount of stars to decrease the stars with
      * @return true if the stars were decreased and false if there are not enough stars
      */
     public boolean decreaseStars(int stars) {
-        if(this.stars < stars){
+        if (this.stars < stars) {
             return false;
         }
-        getPcs().firePropertyChange("StarsChanged",this.stars,this.stars-stars);
+        getPcs().firePropertyChange("StarsChanged", this.stars, this.stars - stars);
         this.stars -= stars;
         // save the settings
         try {
@@ -65,7 +67,7 @@ public class Settings {
 
 
     public void increaseStars(int stars) {
-        getPcs().firePropertyChange("StarsChanged",this.stars,this.stars+stars);
+        getPcs().firePropertyChange("StarsChanged", this.stars, this.stars + stars);
         this.stars += stars;
         // save the settings
         try {
@@ -115,8 +117,13 @@ public class Settings {
     }
 
     public void setHighscore() {
-        scores.add(new Score(ThirteenApplication.getGame().getMoves(),ThirteenApplication.getGame().getBoard().getCurrent_max(),ThirteenApplication.getGame().getTimer().getTime(),ThirteenApplication.getGame().getBoard().getGameState()== GameState.WON));
+        scores.add(new Score(ThirteenApplication.getGame().getBoard().getCurrent_max(), ThirteenApplication.getGame().getMoves(), ThirteenApplication.getGame().getTimer().getTime(), ThirteenApplication.getGame().getBoard().getGameState() == GameState.WON));
         scores.sort(new ScoreComparator());
+        try {
+            Saver.saveSettings(this);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
     }
 
     public PropertyChangeSupport getPcs() {

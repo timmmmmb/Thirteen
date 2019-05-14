@@ -104,14 +104,21 @@ public class GameScreenController implements PropertyChangeListener {
         if (evt.getNewValue() == GameState.WON) {
             gameStateLabel.setText("Won");
             gameStateLabel.setVisible(true);
+            getGame().getTimer().pause();
+            // save the statistic if not a botgame
+            if (!simulation) {
+                getSettings().setHighscore();
+            }
         } else if (evt.getNewValue() == GameState.LOST) {
             gameStateLabel.setText("Lost");
             gameStateLabel.setVisible(true);
+            getGame().getTimer().pause();
+            // save the statistic if not a botgame
+            if (!simulation) {
+                getSettings().setHighscore();
+            }
         }
-        // save the statistic if not a botgame
-        if(!simulation){
-            getSettings().setHighscore();
-        }
+
     }
 
     /**
@@ -370,7 +377,7 @@ public class GameScreenController implements PropertyChangeListener {
     @FXML
     private void click(MouseEvent event) {
         // dont allow clicking if simulation
-        if(simulation){
+        if (simulation) {
             return;
         }
         gameBackground.getChildren().clear();

@@ -1,6 +1,5 @@
 package main.java.ch.bfh.thirteen.model;
 
-import main.java.ch.bfh.thirteen.application.ThirteenApplication;
 import main.java.ch.bfh.thirteen.observer.CustomPropertyChangeSupport;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -354,10 +353,8 @@ public class Board {
     private void checkGamestate() {
         if (isWon()) {
             setGameState(GameState.WON);
-            ThirteenApplication.getSettings().setHighscore();
         } else if (isLost()) {
             setGameState(GameState.LOST);
-            ThirteenApplication.getSettings().setHighscore();
         } else {
             setGameState(GameState.ANIMATING);
         }

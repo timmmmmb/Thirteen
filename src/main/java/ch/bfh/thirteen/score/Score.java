@@ -1,13 +1,21 @@
 package main.java.ch.bfh.thirteen.score;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Calendar;
 import java.util.Date;
 
+@XmlRootElement(name = "Score")
 public class Score {
+    @XmlElement(name = "highestnumber")
     private final int highestnumber;
+    @XmlElement(name = "moves")
     private final int moves;
+    @XmlElement(name = "time")
     private final int time;
+    @XmlElement(name = "win")
     private final Boolean win;
+    @XmlElement(name = "date")
     private final Date date = Calendar.getInstance().getTime();
 
     public Score(int highestnumber, int moves, int time, Boolean win) {
@@ -18,7 +26,7 @@ public class Score {
     }
 
     public Score() {
-        this(0,0,0,false);
+        this(0, 0, 0, false);
     }
 
     public int getHighestnumber() {
