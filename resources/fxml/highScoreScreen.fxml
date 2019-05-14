@@ -16,10 +16,10 @@
     <Button layoutX="164.0" layoutY="416.0" mnemonicParsing="false" onAction="#switchMenu" text="Back" />
    <TableView fx:id="scoreTable" layoutX="31.0" layoutY="107.0" prefHeight="297.0" prefWidth="340.0">
      <columns>
-       <TableColumn fx:id="maxNumRow" prefWidth="84.0" text="MaxNum" />
-       <TableColumn fx:id="movesRow" prefWidth="66.0" text="Moves" />
-         <TableColumn fx:id="timeRow" prefWidth="75.0" text="Time" />
-         <TableColumn fx:id="dateRow" prefWidth="113.0" text="Date" />
+       <TableColumn fx:id="maxNumRow" prefWidth="74.0" text="MaxNum" />
+       <TableColumn fx:id="movesRow" prefWidth="64.0" text="Moves" />
+         <TableColumn fx:id="timeRow" prefWidth="87.0" text="Time" />
+         <TableColumn fx:id="dateRow" prefWidth="96.0" text="Date" />
      </columns>
    </TableView>
 </AnchorPane>
