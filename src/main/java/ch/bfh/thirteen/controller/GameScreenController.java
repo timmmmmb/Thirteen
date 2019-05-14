@@ -338,9 +338,15 @@ public class GameScreenController implements PropertyChangeListener {
 
     @FXML
     protected void switchMenu(ActionEvent event) {
+        // restart the game if it is over
+        if(getGame().getBoard().getGameState()==GameState.LOST||getGame().getBoard().getGameState()==GameState.WON){
+            getGame().restartGame();
+        }
         getGame().getPcs().removePropertyChangeListener(this);
+
         getGame().getTimer().pause();
         changeStage(event, "fxml/menuScreen.fxml");
+
     }
 
     @FXML
