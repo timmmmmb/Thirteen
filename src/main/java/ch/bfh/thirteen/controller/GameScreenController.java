@@ -21,6 +21,7 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 import static main.java.ch.bfh.thirteen.application.ThirteenApplication.getGame;
+import static main.java.ch.bfh.thirteen.application.ThirteenApplication.getSettings;
 import static main.java.ch.bfh.thirteen.stagechanger.StageChanger.changeStage;
 
 public class GameScreenController implements PropertyChangeListener {
@@ -33,6 +34,7 @@ public class GameScreenController implements PropertyChangeListener {
     private ArrayList<ArrayList<Transition>> animationList = new ArrayList<>();
     private boolean isRemovalMode = false;
     protected Duration animationTime = Duration.millis(250);
+    protected boolean simulation = false;
 
     /**
      * This function is called when the observed board fires a change
@@ -43,13 +45,7 @@ public class GameScreenController implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case "GameStateChange":
-                if (evt.getNewValue() == GameState.WON) {
-                    gameStateLabel.setText("Won");
-                    gameStateLabel.setVisible(true);
-                } else if (evt.getNewValue() == GameState.LOST) {
-                    gameStateLabel.setText("Lost");
-                    gameStateLabel.setVisible(true);
-                }
+                gameOver(evt);
                 break;
             case "StarsChanged":
                 starLabel.setText(evt.getNewValue().toString());
@@ -101,6 +97,20 @@ public class GameScreenController implements PropertyChangeListener {
             case "t":
                 timerLabel.setText(evt.getNewValue().toString());
                 break;
+        }
+    }
+
+    private void gameOver(PropertyChangeEvent evt) {
+        if (evt.getNewValue() == GameState.WON) {
+            gameStateLabel.setText("Won");
+            gameStateLabel.setVisible(true);
+        } else if (evt.getNewValue() == GameState.LOST) {
+            gameStateLabel.setText("Lost");
+            gameStateLabel.setVisible(true);
+        }
+        // save the statistic if not a botgame
+        if(!simulation){
+            getSettings().setHighscore();
         }
     }
 
@@ -321,6 +331,7 @@ public class GameScreenController implements PropertyChangeListener {
 
     @FXML
     protected void switchMenu(ActionEvent event) {
+        getGame().getPcs().removePropertyChangeListener(this);
         getGame().getTimer().pause();
         changeStage(event, "fxml/menuScreen.fxml");
     }
@@ -357,7 +368,11 @@ public class GameScreenController implements PropertyChangeListener {
      * @param event the mouseEvent that was triggered when clicking the field
      */
     @FXML
-    protected void click(MouseEvent event) {
+    private void click(MouseEvent event) {
+        // dont allow clicking if simulation
+        if(simulation){
+            return;
+        }
         gameBackground.getChildren().clear();
         FieldLabel fl = (FieldLabel) event.getSource();
         if (isRemovalMode) {

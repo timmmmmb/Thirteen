@@ -8,6 +8,7 @@ import main.java.ch.bfh.thirteen.score.ScoreComparator;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
 @XmlRootElement(name = "Settings")
@@ -17,7 +18,6 @@ public class Settings {
     private final int BOMBINCREMENTCOST = 50;
     @XmlElement(name = "UNDOINCREMENTCOST")
     private final int UNDOINCREMENTCOST = 50;
-
     @XmlElement(name = "fieldWidth")
     private final int fieldWidth = 64;
     @XmlElement(name = "fieldHeight")
@@ -29,9 +29,9 @@ public class Settings {
     private Image gameIcon;
     @XmlElement(name = "Stars")
     private int stars = 0;
-
     @XmlElement(name = "scores")
     private ArrayList<Score> scores = new ArrayList<>();
+    private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
     public Settings(){
 
     }
@@ -49,12 +49,14 @@ public class Settings {
         if(this.stars < stars){
             return false;
         }
-        this.stars += stars;
+        getPcs().firePropertyChange("StarsChanged",this.stars,this.stars-stars);
+        this.stars -= stars;
         return true;
     }
 
 
     public void increaseStars(int stars) {
+        getPcs().firePropertyChange("StarsChanged",this.stars,this.stars+stars);
         this.stars += stars;
     }
 
@@ -100,5 +102,9 @@ public class Settings {
     public void setHighscore() {
         scores.add(new Score(ThirteenApplication.getGame().getMoves(),ThirteenApplication.getGame().getBoard().getCurrent_max(),ThirteenApplication.getGame().getTimer().getTime(),ThirteenApplication.getGame().getBoard().getGameState()== GameState.WON));
         scores.sort(new ScoreComparator());
+    }
+
+    public PropertyChangeSupport getPcs() {
+        return pcs;
     }
 }

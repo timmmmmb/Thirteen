@@ -6,5 +6,5 @@
     <fieldHeight>64</fieldHeight>
     <boardHeight>5</boardHeight>
     <boardWidth>5</boardWidth>
-    <Stars>10000</Stars>
+    <Stars>100</Stars>
 </Settings>

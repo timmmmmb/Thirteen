@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import main.java.ch.bfh.thirteen.application.ThirteenApplication;
 import main.java.ch.bfh.thirteen.bots.BotInterface;
@@ -13,21 +12,21 @@ import main.java.ch.bfh.thirteen.bots.RandomBot;
 import main.java.ch.bfh.thirteen.bots.TopDownBot;
 import main.java.ch.bfh.thirteen.model.GameState;
 
-import static main.java.ch.bfh.thirteen.application.ThirteenApplication.getGame;
-import static main.java.ch.bfh.thirteen.stagechanger.StageChanger.changeStage;
-
 public class SimulationGameController extends GameScreenController {
     private BotInterface bot;
     @FXML
     private ChoiceBox botSelector;
 
     private boolean running = false;
+
+
     @FXML
     private Button startButton;
 
     @FXML
     protected void initialize() {
         super.initialize();
+        simulation = true;
         animationTime = Duration.millis(5);
     }
 
@@ -77,17 +76,12 @@ public class SimulationGameController extends GameScreenController {
     }
 
     @Override
-    protected void click(MouseEvent event) {
-    }
-
-    @Override
     protected void switchMenu(ActionEvent event) {
         switchRunning();
-        getGame().getPcs().removePropertyChangeListener(this);
         restart();
-        changeStage(event, "fxml/menuScreen.fxml");
+        // call the switch from the parent
+        super.switchMenu(event);
     }
-
 
 
 }

@@ -1,5 +1,6 @@
 package main.java.ch.bfh.thirteen.model;
 
+import main.java.ch.bfh.thirteen.application.ThirteenApplication;
 import main.java.ch.bfh.thirteen.stack.SizedStack;
 import main.java.ch.bfh.thirteen.timer.Timer;
 
@@ -29,6 +30,7 @@ public class Game implements PropertyChangeListener {
     public Game(){
         timer = new Timer();
         timer.getPcs().addPropertyChangeListener(this);
+        ThirteenApplication.getSettings().getPcs().addPropertyChangeListener(this);
         restartGame();
     }
 
@@ -58,14 +60,23 @@ public class Game implements PropertyChangeListener {
         moves++;
     }
 
+    /**
+     * this function is called by a player to click a field
+     * @param fl the fieldlabel that was clicked
+     */
     public void clickField(FieldLabel fl) {
         addHistory();
         int x = (int) fl.getBoundsInParent().getMinX() / getSettings().getFieldWidth();
         int y = (int) fl.getBoundsInParent().getMinY() / getSettings().getFieldHeight();
         gameBoard.clickField(x, y);
         moves++;
+        getSettings().increaseStars(1);
     }
 
+    /**
+     * this function is only used by the bots
+     * @param f the field that was clicked
+     */
     public void clickField(Field f) {
         addHistory();
         gameBoard.clickField(f);
