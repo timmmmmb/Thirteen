@@ -10,43 +10,45 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane styleClass="root" stylesheets="@../css/gameScreen.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ch.bfh.thirteen.controller.GameScreenController">
+<BorderPane styleClass="root" stylesheets="@../css/gameScreen.css" xmlns="http://javafx.com/javafx/8.0.121"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="main.java.ch.bfh.thirteen.controller.GameScreenController">
     <top>
-      <AnchorPane>
-         <children>
-               <Button id="menuButton" layoutX="14.0" layoutY="6.0" mnemonicParsing="false" onAction="#switchMenu" prefHeight="44.0" prefWidth="58.0" />
-               <HBox layoutX="160.0" layoutY="1.0" spacing="10.0">
-                   <ImageView fitHeight="44.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-                       <Image url="@../images/clock.png" />
-                   </ImageView>
-                   <Label fx:id="timerLabel" text="0" />
-               </HBox>
-               <HBox layoutX="305.0" layoutY="1.0" spacing="10.0">
-                   <ImageView fitHeight="44.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-                       <Image url="@../images/star.png" />
-                   </ImageView>
-                   <Label fx:id="starLabel" text="0" />
-               </HBox>
-         </children>
-      </AnchorPane>
+        <AnchorPane>
+            <Button id="menuButton" layoutX="14.0" layoutY="6.0" mnemonicParsing="false" onAction="#switchMenu"
+                    prefHeight="44.0" prefWidth="58.0"/>
+            <HBox layoutX="160.0" layoutY="1.0" spacing="10.0">
+                <ImageView fitHeight="44.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../images/clock.png"/>
+                </ImageView>
+                <Label fx:id="timerLabel" text="0"/>
+            </HBox>
+            <HBox layoutX="305.0" layoutY="1.0" spacing="10.0">
+                <ImageView fitHeight="44.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../images/star.png"/>
+                </ImageView>
+                <Label fx:id="starLabel" text="0"/>
+            </HBox>
+        </AnchorPane>
     </top>
     <center>
         <HBox BorderPane.alignment="CENTER">
             <BorderPane.margin>
-                <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                <Insets bottom="20.0" left="10.0" right="10.0" top="10.0"/>
             </BorderPane.margin>
             <Group>
-                <AnchorPane fx:id="gameBackground" />
-                <AnchorPane fx:id="gamePane" styleClass="gamePane" />
-                <Label fx:id="gameStateLabel" layoutX="60.0" layoutY="128.0" styleClass="stateLabel" visible="false" />
+                <AnchorPane fx:id="gameBackground"/>
+                <AnchorPane fx:id="gamePane" styleClass="gamePane"/>
+                <Label fx:id="gameStateLabel" layoutX="60.0" layoutY="128.0" styleClass="stateLabel" visible="false"/>
             </Group>
         </HBox>
     </center>
     <bottom>
         <HBox id="buttonBox" BorderPane.alignment="CENTER">
-            <Button id="undoButton" mnemonicParsing="false" onAction="#undo" prefHeight="44.0" prefWidth="58.0" />
-            <Button id="restartButton" mnemonicParsing="false" onAction="#restart" text="Restart" />
-            <Button id="deleteButton" mnemonicParsing="false" onAction="#switchRemovalMode" prefHeight="44.0" prefWidth="58.0" text=" " />
+            <Button id="undoButton" mnemonicParsing="false" onAction="#undo" prefHeight="44.0" prefWidth="58.0"/>
+            <Button id="restartButton" mnemonicParsing="false" onAction="#restart" text="Restart"/>
+            <Button id="deleteButton" mnemonicParsing="false" onAction="#switchRemovalMode" prefHeight="44.0"
+                    prefWidth="58.0" text=" "/>
         </HBox>
     </bottom>
 </BorderPane>
