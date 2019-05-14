@@ -37,6 +37,7 @@ public class Game implements PropertyChangeListener {
         history.clear();
         setGameBoard(new Board(getSettings().getBoardWidth(), getSettings().getBoardHeight()));
         timer.restart();
+        timer.play();
         moves = 0;
     }
 

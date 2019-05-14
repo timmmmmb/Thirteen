@@ -26,9 +26,9 @@ public class Settings {
     @XmlElement(name = "fieldHeight")
     private final int fieldHeight = 64;
     @XmlElement(name = "boardHeight")
-    private final int boardHeight = 5;
+    private final int boardHeight = 2;
     @XmlElement(name = "boardWidth")
-    private final int boardWidth = 5;
+    private final int boardWidth = 2;
     private Image gameIcon;
     @XmlElement(name = "Stars")
     private int stars = 0;
@@ -114,6 +114,10 @@ public class Settings {
 
     public int getHighscore() {
         return scores.get(0).getMoves();
+    }
+
+    public ArrayList<Score> getScores(){
+        return scores;
     }
 
     public void setHighscore() {

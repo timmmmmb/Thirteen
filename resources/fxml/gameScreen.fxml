@@ -20,7 +20,7 @@
                 </ImageView>
                 <Label fx:id="timerLabel" text="0" />
             </HBox>
-            <HBox layoutX="305.0" layoutY="1.0" spacing="10.0">
+            <HBox layoutX="265.0" layoutY="1.0" prefHeight="55.0" prefWidth="132.0" spacing="10.0">
                 <ImageView fitHeight="44.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../images/star.png" />
                 </ImageView>
