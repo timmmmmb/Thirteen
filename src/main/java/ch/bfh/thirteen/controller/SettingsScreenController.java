@@ -15,8 +15,6 @@ import static main.java.ch.bfh.thirteen.stagechanger.StageChanger.changeStage;
 
 public class SettingsScreenController {
 
-    boolean musicOn = true;
-
     @FXML
     private ResourceBundle resources;
 
@@ -43,30 +41,19 @@ public class SettingsScreenController {
 
     @FXML
     void musicOnOff(MouseEvent event) {
-
-        if (musicOn) {
-
+        if (ThirteenApplication.getSettings().isMusicOn()) {
             musicButton.setText("on");
             ThirteenApplication.getMusic().stop();
-
-
-        } else if (!musicOn) {
+        } else if (!ThirteenApplication.getSettings().isMusicOn()) {
             musicButton.setText("off");
             ThirteenApplication.getMusic().play();
         }
-
-        musicOn = !musicOn;
-
+        ThirteenApplication.getSettings().toggleMusic();
     }
 
     @FXML
-    void selectLanguage(MouseEvent event) {
-
-    }
-
-    @FXML
-    void switchInfoScreen(ActionEvent event) {changeStage(event, "fxml/InfoScreen.fxml");
-
+    void switchInfoScreen(ActionEvent event) {
+        changeStage(event, "fxml/InfoScreen.fxml");
     }
 
     @FXML
@@ -76,7 +63,11 @@ public class SettingsScreenController {
 
     @FXML
     void initialize() {
-
+        if (ThirteenApplication.getSettings().isMusicOn()) {
+            musicButton.setText("on");
+        } else if (!ThirteenApplication.getSettings().isMusicOn()) {
+            musicButton.setText("off");
+        }
         assert langageLabel != null : "fx:id=\"langageLabel\" was not injected: check your FXML file 'settingsScreen.fxml'.";
         assert musicLabel != null : "fx:id=\"musicLabel\" was not injected: check your FXML file 'settingsScreen.fxml'.";
         assert musicButton != null : "fx:id=\"musicButton\" was not injected: check your FXML file 'settingsScreen.fxml'.";

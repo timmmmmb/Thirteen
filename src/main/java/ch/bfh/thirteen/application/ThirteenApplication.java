@@ -30,7 +30,9 @@ public class ThirteenApplication extends Application {
         settings.loadResources();
         game = new Game();
         music = new MusicPlayer("resources/music/bensound-dreams.mp3");
-        music.play();
+        if(getSettings().isMusicOn()){
+            music.play();
+        }
         Thread.sleep(1000);
     }
 

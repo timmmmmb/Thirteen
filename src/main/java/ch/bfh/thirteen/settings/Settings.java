@@ -17,6 +17,8 @@ import java.util.ArrayList;
 @XmlRootElement(name = "Settings")
 public class Settings {
 
+    @XmlElement(name = "musicOn")
+    private boolean musicOn = true;
     @XmlElement(name = "BOMBINCREMENTCOST")
     private final int BOMBINCREMENTCOST = 50;
     @XmlElement(name = "UNDOINCREMENTCOST")
@@ -38,6 +40,10 @@ public class Settings {
 
     public Settings() {
 
+    }
+
+    public boolean isMusicOn() {
+        return musicOn;
     }
 
     public int getStars() {
@@ -132,5 +138,9 @@ public class Settings {
 
     public PropertyChangeSupport getPcs() {
         return pcs;
+    }
+
+    public void toggleMusic() {
+        musicOn = !musicOn;
     }
 }
