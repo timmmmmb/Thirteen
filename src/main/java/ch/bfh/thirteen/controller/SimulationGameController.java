@@ -53,6 +53,9 @@ public class SimulationGameController extends GameScreenController {
             startButton.setText("Start");
         }else{
             startButton.setText("Stop");
+            if(ThirteenApplication.getGame().getBoard().getGameState()==GameState.LOST||ThirteenApplication.getGame().getBoard().getGameState()==GameState.WON){
+                restart();
+            }
         }
     }
 
