@@ -3,9 +3,12 @@ package main.java.ch.bfh.thirteen.settings;
 import javafx.scene.image.Image;
 import main.java.ch.bfh.thirteen.application.ThirteenApplication;
 import main.java.ch.bfh.thirteen.model.GameState;
+import main.java.ch.bfh.thirteen.observer.CustomPropertyChangeSupport;
+import main.java.ch.bfh.thirteen.saver.Saver;
 import main.java.ch.bfh.thirteen.score.Score;
 import main.java.ch.bfh.thirteen.score.ScoreComparator;
 
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.beans.PropertyChangeSupport;
@@ -31,7 +34,7 @@ public class Settings {
     private int stars = 0;
     @XmlElement(name = "scores")
     private ArrayList<Score> scores = new ArrayList<>();
-    private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+    private CustomPropertyChangeSupport pcs = new CustomPropertyChangeSupport(this);
     public Settings(){
 
     }
@@ -41,7 +44,7 @@ public class Settings {
     }
 
     /**
-     * decreses the stars with the amount specified and returns true if there are enough stars and false if there aren't
+     * decreases the stars with the amount specified and returns true if there are enough stars and false if there aren't
      * @param stars the amount of stars to decrease the stars with
      * @return true if the stars were decreased and false if there are not enough stars
      */
@@ -51,6 +54,12 @@ public class Settings {
         }
         getPcs().firePropertyChange("StarsChanged",this.stars,this.stars-stars);
         this.stars -= stars;
+        // save the settings
+        try {
+            Saver.saveSettings(this);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
         return true;
     }
 
@@ -58,6 +67,12 @@ public class Settings {
     public void increaseStars(int stars) {
         getPcs().firePropertyChange("StarsChanged",this.stars,this.stars+stars);
         this.stars += stars;
+        // save the settings
+        try {
+            Saver.saveSettings(this);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

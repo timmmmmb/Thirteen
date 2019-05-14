@@ -1,6 +1,7 @@
 package main.java.ch.bfh.thirteen.model;
 
 import main.java.ch.bfh.thirteen.application.ThirteenApplication;
+import main.java.ch.bfh.thirteen.observer.CustomPropertyChangeSupport;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -11,7 +12,7 @@ import java.util.Random;
 @XmlRootElement(namespace = "board")
 public class Board {
     private WeightedRandomNumberGenerator wrng;
-    private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+    private CustomPropertyChangeSupport pcs = new CustomPropertyChangeSupport(this);
     @XmlElement(name = "max")
     private int current_max = 6;
     @XmlElement(name = "min")

@@ -1,6 +1,7 @@
 package main.java.ch.bfh.thirteen.model;
 
 import main.java.ch.bfh.thirteen.application.ThirteenApplication;
+import main.java.ch.bfh.thirteen.observer.CustomPropertyChangeSupport;
 import main.java.ch.bfh.thirteen.stack.SizedStack;
 import main.java.ch.bfh.thirteen.timer.Timer;
 
@@ -14,7 +15,7 @@ import static main.java.ch.bfh.thirteen.application.ThirteenApplication.getSetti
 
 @XmlRootElement(name = "game")
 public class Game implements PropertyChangeListener {
-    private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+    private CustomPropertyChangeSupport pcs = new CustomPropertyChangeSupport(this);
     @XmlElement(name = "history")
     private SizedStack<Board> history = new SizedStack<>(10);
     @XmlElement(name = "board")
@@ -29,8 +30,6 @@ public class Game implements PropertyChangeListener {
 
     public Game(){
         timer = new Timer();
-        timer.getPcs().addPropertyChangeListener(this);
-        ThirteenApplication.getSettings().getPcs().addPropertyChangeListener(this);
         restartGame();
     }
 
@@ -100,8 +99,13 @@ public class Game implements PropertyChangeListener {
         addPCL();
     }
 
+    /**
+     * this function adds all of the necessary pcl when being created or loaded
+     */
     public void addPCL(){
+        getTimer().getPcs().addPropertyChangeListener(this);
         gameBoard.getPcs().addPropertyChangeListener(this);
+        ThirteenApplication.getSettings().getPcs().addPropertyChangeListener(this);
     }
 
     private void addHistory(){

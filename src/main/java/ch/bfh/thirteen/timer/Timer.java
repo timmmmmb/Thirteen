@@ -4,14 +4,15 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
+import main.java.ch.bfh.thirteen.observer.CustomPropertyChangeSupport;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.beans.PropertyChangeSupport;
 
-@XmlRootElement(name = "game")
+@XmlRootElement(name = "timer")
 public class Timer {
-    private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+    private CustomPropertyChangeSupport pcs = new CustomPropertyChangeSupport(this);
     @XmlElement(name = "t")
     private int t = 0;
     private Timeline tl;
