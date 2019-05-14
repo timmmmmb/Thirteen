@@ -15,20 +15,24 @@
 <BorderPane styleClass="root" stylesheets="@../css/gameScreen.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ch.bfh.thirteen.controller.SimulationGameController">
     <top>
         <AnchorPane>
-            <Button id="menuButton" layoutX="14.0" layoutY="6.0" mnemonicParsing="false" onAction="#switchMenu" prefHeight="44.0" prefWidth="58.0" />
-         <Button fx:id="startButton" id="restartButton" layoutX="312.0" layoutY="6.0" mnemonicParsing="false" onAction="#runSimulation" text="Start" />
-         <ChoiceBox fx:id="botSelector" value="Random" layoutX="128.0" layoutY="12.0" minHeight="25.0" prefHeight="32.0" prefWidth="145.0" styleClass="settings-choice-box">
-             <items>
-                 <FXCollections fx:factory="observableArrayList">
-                     <String fx:value="Random" />
-                     <String fx:value="TopDown" />
-                     <String fx:value="BottomUp" />
-                 </FXCollections>
-             </items>
-             <cursor>
-                 <Cursor fx:constant="HAND" />
-             </cursor>
-         </ChoiceBox>
+         <HBox layoutX="14.0" layoutY="6.0" prefHeight="55.0" prefWidth="400.0" spacing="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                  <Button id="menuButton" mnemonicParsing="false" onAction="#switchMenu" prefHeight="44.0" prefWidth="58.0" />
+               <ChoiceBox fx:id="botSelector" minHeight="25.0" prefHeight="32.0" prefWidth="145.0" styleClass="settings-choice-box" value="Random">
+                   <items>
+                       <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="Random" />
+                           <String fx:value="TopDown" />
+                           <String fx:value="BottomUp" />
+                       </FXCollections>
+                   </items>
+                   <cursor>
+                       <Cursor fx:constant="HAND" />
+                   </cursor>
+               </ChoiceBox>
+               <Button id="restartButton" fx:id="startButton" mnemonicParsing="false" onAction="#runSimulation" text="Start" />
+            </children>
+         </HBox>
          <Label fx:id="timerLabel" visible="false" />
          <Label fx:id="starLabel" visible="false" />
         </AnchorPane>
