@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.java.ch.bfh.thirteen.loader.Loader;
+import main.java.ch.bfh.thirteen.logger.FileLogger;
 import main.java.ch.bfh.thirteen.model.Game;
 import main.java.ch.bfh.thirteen.model.MusicPlayer;
 import main.java.ch.bfh.thirteen.saver.Saver;
@@ -13,17 +14,20 @@ import main.java.ch.bfh.thirteen.settings.Settings;
 
 import java.io.FileNotFoundException;
 import java.util.Objects;
+import java.util.logging.Level;
 
 public class ThirteenApplication extends Application {
     private static Game game;
     private static MusicPlayer music;
     private static Settings settings;
+    public static FileLogger log = new FileLogger();
     @Override
     public void init() throws Exception {
         try{
             settings = Loader.loadSettings();
         }catch (FileNotFoundException fe){
-            System.out.println("Settings File not found");
+            System.out.println("settings File not found");
+
             settings = new Settings();
             Saver.saveSettings(settings);
         }
@@ -34,6 +38,7 @@ public class ThirteenApplication extends Application {
             music.play();
         }
         Thread.sleep(1000);
+
     }
 
     @Override
@@ -48,6 +53,10 @@ public class ThirteenApplication extends Application {
         gameStage.setResizable(false);
         gameStage.setScene(menuScene);
         gameStage.show();
+
+        log.log("application started", Level.INFO);
+
+
     }
 
     public static MusicPlayer getMusic() {

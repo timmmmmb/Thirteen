@@ -97,16 +97,25 @@ Button {
 }
 
 .settings-choice-box .context-menu {
-    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ba9e00, gold);
+    -fx-background-color: #f3ae4b;
     -fx-text-fill: black;
     -fx-font-weight: BOLD;
     -fx-background-radius: 20;
 }
 
 .settings-choice-box .menu-item:focused {
-    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #9d8100, #ba9700);
+    -fx-background-color: #f3ae4b;
     -fx-background-radius: 50;
 }
+
+#botSelector{
+    -fx-background-color: #f3ae4b;
+}
+
+#botSelector:hover{
+    -fx-background-color: #ffc461;
+}
+
 
 
 .smallLabel{

@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 @XmlRootElement(name = "Settings")
 public class Settings {
@@ -67,6 +68,7 @@ public class Settings {
             Saver.saveSettings(this);
         } catch (JAXBException e) {
             e.printStackTrace();
+            ThirteenApplication.log.log("failed to decrease stars", Level.SEVERE);
         }
         return false;
     }
@@ -80,6 +82,7 @@ public class Settings {
             Saver.saveSettings(this);
         } catch (JAXBException e) {
             e.printStackTrace();
+            ThirteenApplication.log.log("failed to increase stars", Level.SEVERE);
         }
     }
 
@@ -133,7 +136,9 @@ public class Settings {
             Saver.saveSettings(this);
         } catch (JAXBException e) {
             e.printStackTrace();
+            ThirteenApplication.log.log("failed to set high score", Level.SEVERE);
         }
+        ThirteenApplication.log.log("high score set", Level.FINE);
     }
 
     public PropertyChangeSupport getPcs() {

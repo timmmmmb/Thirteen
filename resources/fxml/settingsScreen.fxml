@@ -16,7 +16,7 @@
       <font>
          <Font size="14.0" />
       </font></Label>
-    <ToggleButton fx:id="musicButton" layoutX="225.0" layoutY="163.0" mnemonicParsing="false" onMouseClicked="#musicOnOff" prefHeight="33.0" prefWidth="51.0" text="off">
+    <ToggleButton fx:id="musicButton" layoutX="225.0" layoutY="163.0" mnemonicParsing="false" onMouseClicked="#musicOnOff" prefHeight="33.0" prefWidth="51.0" selected="true" text="on">
       <font>
          <Font size="14.0" />
       </font></ToggleButton>

@@ -45,5 +45,6 @@ public class InfoScreenController {
         assert description != null : "fx:id=\"description\" was not injected: check your FXML file 'infoScreen.fxml'.";
         assert credits != null : "fx:id=\"credits\" was not injected: check your FXML file 'infoScreen.fxml'.";
 
+
     }
 }

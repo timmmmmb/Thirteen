@@ -12,10 +12,13 @@ import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 
 import static main.java.ch.bfh.thirteen.stagechanger.StageChanger.changeStage;
 
 public class MenuScreenController {
+
+
 
     @FXML
     private ResourceBundle resources;
@@ -43,11 +46,13 @@ public class MenuScreenController {
     @FXML
     void switchGame(ActionEvent event) {
         changeStage(event, "fxml/gameScreen.fxml");
+        ThirteenApplication.log.log("new game started", Level.INFO);
     }
 
     @FXML
     void switchAutoplay(ActionEvent event) {
         changeStage(event, "fxml/simulationScreen.fxml");
+        ThirteenApplication.log.log("new autoplay game started", Level.INFO);
     }
 
     @FXML
@@ -66,7 +71,9 @@ public class MenuScreenController {
             Saver.save(ThirteenApplication.getGame());
         } catch (JAXBException e) {
             e.printStackTrace();
+            ThirteenApplication.log.log("saving game failed", Level.SEVERE);
         }
+        ThirteenApplication.log.log("game saved successfully", Level.FINE);
     }
 
     @FXML
@@ -76,7 +83,9 @@ public class MenuScreenController {
             ThirteenApplication.getGame().addPCL();
         } catch (JAXBException | FileNotFoundException e) {
             e.printStackTrace();
+            ThirteenApplication.log.log("loading game failed", Level.SEVERE);
         }
+        ThirteenApplication.log.log("game loaded successfully", Level.FINE);
     }
 
 

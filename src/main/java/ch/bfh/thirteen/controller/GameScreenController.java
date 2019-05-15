@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -20,6 +21,7 @@ import main.java.ch.bfh.thirteen.model.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 import static main.java.ch.bfh.thirteen.application.ThirteenApplication.getGame;
 import static main.java.ch.bfh.thirteen.application.ThirteenApplication.getSettings;
@@ -38,6 +40,8 @@ public class GameScreenController implements PropertyChangeListener {
     private boolean isRemovalMode = false;
     protected Duration animationTime = Duration.millis(250);
     protected boolean simulation = false;
+    private BoxBlur blur;
+
 
     /**
      * This function is called when the observed board fires a change
@@ -61,6 +65,7 @@ public class GameScreenController implements PropertyChangeListener {
                     removeFadingOut(fl, gamePane);
                 } catch (FieldLabelNotFoundException e) {
                     e.printStackTrace();
+                    ThirteenApplication.log.log("field label not found", Level.SEVERE);
                 }
                 break;
             }
@@ -79,6 +84,7 @@ public class GameScreenController implements PropertyChangeListener {
                     fl.setTextAndClass(String.valueOf(evt.getNewValue()));
                 } catch (FieldLabelNotFoundException e) {
                     e.printStackTrace();
+                    ThirteenApplication.log.log("field label not found", Level.SEVERE);
                 }
                 break;
             }
@@ -91,6 +97,7 @@ public class GameScreenController implements PropertyChangeListener {
                     tt.setByY(distance);
                     animationList.get(1).add(tt);
                 } catch (FieldLabelNotFoundException e) {
+                    ThirteenApplication.log.log("field label not found", Level.SEVERE);
                     e.printStackTrace();
                 }
                 break;
@@ -107,9 +114,11 @@ public class GameScreenController implements PropertyChangeListener {
 
     private void gameOver(PropertyChangeEvent evt) {
         if (evt.getNewValue() == GameState.WON) {
+            ThirteenApplication.log.log("game won", Level.INFO);
             gameStateLabel.setText("Won");
             createEndscreen();
         } else if (evt.getNewValue() == GameState.LOST) {
+            ThirteenApplication.log.log("game lost", Level.INFO);
             gameStateLabel.setText("Lost");
             createEndscreen();
         }
@@ -132,6 +141,7 @@ public class GameScreenController implements PropertyChangeListener {
      */
     @FXML
     protected void initialize() {
+
         animationList.add(new ArrayList<>());
         animationList.add(new ArrayList<>());
         animationList.add(new ArrayList<>());
@@ -163,6 +173,7 @@ public class GameScreenController implements PropertyChangeListener {
             timerLabel.setText("0");
         }
         gameStateLabel.setVisible(false);
+        ThirteenApplication.log.log("game restarted", Level.INFO);
     }
 
     /**
@@ -295,7 +306,9 @@ public class GameScreenController implements PropertyChangeListener {
                 }
             }
         } catch (FieldLabelNotFoundException e) {
+            ThirteenApplication.log.log("field label not found", Level.SEVERE);
             throw new UINotMatchingModelException(e.getMessage());
+
         }
     }
 

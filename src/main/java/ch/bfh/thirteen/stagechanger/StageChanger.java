@@ -6,9 +6,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.java.ch.bfh.thirteen.application.ThirteenApplication;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.logging.Level;
 
 public class StageChanger {
     /**
@@ -23,6 +25,7 @@ public class StageChanger {
             stage.setScene(new Scene(newroot));
         } catch (IOException e) {
             e.printStackTrace();
+            ThirteenApplication.log.log("failed to change stage", Level.SEVERE);
         }
     }
 }

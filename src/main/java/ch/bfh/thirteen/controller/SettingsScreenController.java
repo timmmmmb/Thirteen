@@ -42,10 +42,10 @@ public class SettingsScreenController {
     @FXML
     void musicOnOff(MouseEvent event) {
         if (ThirteenApplication.getSettings().isMusicOn()) {
-            musicButton.setText("on");
+            musicButton.setText("off");
             ThirteenApplication.getMusic().stop();
         } else if (!ThirteenApplication.getSettings().isMusicOn()) {
-            musicButton.setText("off");
+            musicButton.setText("on");
             ThirteenApplication.getMusic().play();
         }
         ThirteenApplication.getSettings().toggleMusic();

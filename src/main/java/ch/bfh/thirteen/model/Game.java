@@ -32,6 +32,7 @@ public class Game implements PropertyChangeListener {
     public Game() {
         timer = new Timer();
         restartGame();
+
     }
 
     public void restartGame() {
