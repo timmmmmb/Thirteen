@@ -15,29 +15,34 @@ import java.text.SimpleDateFormat;
 
 import static main.java.ch.bfh.thirteen.stagechanger.StageChanger.changeStage;
 
+/**
+ * controller class for the high score screen
+ */
 public class HighScoreScreenController {
-
 
     @FXML
     private AnchorPane pane;
-
     @FXML
     private Label title;
-
     @FXML
     private TableView<Score> scoreTable;
-
     @FXML
     private TableColumn<Score,Number> maxNumRow,movesRow;
     @FXML
     private TableColumn<Score, String> timeRow,dateRow;
 
-
+    /**
+     * lets the player switch back to the menu screen
+     * @param event change stage event
+     */
     @FXML
     void switchMenu(ActionEvent event) {
         changeStage(event, "fxml/menuScreen.fxml");
     }
 
+    /**
+     * initializing the high score screen
+     */
     @FXML
     void initialize() {
         assert pane != null : "fx:id=\"pane\" was not injected: check your FXML file 'highScoreScreen.fxml'.";
@@ -46,7 +51,6 @@ public class HighScoreScreenController {
         movesRow.setCellValueFactory(c->new SimpleIntegerProperty(c.getValue().getMoves()));
         timeRow.setCellValueFactory(c->new SimpleStringProperty(String.format("%d:%02d", c.getValue().getTime()/60, c.getValue().getTime()%60)));
         dateRow.setCellValueFactory(c->new SimpleStringProperty(new SimpleDateFormat().format(c.getValue().getDate())));
-
         scoreTable.getItems().addAll(ThirteenApplication.getSettings().getScores());
     }
 }

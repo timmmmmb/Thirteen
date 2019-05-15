@@ -12,17 +12,20 @@ import main.java.ch.bfh.thirteen.bots.RandomBot;
 import main.java.ch.bfh.thirteen.bots.TopDownBot;
 import main.java.ch.bfh.thirteen.model.GameState;
 
+/**
+ * controller class for the simulated autoplay game
+ */
 public class SimulationGameController extends GameScreenController {
     private BotInterface bot;
     @FXML
     private ChoiceBox botSelector;
-
     private boolean running = false;
-
-
     @FXML
     private Button startButton;
 
+    /**
+     * initializing the screen for the autoplay game
+     */
     @FXML
     protected void initialize() {
         super.initialize();
@@ -30,6 +33,9 @@ public class SimulationGameController extends GameScreenController {
         animationTime = Duration.millis(5);
     }
 
+    /**
+     * runs simulation according to the selected bot
+     */
     @FXML
     public void runSimulation() {
         if (running) {
@@ -47,6 +53,9 @@ public class SimulationGameController extends GameScreenController {
         doTurn();
     }
 
+    /**
+     * sets the text on the button to let the player start or stop the game
+     */
     private void switchRunning() {
         running = !running;
         if (!running) {

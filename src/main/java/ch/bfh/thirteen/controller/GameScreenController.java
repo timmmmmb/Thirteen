@@ -34,7 +34,6 @@ public class GameScreenController implements PropertyChangeListener {
     protected AnchorPane gamePane, gameBackground;
     @FXML
     private Label gameStateLabel, timerLabel, starLabel, scoreInfoLabel, highScoreLabel;
-
     private ArrayList<FieldLabel> removalList = new ArrayList<>();
     private ArrayList<ArrayList<Transition>> animationList = new ArrayList<>();
     private boolean isRemovalMode = false;
@@ -112,6 +111,10 @@ public class GameScreenController implements PropertyChangeListener {
         }
     }
 
+    /**
+     * displays at game over if the game is won or lost
+     * @param evt
+     */
     private void gameOver(PropertyChangeEvent evt) {
         if (evt.getNewValue() == GameState.WON) {
             ThirteenApplication.log.log("game won", Level.INFO);
@@ -124,6 +127,9 @@ public class GameScreenController implements PropertyChangeListener {
         }
     }
 
+    /**
+     * shows up at game over to display and save score
+     */
     private void createEndscreen(){
         getGame().getTimer().pause();
         // save the statistic if not a botgame
@@ -360,6 +366,12 @@ public class GameScreenController implements PropertyChangeListener {
         }
     }
 
+    /**
+     * lets the player go back to the menu
+     * will first check if game is lost or won to restart
+     * pauses active game
+     * @param event stage change event
+     */
     @FXML
     protected void switchMenu(ActionEvent event) {
         // restart the game if it is over

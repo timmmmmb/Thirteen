@@ -19,7 +19,6 @@ public class FileLogger {
      * Sets the console logger to false
      * Log level is set to ALL
      */
-
     public FileLogger() {
 
         this.logger = Logger.getLogger(Logger.class.getName());
@@ -35,18 +34,14 @@ public class FileLogger {
      * @param level
      * The log level which will be shown in the logfile
      */
-
     public void log(String logMessage, Level level){
 
         try {
-
-
             this.logfile = new FileHandler(PATH + "logfile.txt", true);
             logfile.setFormatter(new LogFormatter());
             logger.addHandler(logfile);
             logger.info(level.toString()+":"+ " " +logMessage);
             logfile.close();
-
         } catch (IOException e) {
             System.out.println("log file not found");
         } catch (SecurityException e) {
