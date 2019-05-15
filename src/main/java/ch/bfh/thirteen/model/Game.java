@@ -24,11 +24,12 @@ public class Game implements PropertyChangeListener {
     private Timer timer;
     @XmlElement(name = "moves")
     private int moves = 0;
-
+    @XmlElement(name = "bombcost")
     private int bombcost = 50;
+    @XmlElement(name = "undocost")
     private int undocost = 50;
 
-    public Game(){
+    public Game() {
         timer = new Timer();
         restartGame();
     }
@@ -55,13 +56,14 @@ public class Game implements PropertyChangeListener {
         if (!getSettings().decreaseStars(bombcost)) {
             return;
         }
-        bombcost+=getSettings().getBOMBINCREMENTCOST();
+        bombcost += getSettings().getBOMBINCREMENTCOST();
         gameBoard.removeSingleField(getFieldFromFieldLabel(fl));
         moves++;
     }
 
     /**
      * this function is called by a player to click a field
+     *
      * @param fl the fieldlabel that was clicked
      */
     public void clickField(FieldLabel fl) {
@@ -75,6 +77,7 @@ public class Game implements PropertyChangeListener {
 
     /**
      * this function is only used by the bots
+     *
      * @param f the field that was clicked
      */
     public void clickField(Field f) {
@@ -84,16 +87,16 @@ public class Game implements PropertyChangeListener {
     }
 
     public void undo() {
-        if (history.isEmpty()||getSettings().decreaseStars(undocost)) {
+        if (history.isEmpty() || !getSettings().decreaseStars(undocost)) {
             return;
         }
-        undocost+=getSettings().getUNDOINCREMENTCOST();
+        undocost += getSettings().getUNDOINCREMENTCOST();
         setGameBoard(history.pop());
         moves++;
     }
 
-    private void setGameBoard(Board b){
-        if(gameBoard!=null){
+    private void setGameBoard(Board b) {
+        if (gameBoard != null) {
             gameBoard.getPcs().removePropertyChangeListener(this);
         }
         gameBoard = b;
@@ -103,13 +106,13 @@ public class Game implements PropertyChangeListener {
     /**
      * this function adds all of the necessary pcl when being created or loaded
      */
-    public void addPCL(){
+    public void addPCL() {
         getTimer().getPcs().addPropertyChangeListener(this);
         gameBoard.getPcs().addPropertyChangeListener(this);
         ThirteenApplication.getSettings().getPcs().addPropertyChangeListener(this);
     }
 
-    private void addHistory(){
+    private void addHistory() {
         history.push(new Board(gameBoard));
     }
 
