@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import main.java.ch.bfh.thirteen.application.ThirteenApplication;
 import main.java.ch.bfh.thirteen.exception.FieldLabelNotFoundException;
@@ -26,9 +27,11 @@ import static main.java.ch.bfh.thirteen.stagechanger.StageChanger.changeStage;
 
 public class GameScreenController implements PropertyChangeListener {
     @FXML
+    private VBox popUpPane;
+    @FXML
     protected AnchorPane gamePane, gameBackground;
     @FXML
-    private Label gameStateLabel, timerLabel, starLabel;
+    private Label gameStateLabel, timerLabel, starLabel, scoreInfoLabel, highScoreLabel;
 
     private ArrayList<FieldLabel> removalList = new ArrayList<>();
     private ArrayList<ArrayList<Transition>> animationList = new ArrayList<>();
@@ -48,6 +51,7 @@ public class GameScreenController implements PropertyChangeListener {
                 gameOver(evt);
                 break;
             case "StarsChanged":
+                if(simulation)return;
                 starLabel.setText(evt.getNewValue().toString());
                 break;
             case "removedField": {
@@ -95,6 +99,7 @@ public class GameScreenController implements PropertyChangeListener {
                 resetStyle();
                 break;
             case "t":
+                if(simulation)return;
                 timerLabel.setText(evt.getNewValue().toString());
                 break;
         }
@@ -103,22 +108,23 @@ public class GameScreenController implements PropertyChangeListener {
     private void gameOver(PropertyChangeEvent evt) {
         if (evt.getNewValue() == GameState.WON) {
             gameStateLabel.setText("Won");
-            gameStateLabel.setVisible(true);
-            getGame().getTimer().pause();
-            // save the statistic if not a botgame
-            if (!simulation) {
-                getSettings().setHighscore();
-            }
+            createEndscreen();
         } else if (evt.getNewValue() == GameState.LOST) {
             gameStateLabel.setText("Lost");
-            gameStateLabel.setVisible(true);
-            getGame().getTimer().pause();
-            // save the statistic if not a botgame
-            if (!simulation) {
-                getSettings().setHighscore();
-            }
+            createEndscreen();
         }
+    }
 
+    private void createEndscreen(){
+        getGame().getTimer().pause();
+        // save the statistic if not a botgame
+        if (!simulation) {
+            getSettings().setHighscore();
+            scoreInfoLabel.setText("Your Score: "+String.valueOf(getGame().getBoard().getCurrent_max())+": "+String.valueOf(getGame().getMoves()));
+            highScoreLabel.setText("Highscore: "+String.valueOf(getSettings().getHighscore().getHighestnumber())+": "+String.valueOf(getSettings().getHighscore().getMoves()));
+            popUpPane.setVisible(true);
+        }
+        gameStateLabel.setVisible(true);
     }
 
     /**
@@ -129,12 +135,14 @@ public class GameScreenController implements PropertyChangeListener {
         animationList.add(new ArrayList<>());
         animationList.add(new ArrayList<>());
         animationList.add(new ArrayList<>());
-        getGame().getPcs().addPropertyChangeListener(this);
-        timerLabel.setText(String.valueOf(getGame().getTimer().getTime()));
+        if(!simulation){
+            timerLabel.setText(String.valueOf(getGame().getTimer().getTime()));
+            starLabel.setText(String.valueOf(ThirteenApplication.getSettings().getStars()));
+        }
         getGame().getTimer().play();
+        getGame().getPcs().addPropertyChangeListener(this);
         addLabels();
         createBackground();
-        starLabel.setText(String.valueOf(ThirteenApplication.getSettings().getStars()));
     }
 
     /**
@@ -149,9 +157,12 @@ public class GameScreenController implements PropertyChangeListener {
         addLabels();
         createBackground();
         gameStateLabel.setText("");
+        if(!simulation){
+            popUpPane.setVisible(false);
+            starLabel.setText(String.valueOf(ThirteenApplication.getSettings().getStars()));
+            timerLabel.setText("0");
+        }
         gameStateLabel.setVisible(false);
-        starLabel.setText(String.valueOf(ThirteenApplication.getSettings().getStars()));
-        timerLabel.setText("0");
     }
 
     /**

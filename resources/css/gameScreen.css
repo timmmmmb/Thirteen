@@ -108,7 +108,15 @@ Button {
     -fx-background-radius: 50;
 }
 
-Label {
+
+.smallLabel{
+    -fx-font-size: 32px;
+    -fx-font-family: Arial, serif;
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
+}
+
+.bigLabel {
     -fx-font-size: 48px;
     -fx-font-family: Arial, serif;
     -fx-text-fill: white;
@@ -129,6 +137,11 @@ FieldLabel {
 FieldLabel:hover {
     -fx-background-color: derive(base-color, -10%);
 }
+
+.popUpPane {
+    -fx-background-color: rgba(0, 0, 0, 0.8);
+}
+
 
 .root {
     -fx-background-color: #000000;

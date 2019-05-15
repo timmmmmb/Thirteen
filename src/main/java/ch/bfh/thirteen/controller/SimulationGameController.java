@@ -32,7 +32,7 @@ public class SimulationGameController extends GameScreenController {
 
     @FXML
     public void runSimulation() {
-        if(running){
+        if (running) {
             switchRunning();
             return;
         }
@@ -47,13 +47,13 @@ public class SimulationGameController extends GameScreenController {
         doTurn();
     }
 
-    private void switchRunning(){
+    private void switchRunning() {
         running = !running;
-        if(!running){
+        if (!running) {
             startButton.setText("Start");
-        }else{
+        } else {
             startButton.setText("Stop");
-            if(ThirteenApplication.getGame().getBoard().getGameState()==GameState.LOST||ThirteenApplication.getGame().getBoard().getGameState()==GameState.WON){
+            if (ThirteenApplication.getGame().getBoard().getGameState() == GameState.LOST || ThirteenApplication.getGame().getBoard().getGameState() == GameState.WON) {
                 restart();
             }
         }
@@ -71,7 +71,7 @@ public class SimulationGameController extends GameScreenController {
             super.playAnimations(0);
         } else {
             System.out.println("Bot Simulation over");
-            if(running){
+            if (running) {
                 switchRunning();
             }
         }

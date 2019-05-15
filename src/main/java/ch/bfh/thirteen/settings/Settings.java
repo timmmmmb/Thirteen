@@ -58,7 +58,7 @@ public class Settings {
      */
     public boolean decreaseStars(int stars) {
         if (this.stars < stars) {
-            return false;
+            return true;
         }
         getPcs().firePropertyChange("StarsChanged", this.stars, this.stars - stars);
         this.stars -= stars;
@@ -68,7 +68,7 @@ public class Settings {
         } catch (JAXBException e) {
             e.printStackTrace();
         }
-        return true;
+        return false;
     }
 
 
@@ -118,8 +118,8 @@ public class Settings {
         return UNDOINCREMENTCOST;
     }
 
-    public int getHighscore() {
-        return scores.get(0).getMoves();
+    public Score getHighscore() {
+        return scores.get(0);
     }
 
     public ArrayList<Score> getScores(){
