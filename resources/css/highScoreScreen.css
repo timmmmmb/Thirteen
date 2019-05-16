@@ -1,5 +1,4 @@
 * {
-
     -fx-alignment: center;
 }
 
@@ -7,7 +6,6 @@ pane {
     -fx-pref-width: 400px;
     -fx-pref-height: 500px;
     -fx-background-color: #191919;
-
 }
 
 Button {
@@ -20,6 +18,5 @@ Button {
 }
 
 Button:hover {
-
     -fx-background-color: #ffbf6a;;
 }

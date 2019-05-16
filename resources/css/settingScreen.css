@@ -19,30 +19,22 @@ Button {
 }
 
 #backButton {
-
     -fx-background-color: #f3ae4b;
-
 }
 
 #backButton:hover {
-
     -fx-background-color: #ffbf6a;
 }
 
 #infoButton {
-
     -fx-background-color: #00a8b5;
-
 }
 
 #infoButton:hover {
-
     -fx-background-color: #00ccd9;
-
 }
 
 #musicButton {
-
     -fx-background-color: #ff5839;
     -fx-text-fill: white;
     -fx-font-size: 14px;
@@ -50,7 +42,6 @@ Button {
 }
 
 #musicButton:selected {
-
     -fx-background-color: #66d65f;
     -fx-text-fill: white;
     -fx-font-size: 14px;
