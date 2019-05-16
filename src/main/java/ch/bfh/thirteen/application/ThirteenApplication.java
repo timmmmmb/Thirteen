@@ -8,12 +8,13 @@ import javafx.stage.Stage;
 import main.java.ch.bfh.thirteen.loader.Loader;
 import main.java.ch.bfh.thirteen.logger.FileLogger;
 import main.java.ch.bfh.thirteen.model.Game;
-import main.java.ch.bfh.thirteen.model.MusicPlayer;
+import main.java.ch.bfh.thirteen.musicplayer.MusicPlayer;
 import main.java.ch.bfh.thirteen.saver.Saver;
 import main.java.ch.bfh.thirteen.settings.Settings;
 
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import java.util.Objects;
 import java.util.logging.Level;
 
@@ -40,9 +41,13 @@ public class ThirteenApplication extends Application {
         }
         settings.loadResources();
         game = new Game();
-        music = new MusicPlayer("resources/music/bensound-dreams.mp3");
-        if (getSettings().isMusicOn()) {
-            music.play();
+        try {
+            music = new MusicPlayer("music/bensound-dreams.mp3");
+            if (getSettings().isMusicOn()) {
+                music.play();
+            }
+        } catch (URISyntaxException e) {
+            log.log(e.getMessage(),Level.SEVERE);
         }
         try {
             Thread.sleep(1000);
