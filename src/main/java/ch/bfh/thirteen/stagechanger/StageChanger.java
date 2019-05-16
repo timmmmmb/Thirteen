@@ -15,12 +15,13 @@ import java.util.logging.Level;
 public class StageChanger {
     /**
      * this function changes the stage of the application to another fxml file
-     * @param event an ActionEvent that was used when pressing the change stage button
+     *
+     * @param event    an ActionEvent that was used when pressing the change stage button
      * @param filename the filename to the new fxml file that should get loaded
      */
-    public static void changeStage(ActionEvent event, String filename){
+    public static void changeStage(ActionEvent event, String filename) {
         try {
-            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Parent newroot = FXMLLoader.load(Objects.requireNonNull(StageChanger.class.getClassLoader().getResource(filename)));
             stage.setScene(new Scene(newroot));
         } catch (IOException e) {
