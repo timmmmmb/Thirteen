@@ -53,10 +53,6 @@ public class Game implements PropertyChangeListener {
 
     public void removeField(FieldLabel fl) {
         addHistory();
-        //decreases the stars and returns if there are not enough of them
-        if (getSettings().decreaseStars(bombcost)) {
-            return;
-        }
         bombcost += getSettings().getBOMBINCREMENTCOST();
         gameBoard.removeSingleField(getFieldFromFieldLabel(fl));
         moves++;
@@ -139,5 +135,17 @@ public class Game implements PropertyChangeListener {
 
     public String toString() {
         return getBoard().toSting();
+    }
+
+    public int getBombcost() {
+        return bombcost;
+    }
+
+    public int getUndocost() {
+        return undocost;
+    }
+
+    public boolean hasHistory() {
+        return !history.isEmpty();
     }
 }

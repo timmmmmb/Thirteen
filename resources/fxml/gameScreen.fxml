@@ -29,6 +29,9 @@
                     </ImageView>
                     <Label fx:id="starLabel" styleClass="bigLabel" text="0" />
                 </HBox>
+            <BorderPane.margin>
+               <Insets left="10.0" right="10.0" />
+            </BorderPane.margin>
             </HBox>
         </top>
         <center>
@@ -44,13 +47,20 @@
         </center>
         <bottom>
             <HBox id="buttonBox" BorderPane.alignment="CENTER">
-                <Button id="undoButton" mnemonicParsing="false" onAction="#undo" prefHeight="44.0" prefWidth="58.0" />
+                <Button id="undoButton" fx:id="undoButton" mnemonicParsing="false" onAction="#undo" prefHeight="44.0" prefWidth="58.0" />
                 <Button id="restartButton" mnemonicParsing="false" onAction="#restart" text="Restart" />
-                <Button id="deleteButton" mnemonicParsing="false" onAction="#switchRemovalMode" prefHeight="44.0" prefWidth="58.0" text=" " />
+                <Button id="deleteButton" fx:id="bombButton" mnemonicParsing="false" onAction="#switchRemovalMode" prefHeight="44.0" prefWidth="58.0" text=" " />
             </HBox>
         </bottom>
     </BorderPane>
-    <VBox fx:id="popUpPane" styleClass="popUpPane" visible="false">
+    <VBox fx:id="confirmationPane" styleClass="popUpPane" visible="false">
+        <Label fx:id="infoTextLabel" prefHeight="52.0" prefWidth="400.0" styleClass="smallLabel" text="This Action costs: " />
+        <HBox spacing="10.0">
+            <Button id="agreeButton" mnemonicParsing="false" onAction="#agree" text="Agree" />
+            <Button id="rejectButton" mnemonicParsing="false" onAction="#reject" text="Reject" />
+        </HBox>
+    </VBox>
+    <VBox fx:id="endGamePane" styleClass="popUpPane" visible="false">
         <Label fx:id="gameStateLabel" styleClass="stateLabel" />
         <Label fx:id="scoreInfoLabel" styleClass="smallLabel" text="Your Score:" />
         <Label fx:id="highScoreLabel" layoutX="83.0" layoutY="265.0" styleClass="smallLabel" text="Highscore:" />

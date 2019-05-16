@@ -83,6 +83,22 @@ Button {
     -fx-background-color: #ff4e97;
 }
 
+#rejectButton {
+    -fx-background-color: #de0c15;
+}
+
+#rejectButton:hover {
+    -fx-background-color: #ff4a3d;
+}
+
+#agreeButton {
+    -fx-background-color: #41de21;
+}
+
+#agreeButton:hover {
+    -fx-background-color: #94ff74;
+}
+
 .settings-choice-box > Label {
     -fx-text-fill: black;
     -fx-font-size: 16px;

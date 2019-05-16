@@ -7,8 +7,8 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.BoxBlur;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -29,17 +29,19 @@ import static main.java.ch.bfh.thirteen.stagechanger.StageChanger.changeStage;
 
 public class GameScreenController implements PropertyChangeListener {
     @FXML
-    private VBox popUpPane;
+    public VBox endGamePane,confirmationPane;
+    @FXML
+    public Button undoButton,bombButton;
     @FXML
     protected AnchorPane gamePane, gameBackground;
     @FXML
-    private Label gameStateLabel, timerLabel, starLabel, scoreInfoLabel, highScoreLabel;
+    private Label gameStateLabel, timerLabel, starLabel, scoreInfoLabel, highScoreLabel, infoTextLabel;
     private ArrayList<FieldLabel> removalList = new ArrayList<>();
     private ArrayList<ArrayList<Transition>> animationList = new ArrayList<>();
     private boolean isRemovalMode = false;
     protected Duration animationTime = Duration.millis(250);
     protected boolean simulation = false;
-    private BoxBlur blur;
+    private boolean undoEvent = false;
 
 
     /**
@@ -56,6 +58,7 @@ public class GameScreenController implements PropertyChangeListener {
             case "StarsChanged":
                 if(simulation)return;
                 starLabel.setText(evt.getNewValue().toString());
+                disableButton();
                 break;
             case "removedField": {
                 try {
@@ -137,7 +140,7 @@ public class GameScreenController implements PropertyChangeListener {
             getSettings().setHighscore();
             scoreInfoLabel.setText("Your Score: "+String.valueOf(getGame().getBoard().getCurrent_max())+": "+String.valueOf(getGame().getMoves()));
             highScoreLabel.setText("Highscore: "+String.valueOf(getSettings().getHighscore().getHighestnumber())+": "+String.valueOf(getSettings().getHighscore().getMoves()));
-            popUpPane.setVisible(true);
+            endGamePane.setVisible(true);
         }
         gameStateLabel.setVisible(true);
     }
@@ -147,7 +150,7 @@ public class GameScreenController implements PropertyChangeListener {
      */
     @FXML
     protected void initialize() {
-
+        disableButton();
         animationList.add(new ArrayList<>());
         animationList.add(new ArrayList<>());
         animationList.add(new ArrayList<>());
@@ -174,7 +177,7 @@ public class GameScreenController implements PropertyChangeListener {
         createBackground();
         gameStateLabel.setText("");
         if(!simulation){
-            popUpPane.setVisible(false);
+            endGamePane.setVisible(false);
             starLabel.setText(String.valueOf(ThirteenApplication.getSettings().getStars()));
             timerLabel.setText("0");
         }
@@ -387,7 +390,12 @@ public class GameScreenController implements PropertyChangeListener {
 
     @FXML
     private void switchRemovalMode() {
-        switchRemovalMode(false);
+        if(isRemovalMode){
+            return;
+        }
+        infoTextLabel.setText("This Action costs: "+getGame().getBombcost());
+        undoEvent = false;
+        confirmationPane.setVisible(true);
     }
 
     private void switchRemovalMode(boolean click) {
@@ -397,6 +405,10 @@ public class GameScreenController implements PropertyChangeListener {
             }
             resetStyle();
         } else {
+            //decreases the stars and returns if there are not enough of them
+            if (getSettings().decreaseStars(getGame().getBombcost())) {
+                return;
+            }
             gameBackground.getChildren().clear();
             for (Node fl : gamePane.getChildren()) {
                 fl.getStyleClass().add("fieldBombMode");
@@ -407,8 +419,9 @@ public class GameScreenController implements PropertyChangeListener {
 
     @FXML
     private void undo() {
-        getGame().undo();
-        reload();
+        infoTextLabel.setText("This Action costs: "+getGame().getUndocost());
+        undoEvent = true;
+        confirmationPane.setVisible(true);
     }
 
     /**
@@ -431,5 +444,35 @@ public class GameScreenController implements PropertyChangeListener {
             getGame().clickField(fl);
         }
         playAnimations(0);
+    }
+
+    public void agree() {
+        if(undoEvent){
+            getGame().undo();
+            reload();
+        }else{
+            switchRemovalMode(false);
+
+        }
+        confirmationPane.setVisible(false);
+        disableButton();
+    }
+
+    public void reject() {
+        confirmationPane.setVisible(false);
+    }
+
+    private void disableButton(){
+        if(getSettings().getStars()>=getGame().getBombcost()){
+            bombButton.setDisable(false);
+        }else{
+            bombButton.setDisable(true);
+        }
+
+        if(getSettings().getStars()>=getGame().getUndocost()&&getGame().hasHistory()){
+            undoButton.setDisable(false);
+        }else{
+            undoButton.setDisable(true);
+        }
     }
 }
