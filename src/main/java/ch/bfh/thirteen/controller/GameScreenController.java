@@ -404,6 +404,7 @@ public class GameScreenController implements PropertyChangeListener {
                 createBackground();
             }
             resetStyle();
+            disableButton();
         } else {
             //decreases the stars and returns if there are not enough of them
             if (getSettings().decreaseStars(getGame().getBombcost())) {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
@@ -61,7 +62,11 @@
         </HBox>
     </VBox>
     <VBox fx:id="endGamePane" styleClass="popUpPane" visible="false">
-        <Label fx:id="gameStateLabel" styleClass="stateLabel" />
+        <Label fx:id="gameStateLabel">
+         <styleClass>
+            <String fx:value="stateLabel" />
+            <String fx:value="bigLabel" />
+         </styleClass></Label>
         <Label fx:id="scoreInfoLabel" styleClass="smallLabel" text="Your Score:" />
         <Label fx:id="highScoreLabel" layoutX="83.0" layoutY="265.0" styleClass="smallLabel" text="Highscore:" />
         <Button id="restartButton" mnemonicParsing="false" onAction="#restart" text="Restart" />
