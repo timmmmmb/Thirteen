@@ -97,8 +97,9 @@ public class MenuScreenController {
         } catch (JAXBException | FileNotFoundException e) {
             e.printStackTrace();
             ThirteenApplication.log.log("loading game failed", Level.SEVERE);
+        }finally {
+            ThirteenApplication.log.log("game loaded successfully", Level.FINE);
         }
-        ThirteenApplication.log.log("game loaded successfully", Level.FINE);
     }
 
     /**
