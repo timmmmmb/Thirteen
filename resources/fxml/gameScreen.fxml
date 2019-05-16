@@ -12,64 +12,58 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane styleClass="root" stylesheets="@../css/gameScreen.css" xmlns="http://javafx.com/javafx/8.0.121"
-           xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="main.java.ch.bfh.thirteen.controller.GameScreenController">
+<StackPane styleClass="root" stylesheets="@../css/gameScreen.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ch.bfh.thirteen.controller.GameScreenController">
     <BorderPane styleClass="popUpPane">
         <top>
             <HBox spacing="50.0">
-                <Button id="menuButton" mnemonicParsing="false" onAction="#switchMenu" prefHeight="44.0"
-                        prefWidth="58.0"/>
+                <Button id="menuButton" mnemonicParsing="false" onAction="#switchMenu" prefHeight="44.0" prefWidth="58.0" />
                 <HBox spacing="10.0">
                     <ImageView fitHeight="44.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../images/clock.png"/>
+                        <Image url="@../images/clock.png" />
                     </ImageView>
-                    <Label fx:id="timerLabel" styleClass="bigLabel" text="0"/>
+                    <Label fx:id="timerLabel" styleClass="bigLabel" text="100" />
                 </HBox>
                 <HBox spacing="10.0">
                     <ImageView fitHeight="44.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../images/star.png"/>
+                        <Image url="@../images/star.png" />
                     </ImageView>
-                    <Label fx:id="starLabel" styleClass="bigLabel" text="0"/>
+                    <Label fx:id="starLabel" styleClass="bigLabel" text="100" />
                 </HBox>
                 <BorderPane.margin>
-                    <Insets left="10.0" right="10.0"/>
+                    <Insets left="10.0" right="10.0" />
                 </BorderPane.margin>
             </HBox>
         </top>
         <center>
             <HBox BorderPane.alignment="CENTER">
                 <BorderPane.margin>
-                    <Insets bottom="20.0" left="10.0" right="10.0" top="10.0"/>
+                    <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
                 </BorderPane.margin>
                 <Group>
-                    <AnchorPane fx:id="gameBackground" prefWidth="320.0"/>
-                    <AnchorPane fx:id="gamePane" styleClass="gamePane"/>
+                    <AnchorPane fx:id="gameBackground" prefWidth="320.0" />
+                    <AnchorPane fx:id="gamePane" styleClass="gamePane" />
                 </Group>
             </HBox>
         </center>
         <bottom>
             <HBox id="buttonBox" BorderPane.alignment="CENTER">
-                <Button id="undoButton" fx:id="undoButton" mnemonicParsing="false" onAction="#undo" prefHeight="44.0"
-                        prefWidth="58.0"/>
-                <Button id="restartButton" mnemonicParsing="false" onAction="#restart" text="Restart"/>
-                <Button id="deleteButton" fx:id="bombButton" mnemonicParsing="false" onAction="#switchRemovalMode"
-                        prefHeight="44.0" prefWidth="58.0" text=" "/>
+                <Button id="undoButton" fx:id="undoButton" mnemonicParsing="false" onAction="#undo" prefHeight="44.0" prefWidth="58.0" />
+                <Button id="restartButton" mnemonicParsing="false" onAction="#restart" text="Restart" />
+                <Button id="deleteButton" fx:id="bombButton" mnemonicParsing="false" onAction="#switchRemovalMode" prefHeight="44.0" prefWidth="58.0" text=" " />
             </HBox>
         </bottom>
     </BorderPane>
     <VBox fx:id="confirmationPane" styleClass="popUpPane" visible="false">
-        <Label fx:id="infoTextLabel" prefHeight="52.0" prefWidth="400.0" styleClass="smallLabel"
-               text="This Action costs: "/>
+        <Label fx:id="infoTextLabel" prefHeight="52.0" prefWidth="400.0" styleClass="smallLabel" text="This Action costs: " />
         <HBox spacing="10.0">
-            <Button id="agreeButton" mnemonicParsing="false" onAction="#agree" text="Agree"/>
-            <Button id="rejectButton" mnemonicParsing="false" onAction="#reject" text="Reject"/>
+            <Button id="agreeButton" mnemonicParsing="false" onAction="#agree" text="Agree" />
+            <Button id="rejectButton" mnemonicParsing="false" onAction="#reject" text="Reject" />
         </HBox>
     </VBox>
     <VBox fx:id="endGamePane" styleClass="popUpPane" visible="false">
-        <Label fx:id="gameStateLabel" styleClass="stateLabel"/>
-        <Label fx:id="scoreInfoLabel" styleClass="smallLabel" text="Your Score:"/>
-        <Label fx:id="highScoreLabel" layoutX="83.0" layoutY="265.0" styleClass="smallLabel" text="Highscore:"/>
-        <Button id="restartButton" mnemonicParsing="false" onAction="#restart" text="Restart"/>
+        <Label fx:id="gameStateLabel" styleClass="stateLabel" />
+        <Label fx:id="scoreInfoLabel" styleClass="smallLabel" text="Your Score:" />
+        <Label fx:id="highScoreLabel" layoutX="83.0" layoutY="265.0" styleClass="smallLabel" text="Highscore:" />
+        <Button id="restartButton" mnemonicParsing="false" onAction="#restart" text="Restart" />
     </VBox>
 </StackPane>

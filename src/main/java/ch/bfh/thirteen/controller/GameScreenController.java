@@ -463,6 +463,9 @@ public class GameScreenController implements PropertyChangeListener {
     }
 
     private void disableButton(){
+        if(simulation){
+            return;
+        }
         if(getSettings().getStars()>=getGame().getBombcost()){
             bombButton.setDisable(false);
         }else{

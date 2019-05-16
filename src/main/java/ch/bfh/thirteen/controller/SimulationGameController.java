@@ -28,8 +28,8 @@ public class SimulationGameController extends GameScreenController {
      */
     @FXML
     protected void initialize() {
-        super.initialize();
         simulation = true;
+        super.initialize();
         animationTime = Duration.millis(5);
     }
 

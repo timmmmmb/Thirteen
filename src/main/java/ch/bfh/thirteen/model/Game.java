@@ -21,7 +21,7 @@ public class Game implements PropertyChangeListener {
     @XmlElement(name = "board")
     private Board gameBoard;
     @XmlElement(name = "timer")
-    private Timer timer;
+    private Timer timer = new Timer();
     @XmlElement(name = "moves")
     private int moves = 0;
     @XmlElement(name = "bombcost")
@@ -30,9 +30,7 @@ public class Game implements PropertyChangeListener {
     private int undocost = 50;
 
     public Game() {
-        timer = new Timer();
-        restartGame();
-
+        setGameBoard(new Board(getSettings().getBoardWidth(), getSettings().getBoardHeight()));
     }
 
     public void restartGame() {
