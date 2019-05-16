@@ -34,6 +34,7 @@ public class Timer {
 
     /**
      * gets the pcs
+     *
      * @return the pcs from the timer
      */
     public PropertyChangeSupport getPcs() {
@@ -42,6 +43,7 @@ public class Timer {
 
     /**
      * the toString function returns the current t as string
+     *
      * @return String t
      */
     public String toString() {
@@ -50,6 +52,7 @@ public class Timer {
 
     /**
      * gets the time as int
+     *
      * @return the time as int
      */
     public int getTime() {
