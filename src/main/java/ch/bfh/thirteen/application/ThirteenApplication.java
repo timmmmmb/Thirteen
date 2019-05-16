@@ -12,6 +12,7 @@ import main.java.ch.bfh.thirteen.model.MusicPlayer;
 import main.java.ch.bfh.thirteen.saver.Saver;
 import main.java.ch.bfh.thirteen.settings.Settings;
 
+import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -21,23 +22,33 @@ public class ThirteenApplication extends Application {
     private static MusicPlayer music;
     private static Settings settings;
     public static FileLogger log = new FileLogger();
-    @Override
-    public void init() throws Exception {
-        try{
-            settings = Loader.loadSettings();
-        }catch (FileNotFoundException fe){
-            System.out.println("settings File not found");
 
+    @Override
+    public void init()  {
+        try {
+            settings = Loader.loadSettings();
+        } catch (FileNotFoundException fe) {
+            log.log("settings File not found",Level.SEVERE);
             settings = new Settings();
-            Saver.saveSettings(settings);
+            try {
+                Saver.saveSettings(settings);
+            } catch (JAXBException e) {
+                log.log(e.toString(),Level.SEVERE);
+            }
+        } catch (JAXBException e) {
+            log.log(e.toString(),Level.SEVERE);
         }
         settings.loadResources();
         game = new Game();
         music = new MusicPlayer("resources/music/bensound-dreams.mp3");
-        if(getSettings().isMusicOn()){
+        if (getSettings().isMusicOn()) {
             music.play();
         }
-        Thread.sleep(1000);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -72,7 +83,9 @@ public class ThirteenApplication extends Application {
     }
 
     public static void setGame(Game game) {
-        ThirteenApplication.game =game;
+        ThirteenApplication.game = game;
     }
+
+
 
 }

@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 public class FileLogger {
 
     private static final String PATH = "./src/main/java/ch/bfh/thirteen/logger/";
-    private static FileHandler logfile;
     private Logger logger;
 
     /**
@@ -20,7 +19,6 @@ public class FileLogger {
      * Log level is set to ALL
      */
     public FileLogger() {
-
         this.logger = Logger.getLogger(Logger.class.getName());
         logger.setUseParentHandlers(false);
         logger.setLevel(Level.ALL);
@@ -37,7 +35,7 @@ public class FileLogger {
     public void log(String logMessage, Level level){
 
         try {
-            this.logfile = new FileHandler(PATH + "logfile.txt", true);
+            FileHandler logfile = new FileHandler(PATH + "logfile.txt", true);
             logfile.setFormatter(new LogFormatter());
             logger.addHandler(logfile);
             logger.info(level.toString()+":"+ " " +logMessage);

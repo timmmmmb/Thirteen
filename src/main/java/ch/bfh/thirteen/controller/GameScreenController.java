@@ -116,7 +116,7 @@ public class GameScreenController implements PropertyChangeListener {
 
     /**
      * displays at game over if the game is won or lost
-     * @param evt
+     * @param evt the change event that said what changed
      */
     private void gameOver(PropertyChangeEvent evt) {
         if (evt.getNewValue() == GameState.WON) {

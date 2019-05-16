@@ -20,6 +20,7 @@ public class Settings {
 
     @XmlElement(name = "musicOn")
     private boolean musicOn = true;
+    @SuppressWarnings("")
     @XmlElement(name = "BOMBINCREMENTCOST")
     private final int BOMBINCREMENTCOST = 50;
     @XmlElement(name = "UNDOINCREMENTCOST")
