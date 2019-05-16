@@ -5,10 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.input.MouseEvent;
 import main.java.ch.bfh.thirteen.application.ThirteenApplication;
-import java.net.URL;
-import java.util.ResourceBundle;
+import main.java.ch.bfh.thirteen.saver.Saver;
+
+import javax.xml.bind.JAXBException;
 
 import static main.java.ch.bfh.thirteen.stagechanger.StageChanger.changeStage;
 
@@ -17,12 +17,6 @@ import static main.java.ch.bfh.thirteen.stagechanger.StageChanger.changeStage;
  */
 public class SettingsScreenController {
 
-    @FXML
-    private ResourceBundle resources;
-    @FXML
-    private URL location;
-    @FXML
-    private Label langageLabel;
     @FXML
     private Label musicLabel;
     @FXML
@@ -37,10 +31,9 @@ public class SettingsScreenController {
     /**
      * lets the player turn on or off the music
      * changes text of toggle button
-     * @param event mouse event on the toggle button
      */
     @FXML
-    void musicOnOff(MouseEvent event) {
+    void musicOnOff() {
         if (ThirteenApplication.getSettings().isMusicOn()) {
             musicButton.setText("off");
             ThirteenApplication.getMusic().stop();
@@ -49,10 +42,16 @@ public class SettingsScreenController {
             ThirteenApplication.getMusic().play();
         }
         ThirteenApplication.getSettings().toggleMusic();
+        try {
+            Saver.saveSettings(ThirteenApplication.getSettings());
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * lets the player switch to the info screen
+     *
      * @param event change stage event
      */
     @FXML
@@ -62,6 +61,7 @@ public class SettingsScreenController {
 
     /**
      * lets the player go back to the menu screen
+     *
      * @param event change stage event
      */
     @FXML
@@ -79,7 +79,6 @@ public class SettingsScreenController {
         } else if (!ThirteenApplication.getSettings().isMusicOn()) {
             musicButton.setText("off");
         }
-        assert langageLabel != null : "fx:id=\"langageLabel\" was not injected: check your FXML file 'settingsScreen.fxml'.";
         assert musicLabel != null : "fx:id=\"musicLabel\" was not injected: check your FXML file 'settingsScreen.fxml'.";
         assert musicButton != null : "fx:id=\"musicButton\" was not injected: check your FXML file 'settingsScreen.fxml'.";
         assert infoButton != null : "fx:id=\"infoButton\" was not injected: check your FXML file 'settingsScreen.fxml'.";
