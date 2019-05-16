@@ -124,17 +124,15 @@ Button {
     -fx-background-radius: 50;
 }
 
-#botSelector{
+#botSelector {
     -fx-background-color: #f3ae4b;
 }
 
-#botSelector:hover{
+#botSelector:hover {
     -fx-background-color: #ffc461;
 }
 
-
-
-.smallLabel{
+.smallLabel {
     -fx-font-size: 32px;
     -fx-font-family: Arial, serif;
     -fx-text-fill: white;
@@ -166,7 +164,6 @@ FieldLabel:hover {
 .popUpPane {
     -fx-background-color: rgba(0, 0, 0, 0.8);
 }
-
 
 .root {
     -fx-background-color: #000000;

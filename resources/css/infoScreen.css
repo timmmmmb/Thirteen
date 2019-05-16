@@ -26,20 +26,21 @@ Button {
 
 #backButton:hover {
 
-    -fx-background-color: #ffbf6a; }
+    -fx-background-color: #ffbf6a;
+}
 
-.text-area .content{
+.text-area .content {
     -fx-background-color: #191919;
     -fx-background-radius: 0;
     -fx-alignment: CENTER;
 }
 
-#creditsText{
+#creditsText {
     -fx-text-fill: white;
     -fx-background-color: #191919;
 }
 
-#descriptionText{
+#descriptionText {
 
     -fx-text-fill: white;
     -fx-background-color: #191919;

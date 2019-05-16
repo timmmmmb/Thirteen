@@ -34,8 +34,6 @@ Button {
     -fx-background-color: #ffbf6a;
 }
 
-
-
 #hiScoreButton {
     -fx-background-color: #de4383;
     -fx-background-image: url("../images/trophy.png");
@@ -60,7 +58,7 @@ Button {
     -fx-background-color: #9754bf;
 }
 
-#saveButton{
+#saveButton {
     -fx-background-color: #e4734f;
     -fx-background-image: url("../images/diskette.png");
     -fx-background-size: 35 35;
@@ -68,11 +66,11 @@ Button {
     -fx-background-position: center;
 }
 
-#saveButton:hover{
+#saveButton:hover {
     -fx-background-color: #ff8c64;
 }
 
-#loadButton{
+#loadButton {
     -fx-background-color: #bcd574;
     -fx-background-image: url("../images/upload.png");
     -fx-background-size: 35 35;
@@ -80,7 +78,7 @@ Button {
     -fx-background-position: center;
 }
 
-#loadButton:hover{
+#loadButton:hover {
     -fx-background-color: #e3ff8b;
 }
 
