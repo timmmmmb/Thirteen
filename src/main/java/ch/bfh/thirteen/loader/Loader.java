@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 public class Loader {
+    public static final String PATH = "./resources/saves/";
     /**
      * loads from file and returns a new game
      *
@@ -30,7 +31,7 @@ public class Loader {
      */
     public static Object load(String filename, JAXBContext context) throws JAXBException, FileNotFoundException {
         Unmarshaller um = context.createUnmarshaller();
-        return um.unmarshal(new FileReader(filename));
+        return um.unmarshal(new FileReader(PATH+filename));
     }
 
     /**

@@ -1,5 +1,6 @@
 package main.java.ch.bfh.thirteen.saver;
 
+import main.java.ch.bfh.thirteen.loader.Loader;
 import main.java.ch.bfh.thirteen.model.Game;
 import main.java.ch.bfh.thirteen.model.GameState;
 import main.java.ch.bfh.thirteen.settings.Settings;
@@ -19,40 +20,36 @@ public class Saver {
      * @param game the game that shall get saved
      */
     public static void save(Game game) throws JAXBException {
-        save(game, "ThirteenSave.xml");
-    }
-
-    /**
-     * saves the game as xml
-     *
-     * @param game     the game that shall get saved
-     * @param filename the name of the file that shall get saved
-     */
-    public static void save(Game game, String filename) throws JAXBException {
         if (game.getBoard().getGameState() != GameState.RUNNING) {
             return;
         }
-        // create JAXB context and instantiate marshaller
-        JAXBContext context = JAXBContext.newInstance(game.getClass());
-        Marshaller m = context.createMarshaller();
-        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-
-        // Write to File
-        m.marshal(game, new File(filename));
+        save("ThirteenSave.xml", game, JAXBContext.newInstance(Game.class));
     }
 
     /**
-     * saves the game as xml
+     * saves an object as xml
      *
-     * @param settings the game that shall get saved
+     * @param filename the name of the file that shall get saved
+     * @param o the object to save
+     * @param context the jaxbcontext of the object
+     * @throws JAXBException if an error occures while saving
      */
-    public static void saveSettings(Settings settings) throws JAXBException {
+    public static void save(String filename, Object o, JAXBContext context) throws JAXBException {
+
         // create JAXB context and instantiate marshaller
-        JAXBContext context = JAXBContext.newInstance(settings.getClass());
         Marshaller m = context.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
         // Write to File
-        m.marshal(settings, new File("Settings.xml"));
+        m.marshal(o, new File(Loader.PATH +filename));
+    }
+
+    /**
+     * saves the settings as xml
+     *
+     * @param settings the settings that shall get saved
+     */
+    public static void saveSettings(Settings settings) throws JAXBException {
+        save("Settings.xml", settings, JAXBContext.newInstance(Settings.class));
     }
 }
