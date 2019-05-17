@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class BottomUpBot implements BotInterface {
     /**
      * does the turn which is clicking the last field
+     *
      * @param game the current game
      */
     @Override
