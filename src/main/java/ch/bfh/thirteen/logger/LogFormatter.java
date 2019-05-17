@@ -11,6 +11,7 @@ public class LogFormatter extends Formatter {
 
     /**
      * Makes the format which will be shown in the log file
+     *
      * @param record the record to format
      * @return the String for the log file
      */

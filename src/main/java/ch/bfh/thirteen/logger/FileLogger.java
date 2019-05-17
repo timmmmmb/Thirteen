@@ -32,18 +32,17 @@ public class FileLogger {
      * @param level
      * The log level which will be shown in the logfile
      */
-    public void log(String logMessage, Level level){
-
+    public void log(String logMessage, Level level) {
         try {
             FileHandler logfile = new FileHandler(PATH + "logfile.txt", true);
             logfile.setFormatter(new LogFormatter());
             logger.addHandler(logfile);
-            logger.info(level.toString()+":"+ " " +logMessage);
+            logger.info(level.toString() + ":" + " " + logMessage);
             logfile.close();
         } catch (IOException e) {
             System.out.println("log file not found");
         } catch (SecurityException e) {
-                System.out.println("log failed");
-            }
+            System.out.println("log failed");
         }
+    }
 }
