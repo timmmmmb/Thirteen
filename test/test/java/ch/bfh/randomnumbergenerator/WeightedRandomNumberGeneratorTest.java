@@ -1,9 +1,9 @@
-package test.java.ch.bfh.model.test;
+package test.java.ch.bfh.randomnumbergenerator;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import main.java.ch.bfh.thirteen.model.WeightedRandomNumberGenerator;
+import main.java.ch.bfh.thirteen.randomnumbergenerator.WeightedRandomNumberGenerator;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

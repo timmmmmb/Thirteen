@@ -1,4 +1,4 @@
-package test.java.ch.bfh.model.test;
+package test.java.ch.bfh.model;
 
 import main.java.ch.bfh.thirteen.model.Board;
 import org.junit.jupiter.api.BeforeAll;

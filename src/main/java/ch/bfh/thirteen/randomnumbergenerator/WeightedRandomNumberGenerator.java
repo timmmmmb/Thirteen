@@ -1,4 +1,4 @@
-package main.java.ch.bfh.thirteen.model;
+package main.java.ch.bfh.thirteen.randomnumbergenerator;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -38,7 +38,7 @@ public class WeightedRandomNumberGenerator {
         return lb;
     }
 
-    void increaseMax() {
+    public void increaseMax() {
         ub++;
         if (ub >= 9) {
             lb++;

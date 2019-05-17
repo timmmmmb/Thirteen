@@ -1,4 +1,4 @@
-package test.java.ch.bfh.model.test;
+package test.java.ch.bfh.model;
 
 import main.java.ch.bfh.thirteen.model.Coordinate;
 import main.java.ch.bfh.thirteen.model.Field;

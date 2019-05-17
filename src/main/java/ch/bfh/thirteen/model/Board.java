@@ -1,6 +1,7 @@
 package main.java.ch.bfh.thirteen.model;
 
 import main.java.ch.bfh.thirteen.observer.CustomPropertyChangeSupport;
+import main.java.ch.bfh.thirteen.randomnumbergenerator.WeightedRandomNumberGenerator;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
