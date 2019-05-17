@@ -10,7 +10,6 @@ import java.util.logging.Logger;
  */
 public class FileLogger {
 
-    private static final String PATH = "./src/main/java/ch/bfh/thirteen/logger/";
     private Logger logger;
 
     /**
@@ -34,7 +33,7 @@ public class FileLogger {
      */
     public void log(String logMessage, Level level) {
         try {
-            FileHandler logfile = new FileHandler(PATH + "logfile.txt", true);
+            FileHandler logfile = new FileHandler("logfile.txt", true);
             logfile.setFormatter(new LogFormatter());
             logger.addHandler(logfile);
             logger.info(level.toString() + ":" + " " + logMessage);
