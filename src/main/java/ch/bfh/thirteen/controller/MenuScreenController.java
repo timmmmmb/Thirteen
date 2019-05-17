@@ -79,11 +79,10 @@ public class MenuScreenController {
         try {
             ThirteenApplication.setGame(Loader.loadGame());
             ThirteenApplication.getGame().addPCL();
+            ThirteenApplication.log.log("game loaded successfully", Level.FINE);
         } catch (JAXBException | FileNotFoundException e) {
             e.printStackTrace();
             ThirteenApplication.log.log("loading game failed", Level.SEVERE);
-        }finally {
-            ThirteenApplication.log.log("game loaded successfully", Level.FINE);
         }
     }
 }
