@@ -2,15 +2,12 @@ package main.java.ch.bfh.thirteen.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
 import main.java.ch.bfh.thirteen.application.ThirteenApplication;
 import main.java.ch.bfh.thirteen.loader.Loader;
 import main.java.ch.bfh.thirteen.saver.Saver;
+
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 
 import static main.java.ch.bfh.thirteen.stagechanger.StageChanger.changeStage;
@@ -19,18 +16,6 @@ import static main.java.ch.bfh.thirteen.stagechanger.StageChanger.changeStage;
  * The controller class for the menu screen
  */
 public class MenuScreenController {
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
-    private Button startButton, loadButton, autoplayButton, hiScoreButton, infoButton, saveButton;
-
-    @FXML
-    private ImageView image;
 
     /**
      * loads the game screen to start a new game
@@ -86,13 +71,13 @@ public class MenuScreenController {
     }
 
     /**
-     * lets the player load the game
+     * lets the player loadGame the game
      * will write to the log file if loading was successful
      */
     @FXML
     void load() {
         try {
-            ThirteenApplication.setGame(Loader.load());
+            ThirteenApplication.setGame(Loader.loadGame());
             ThirteenApplication.getGame().addPCL();
         } catch (JAXBException | FileNotFoundException e) {
             e.printStackTrace();
@@ -100,16 +85,6 @@ public class MenuScreenController {
         }finally {
             ThirteenApplication.log.log("game loaded successfully", Level.FINE);
         }
-    }
-
-    /**
-     * initializing the menu screen
-     */
-    @FXML
-    void initialize() {
-        assert startButton != null : "fx:id=\"startButton\" was not injected: check your FXML file 'menuScreen.fxml'.";
-        assert autoplayButton != null : "fx:id=\"autoplayButton\" was not injected: check your FXML file 'menuScreen.fxml'.";
-        assert image != null : "fx:id=\"image\" was not injected: check your FXML file 'menuScreen.fxml'.";
     }
 }
 

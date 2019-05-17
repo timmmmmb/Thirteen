@@ -15,18 +15,21 @@ import java.io.File;
 public class Saver {
     /**
      * saves the game as xml
+     *
      * @param game the game that shall get saved
      */
     public static void save(Game game) throws JAXBException {
         save(game, "ThirteenSave.xml");
     }
+
     /**
      * saves the game as xml
-     * @param game the game that shall get saved
+     *
+     * @param game     the game that shall get saved
      * @param filename the name of the file that shall get saved
      */
     public static void save(Game game, String filename) throws JAXBException {
-        if(game.getBoard().getGameState() != GameState.RUNNING){
+        if (game.getBoard().getGameState() != GameState.RUNNING) {
             return;
         }
         // create JAXB context and instantiate marshaller
@@ -40,6 +43,7 @@ public class Saver {
 
     /**
      * saves the game as xml
+     *
      * @param settings the game that shall get saved
      */
     public static void saveSettings(Settings settings) throws JAXBException {

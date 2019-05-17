@@ -14,19 +14,16 @@ public class Loader {
      * loads from file and returns a new game
      * @return a game loaded from the savedata
      */
-    public static Game load() throws JAXBException, FileNotFoundException {
-        return load("ThirteenSave.xml");
+    public static Game loadGame() throws JAXBException, FileNotFoundException {
+        return (Game) load("ThirteenSave.xml", JAXBContext.newInstance(Game.class));
     }
 
-    public static Game load(String filename) throws JAXBException, FileNotFoundException {
-        JAXBContext context = JAXBContext.newInstance(Game.class);
+    public static Object load(String filename, JAXBContext context) throws JAXBException, FileNotFoundException {
         Unmarshaller um = context.createUnmarshaller();
-        return (Game) um.unmarshal(new FileReader(filename));
+        return um.unmarshal(new FileReader(filename));
     }
 
     public static Settings loadSettings() throws JAXBException, FileNotFoundException {
-        JAXBContext context = JAXBContext.newInstance(Settings.class);
-        Unmarshaller um = context.createUnmarshaller();
-        return (Settings) um.unmarshal(new FileReader("Settings.xml"));
+        return (Settings) load("Settings.xml", JAXBContext.newInstance(Settings.class));
     }
 }

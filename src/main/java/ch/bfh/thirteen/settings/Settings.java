@@ -126,7 +126,7 @@ public class Settings {
         return scores.get(0);
     }
 
-    public ArrayList<Score> getScores(){
+    public ArrayList<Score> getScores() {
         return scores;
     }
 
