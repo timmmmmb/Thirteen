@@ -1,6 +1,5 @@
 package main.java.ch.bfh.thirteen.saver;
 
-import main.java.ch.bfh.thirteen.loader.Loader;
 import main.java.ch.bfh.thirteen.model.Game;
 import main.java.ch.bfh.thirteen.model.GameState;
 import main.java.ch.bfh.thirteen.settings.Settings;
@@ -41,7 +40,7 @@ public class Saver {
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
         // Write to File
-        m.marshal(o, new File(Loader.PATH +filename));
+        m.marshal(o, new File(filename));
     }
 
     /**
