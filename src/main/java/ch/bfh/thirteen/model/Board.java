@@ -27,10 +27,19 @@ public class Board {
 
     private ArrayList<Field> clickableFields = new ArrayList<>();
 
+    /**
+     * default constructor for jaxb
+     */
     public Board() {
         this(5, 5);
     }
 
+    /**
+     * creates a new board the board is where the game logic is
+     *
+     * @param width  the width of the board
+     * @param height the height of the board
+     */
     public Board(int width, int height) {
         this.width = width;
         this.height = height;
@@ -39,6 +48,12 @@ public class Board {
         initializeBoard();
     }
 
+    /**
+     * copy constructor
+     * copies a board
+     *
+     * @param b the board to get copied
+     */
     public Board(Board b) {
         this.current_min = b.current_min;
         this.current_max = b.current_max;
@@ -54,6 +69,11 @@ public class Board {
         }
     }
 
+    /**
+     * gets the state of the board
+     *
+     * @return GameState the current gamestate
+     */
     public GameState getGameState() {
         return gameState;
     }
@@ -69,23 +89,49 @@ public class Board {
         return positions[x][y];
     }
 
+    /**
+     * gets the width of the board
+     *
+     * @return an int that is the width of the board
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     * gets the height of the board
+     *
+     * @return an int that is the height of the board
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     * gets the propertychangesupport needed for observer
+     *
+     * @return the PCS from the board
+     */
     PropertyChangeSupport getPcs() {
         return pcs;
     }
 
+    /**
+     * used to click a field by coordinats
+     *
+     * @param x the x coordinate 0<=x<=width
+     * @param y the y coordinate 0<=y<=height
+     */
     void clickField(int x, int y) {
         Field f = getField(x, y);
         clickField(f);
     }
 
+    /**
+     * click a field by field
+     *
+     * @param f the field to click
+     */
     void clickField(Field f) {
         if (gameState != GameState.RUNNING) {
             return;
@@ -98,6 +144,9 @@ public class Board {
         }
     }
 
+    /**
+     * called to change the gamestate when the animation is finished
+     */
     public void finishAnimation() {
         if (gameState != GameState.ANIMATING) {
             return;
@@ -105,6 +154,13 @@ public class Board {
         setGameState(GameState.RUNNING);
     }
 
+    /**
+     * tostring function
+     * loops through each position and displays its content
+     * displays NULL if a field is null
+     *
+     * @return the board as a String
+     */
     public String toSting() {
         StringBuilder result = new StringBuilder();
 
@@ -123,6 +179,10 @@ public class Board {
         return result.toString();
     }
 
+    /**
+     * initializes the board
+     * creates fields with random values at each position
+     */
     private void initializeBoard() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -154,10 +214,6 @@ public class Board {
             }
         }
         return false;
-    }
-
-    private boolean isClickable(Field f1, Field f2) {
-        return f1.getValue() == f2.getValue();
     }
 
     /**
@@ -225,7 +281,7 @@ public class Board {
     private void removeNeighbors(Field f) {
         f.setVisited(true);
         for (Field neighbor : getNeighbors(f)) {
-            if (!neighbor.isVisited() && !neighbor.getToBeRemoved() && isClickable(f, neighbor)) {
+            if (!neighbor.isVisited() && !neighbor.getToBeRemoved() && f.getValue() == neighbor.getValue()) {
                 neighbor.toBeRemoved();
                 removeNeighbors(neighbor);
                 if (neighbor.getToBeRemoved()) {
@@ -303,23 +359,46 @@ public class Board {
         this.pcs.firePropertyChange("addedField", new FieldPosition(positions[x][y], x, y), null);
     }
 
+    /**
+     * changes the gamestate of the board and fires a pcs
+     *
+     * @param gameState the new gamestate
+     */
     private void setGameState(GameState gameState) {
         this.pcs.firePropertyChange("GameStateChange", this.gameState, gameState);
         this.gameState = gameState;
 
     }
 
+    /**
+     * increments a fieldvalue and fires a pcs
+     *
+     * @param f the f that gets incremented
+     * @param x the x pos of f
+     * @param y the y pos of f
+     */
     private void incrementFieldValue(Field f, int x, int y) {
         this.pcs.firePropertyChange("incrementedFieldValue", new FieldPosition(f, x, y), f.getValue() + 1);
         f.incrementValue();
         setNewMax(f.getValue());
     }
 
+    /**
+     * resets the visited value of the field at the specified coordinates
+     *
+     * @param x the x coordinate of the field
+     * @param y the y coordinate of the field
+     */
     private void resetVisited(int x, int y) {
         positions[x][y].setCoordinate(new Coordinate(x, y));
         positions[x][y].setVisited(false);
     }
 
+    /**
+     * sets a new max changes in rng and fires pcs
+     *
+     * @param i the new value
+     */
     private void setNewMax(int i) {
         if (i > current_max) {
             //remove all tiles with the lowest number
@@ -341,16 +420,29 @@ public class Board {
         }
     }
 
+    /**
+     * gets the current max value
+     *
+     * @return the current max value
+     */
     public int getCurrent_max() {
         return current_max;
     }
 
+    /**
+     * removes a single field(Bomb)
+     *
+     * @param f the field to get removed
+     */
     void removeSingleField(Field f) {
         removeField(f);
         moveFields();
         checkGamestate();
     }
 
+    /**
+     * checks if the game is won or lost
+     */
     private void checkGamestate() {
         if (isWon()) {
             setGameState(GameState.WON);
@@ -361,6 +453,11 @@ public class Board {
         }
     }
 
+    /**
+     * gets all of the fields that can be clicked
+     *
+     * @return an arraylist of all clickable fields
+     */
     public ArrayList<Field> getClickableFields() {
         return clickableFields;
     }
