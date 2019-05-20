@@ -65,8 +65,8 @@ public class GameScreenController implements PropertyChangeListener {
                 break;
             case "removedField": {
                 try {
-                    FieldPosition fp = (FieldPosition) evt.getOldValue();
-                    FieldLabel fl = getFieldLabelByCoordinates(fp.getF(), fp.getX(), fp.getY());
+                    Field f = (Field) evt.getOldValue();
+                    FieldLabel fl = getFieldLabelByCoordinates(f, f.getCoordinate().getX(), f.getCoordinate().getY());
                     removeFadingOut(fl, gamePane);
                 } catch (FieldLabelNotFoundException e) {
                     e.printStackTrace();
@@ -75,16 +75,16 @@ public class GameScreenController implements PropertyChangeListener {
                 break;
             }
             case "addedField": {
-                FieldPosition fp = (FieldPosition) evt.getOldValue();
-                FieldLabel fl = FieldLabelFactory.createFieldLabel(fp);
+                Field f = (Field) evt.getOldValue();
+                FieldLabel fl = FieldLabelFactory.createFieldLabel(f);
                 fl.setOnMouseClicked(this::click);
                 addFadingIn(fl, gamePane);
                 break;
             }
             case "incrementedFieldValue": {
                 try {
-                    FieldPosition fp = (FieldPosition) evt.getOldValue();
-                    FieldLabel fl = getFieldLabelByCoordinates(fp.getF(), fp.getX(), fp.getY());
+                    Field f = (Field) evt.getOldValue();
+                    FieldLabel fl = getFieldLabelByCoordinates(f, f.getCoordinate().getX(), f.getCoordinate().getY());
                     fl.getStyleClass().clear();
                     fl.setTextAndClass(String.valueOf(evt.getNewValue()));
                 } catch (FieldLabelNotFoundException e) {
@@ -95,8 +95,8 @@ public class GameScreenController implements PropertyChangeListener {
             }
             case "movedField": {
                 try {
-                    FieldPosition fp = (FieldPosition) evt.getOldValue();
-                    FieldLabel fl = getFieldLabelByCoordinates(fp.getF(), fp.getX(), fp.getY());
+                    Field f = (Field) evt.getOldValue();
+                    FieldLabel fl = getFieldLabelByCoordinates(f, f.getCoordinate().getX(), f.getCoordinate().getY());
                     TranslateTransition tt = new TranslateTransition(animationTime.multiply(2), fl);
                     double distance = ThirteenApplication.getSettings().getFieldHeight() * (Integer) evt.getNewValue();
                     tt.setByY(distance);
@@ -251,7 +251,7 @@ public class GameScreenController implements PropertyChangeListener {
         Board b = getGame().getBoard();
         for (int x = 0; x < b.getWidth(); x++) {
             for (int y = 0; y < b.getHeight(); y++) {
-                FieldLabel fl = FieldLabelFactory.createFieldLabel(b.getField(x, y), x, y);
+                FieldLabel fl = FieldLabelFactory.createFieldLabel(b.getField(x, y));
                 fl.setOnMouseClicked(this::click);
                 gamePane.getChildren().add(fl);
             }
@@ -362,13 +362,13 @@ public class GameScreenController implements PropertyChangeListener {
                 if (y != b.getHeight() - 1) {
                     Field fh = b.getField(x, y + 1); // get the field below
                     if (fh.getValue() == f.getValue()) {
-                        gameBackground.getChildren().add(FieldLabelFactory.createFieldLabel(f, x, y, 2, 1));
+                        gameBackground.getChildren().add(FieldLabelFactory.createFieldLabel(f, 2, 1));
                     }
                 }
                 if (x != b.getWidth() - 1) {
                     Field fr = b.getField(x + 1, y); // get the field right
                     if (fr.getValue() == f.getValue()) {
-                        gameBackground.getChildren().add(FieldLabelFactory.createFieldLabel(f, x, y, 1, 2));
+                        gameBackground.getChildren().add(FieldLabelFactory.createFieldLabel(f, 1, 2));
                     }
                 }
             }

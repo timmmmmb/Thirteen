@@ -3,18 +3,19 @@ package main.java.ch.bfh.thirteen.model;
 import main.java.ch.bfh.thirteen.application.ThirteenApplication;
 
 public class FieldLabelFactory {
-    public static FieldLabel createFieldLabel(Field f, int x, int y) {
-        FieldLabel fl = new FieldLabel(x, y);
+    /**
+     * creates a fieldLabel
+     * @param f the field from the model
+     * @return a new generated fieldlabel
+     */
+    public static FieldLabel createFieldLabel(Field f) {
+        FieldLabel fl = new FieldLabel(f.getCoordinate().getX(), f.getCoordinate().getY());
         fl.setTextAndClass(String.valueOf(f.getValue()));
         return fl;
     }
 
-    public static FieldLabel createFieldLabel(FieldPosition fp) {
-        return createFieldLabel(fp.getF(), fp.getX(), fp.getY());
-    }
-
-    public static FieldLabel createFieldLabel(Field f, int x, int y, int height, int width) {
-        FieldLabel fl = createFieldLabel(f, x, y);
+    public static FieldLabel createFieldLabel(Field f, int height, int width) {
+        FieldLabel fl = createFieldLabel(f);
         fl.setPrefHeight(ThirteenApplication.getSettings().getFieldHeight() * height);
         fl.setPrefWidth(ThirteenApplication.getSettings().getFieldWidth() * width);
         fl.setText("");

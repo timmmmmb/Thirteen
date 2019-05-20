@@ -297,18 +297,16 @@ public class Board {
      * @param f the field who shall get removed
      */
     private void removeField(Field f) {
-        FieldPosition fp = null;
         outer:
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 if (positions[x][y] == f) {
                     positions[x][y] = null;
-                    fp = new FieldPosition(f, x, y);
                     break outer;
                 }
             }
         }
-        this.pcs.firePropertyChange("removedField", fp, null);
+        this.pcs.firePropertyChange("removedField", f, null);
     }
 
     /**
@@ -327,7 +325,7 @@ public class Board {
                     if (moveamount == 0) {
                         continue;
                     }
-                    this.pcs.firePropertyChange("movedField", new FieldPosition(positions[x][y], x, y), moveamount);
+                    this.pcs.firePropertyChange("movedField", positions[x][y], moveamount);
                     positions[x][y + moveamount] = positions[x][y];
                     positions[x][y] = null;
                 }
@@ -356,7 +354,7 @@ public class Board {
      */
     private void addField(int x, int y) {
         positions[x][y] = new Field(wrng.getNumber(), new Coordinate(x, y));
-        this.pcs.firePropertyChange("addedField", new FieldPosition(positions[x][y], x, y), null);
+        this.pcs.firePropertyChange("addedField", positions[x][y], null);
     }
 
     /**
@@ -378,7 +376,7 @@ public class Board {
      * @param y the y pos of f
      */
     private void incrementFieldValue(Field f, int x, int y) {
-        this.pcs.firePropertyChange("incrementedFieldValue", new FieldPosition(f, x, y), f.getValue() + 1);
+        this.pcs.firePropertyChange("incrementedFieldValue", f, f.getValue() + 1);
         f.incrementValue();
         setNewMax(f.getValue());
     }

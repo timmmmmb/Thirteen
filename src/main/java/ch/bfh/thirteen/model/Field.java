@@ -62,7 +62,7 @@ public class Field{
         this.visited = visited;
     }
 
-    Coordinate getCoordinate() {
+    public Coordinate getCoordinate() {
         return coordinate;
     }
 
