@@ -1,2 +1,4 @@
 # Group 4
-Trello Board for task management https://trello.com/b/yEyICqcI/oop2-project
+To start this game clone the repo with git clone
+in intellij right click on the pom.xml file and select create new maven project
+now you have all dependencies and can run it.
