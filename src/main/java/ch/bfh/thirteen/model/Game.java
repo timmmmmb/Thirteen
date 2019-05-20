@@ -15,10 +15,11 @@ import static main.java.ch.bfh.thirteen.application.ThirteenApplication.getSetti
 
 @XmlRootElement(name = "game")
 
-/**
- * class to control the game on the board
- */
+
 public class Game implements PropertyChangeListener {
+    /**
+     * class to control the game on the board
+     */
     private CustomPropertyChangeSupport pcs = new CustomPropertyChangeSupport(this);
     @XmlElement(name = "history")
     private SizedStack<Board> history = new SizedStack<>(10);
@@ -53,6 +54,7 @@ public class Game implements PropertyChangeListener {
 
     /**
      * gets the property change support
+     *
      * @return property change support
      */
     public PropertyChangeSupport getPcs() {
@@ -61,6 +63,7 @@ public class Game implements PropertyChangeListener {
 
     /**
      * returns the current game board
+     *
      * @return game board
      */
     public Board getBoard() {
@@ -70,6 +73,7 @@ public class Game implements PropertyChangeListener {
     /**
      * removes a given field
      * gets the cost for using the removal bomb
+     *
      * @param fl field to remove
      */
     public void removeField(FieldLabel fl) {
@@ -118,6 +122,7 @@ public class Game implements PropertyChangeListener {
 
     /**
      * sets up a game board from a given game board
+     *
      * @param b board to set
      */
     private void setGameBoard(Board b) {
@@ -146,6 +151,7 @@ public class Game implements PropertyChangeListener {
 
     /**
      * gets coordinates of field from field label
+     *
      * @param fl field  label to get coordinates from
      * @return field of x and y coordinates
      */
@@ -158,6 +164,7 @@ public class Game implements PropertyChangeListener {
 
     /**
      * property change with the property change event
+     *
      * @param evt property change event
      */
     @Override
@@ -167,6 +174,7 @@ public class Game implements PropertyChangeListener {
 
     /**
      * gets the time from timer
+     *
      * @return time
      */
     public Timer getTimer() {
@@ -175,6 +183,7 @@ public class Game implements PropertyChangeListener {
 
     /**
      * gets number of moves
+     *
      * @return number of moves
      */
     public int getMoves() {
@@ -183,6 +192,7 @@ public class Game implements PropertyChangeListener {
 
     /**
      * to string method for the game
+     *
      * @return String with board information
      */
     public String toString() {
@@ -191,6 +201,7 @@ public class Game implements PropertyChangeListener {
 
     /**
      * gets the cost for the bomb
+     *
      * @return bomb cost
      */
     public int getBombcost() {
@@ -199,6 +210,7 @@ public class Game implements PropertyChangeListener {
 
     /**
      * gets the undo cost
+     *
      * @return undo cost
      */
     public int getUndocost() {
@@ -207,6 +219,7 @@ public class Game implements PropertyChangeListener {
 
     /**
      * checks if the game has a history of moves
+     *
      * @return game history
      */
     public boolean hasHistory() {
