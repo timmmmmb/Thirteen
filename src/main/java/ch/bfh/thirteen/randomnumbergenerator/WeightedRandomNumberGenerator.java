@@ -12,7 +12,13 @@ public class WeightedRandomNumberGenerator {
     private int w;
     private ArrayList<Double> klist = new ArrayList<>();
 
-    public WeightedRandomNumberGenerator(int max, int min, double p) throws IllegalArgumentException {
+    /**
+     * constructor creates a new RNG
+     * @param max the max of the rng
+     * @param min the min value that gets generatet
+     * @param p a double value to controll the distribution
+     */
+    public WeightedRandomNumberGenerator(int max, int min, double p) {
         this.lb = min;
         this.ub = max;
         this.w = ub - lb;
@@ -20,12 +26,19 @@ public class WeightedRandomNumberGenerator {
         generateKlist();
     }
 
+    /**
+     * generates the list with all of the probabilitys for the numbers
+     */
     private void generateKlist() {
         for (int i = 0; i <= w; i++) {
             klist.add(calculateValue(i));
         }
     }
 
+    /**
+     * gets a random number
+     * @return the new number
+     */
     public int getNumber() {
         double r = new Random().nextDouble();
         double sum = 0.0;
@@ -38,6 +51,10 @@ public class WeightedRandomNumberGenerator {
         return lb;
     }
 
+    /**
+     * increases the max value of the rng
+     * if the max is > 9 also increases the min value
+     */
     public void increaseMax() {
         ub++;
         if (ub >= 9) {
@@ -48,6 +65,11 @@ public class WeightedRandomNumberGenerator {
         generateKlist();
     }
 
+    /**
+     * creates factorial of the input n 1*2*3*....*n = factorial
+     * @param n the input which shall get generated until here
+     * @return the factorial value
+     */
     private double factorial(int n) {
         double res = 1;
         for (double i = 1; i <= n; i++) {
@@ -56,10 +78,20 @@ public class WeightedRandomNumberGenerator {
         return res;
     }
 
+    /**
+     * creates the binomialCoefficient
+     * @param k the value to create a binomialCoefficient
+     * @return the binomialCoefficient
+     */
     private double binomialCoefficient(int k) {
         return factorial(w) / (factorial(k) * factorial(w - k));
     }
 
+    /**
+     * calculates the probability
+     * @param k the value to get the probability from
+     * @return the probability a double less than 1
+     */
     private double calculateValue(int k) {
         return binomialCoefficient(k) * Math.pow(p, k) * Math.pow((1 - p), w - k);
     }
