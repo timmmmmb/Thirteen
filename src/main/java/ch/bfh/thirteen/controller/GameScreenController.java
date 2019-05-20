@@ -27,6 +27,9 @@ import static main.java.ch.bfh.thirteen.application.ThirteenApplication.getGame;
 import static main.java.ch.bfh.thirteen.application.ThirteenApplication.getSettings;
 import static main.java.ch.bfh.thirteen.stagechanger.StageChanger.changeStage;
 
+/**
+ * controller class for the game screen
+ */
 public class GameScreenController implements PropertyChangeListener {
     @FXML
     public VBox endGamePane,confirmationPane;
@@ -286,6 +289,9 @@ public class GameScreenController implements PropertyChangeListener {
         }
     }
 
+    /**
+     * ends the current turn
+     */
     public void endTurn() {
         gamePane.getChildren().removeAll(removalList);
         removalList.clear();
@@ -388,6 +394,9 @@ public class GameScreenController implements PropertyChangeListener {
 
     }
 
+    /**
+     *lets the user see a decision screen when wanting to remove a tile
+     */
     @FXML
     private void switchRemovalMode() {
         if(isRemovalMode){
@@ -398,6 +407,11 @@ public class GameScreenController implements PropertyChangeListener {
         confirmationPane.setVisible(true);
     }
 
+
+    /**
+     * lets the user remove a tile if they have enough stars
+     * @param click sees if a field is clicked
+     */
     private void switchRemovalMode(boolean click) {
         if (isRemovalMode) {
             if (!click) {
@@ -418,6 +432,9 @@ public class GameScreenController implements PropertyChangeListener {
         isRemovalMode = !isRemovalMode;
     }
 
+    /**
+     * shows the screen to decide id the user wants to undo an action and does the undo event
+     */
     @FXML
     private void undo() {
         infoTextLabel.setText("This Action costs: "+getGame().getUndocost());
@@ -447,6 +464,10 @@ public class GameScreenController implements PropertyChangeListener {
         playAnimations(0);
     }
 
+    /**
+     *does the undo when it was confirmed or else goes back
+     *sets the decision screen invisible again
+     */
     public void agree() {
         if(undoEvent){
             getGame().undo();
@@ -459,10 +480,16 @@ public class GameScreenController implements PropertyChangeListener {
         disableButton();
     }
 
+    /**
+     * sets the decision screen invisible if undo was rejected
+     */
     public void reject() {
         confirmationPane.setVisible(false);
     }
 
+    /**
+     * if the user has not enough stars for the bomb or the undo the button will be disabled
+     */
     private void disableButton(){
         if(simulation){
             return;
