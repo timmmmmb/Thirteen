@@ -138,7 +138,7 @@ public class Board {
         }
         if (isClickable(f)) {
             removeNeighbors(f);
-            incrementFieldValue(f, f.getCoordinate().getX(), f.getCoordinate().getY());
+            incrementFieldValue(f);
             moveFields();
             checkGamestate();
         }
@@ -372,10 +372,8 @@ public class Board {
      * increments a fieldvalue and fires a pcs
      *
      * @param f the f that gets incremented
-     * @param x the x pos of f
-     * @param y the y pos of f
      */
-    private void incrementFieldValue(Field f, int x, int y) {
+    private void incrementFieldValue(Field f) {
         this.pcs.firePropertyChange("incrementedFieldValue", f, f.getValue() + 1);
         f.incrementValue();
         setNewMax(f.getValue());

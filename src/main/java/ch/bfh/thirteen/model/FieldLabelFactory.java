@@ -14,6 +14,13 @@ public class FieldLabelFactory {
         return fl;
     }
 
+    /**
+     * creates a fieldLabel
+     * @param f the field
+     * @param height the height of the fl
+     * @param width the width of the fl
+     * @return a new fieldlabel
+     */
     public static FieldLabel createFieldLabel(Field f, int height, int width) {
         FieldLabel fl = createFieldLabel(f);
         fl.setPrefHeight(ThirteenApplication.getSettings().getFieldHeight() * height);

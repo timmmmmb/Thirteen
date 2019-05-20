@@ -6,10 +6,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(namespace = "field")
 
-/**
- * class for the field, stores and increments a value in the field and lets also set the position
- */
+
 public class Field{
+    /**
+     * class for the field, stores and increments a value in the field and lets also set the position
+     */
     @XmlElement(name = "value")
     private int value;
     private boolean tobeRemoved = false;
@@ -91,7 +92,7 @@ public class Field{
 
     /**
      * checks if field is visited
-     * @return
+     * @return true if the field is visited
      */
     boolean isVisited() {
         return visited;
