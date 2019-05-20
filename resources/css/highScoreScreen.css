@@ -2,7 +2,7 @@
     -fx-alignment: center;
 }
 
-pane {
+#pane{
     -fx-pref-width: 400px;
     -fx-pref-height: 500px;
     -fx-background-color: #191919;

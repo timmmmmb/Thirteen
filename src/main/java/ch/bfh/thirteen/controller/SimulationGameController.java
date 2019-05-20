@@ -68,12 +68,19 @@ public class SimulationGameController extends GameScreenController {
         }
     }
 
+    /**
+     * lets bot ends the turn and go to next turn
+     */
     @Override
     public void endTurn() {
         super.endTurn();
         doTurn();
     }
 
+    /**
+     * checks if the game is not lost and then does the next turn with the animations
+     * if the game is lost the simulation will end
+     */
     private void doTurn() {
         if (running && ThirteenApplication.getGame().getBoard().getGameState() != GameState.LOST && ThirteenApplication.getGame().getBoard().getGameState() != GameState.WON) {
             bot.doTurn(ThirteenApplication.getGame());
@@ -87,6 +94,10 @@ public class SimulationGameController extends GameScreenController {
         gameBackground.getChildren().clear();
     }
 
+    /**
+     * lets the player switch back to the menu
+     * @param event stage change event
+     */
     @Override
     protected void switchMenu(ActionEvent event) {
         switchRunning();
