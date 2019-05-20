@@ -15,6 +15,9 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
+/**
+ * class to change some of the settings such as stars, music and high scores in the game
+ */
 @XmlRootElement(name = "Settings")
 public class Settings {
 
@@ -44,10 +47,18 @@ public class Settings {
 
     }
 
+    /**
+     * checks if music is on
+     * @return
+     */
     public boolean isMusicOn() {
         return musicOn;
     }
 
+    /**
+     * gets the amount of stars
+     * @return
+     */
     public int getStars() {
         return this.stars;
     }
@@ -75,6 +86,10 @@ public class Settings {
     }
 
 
+    /**
+     * increases the amount of stars and saves it
+     * @param stars
+     */
     public void increaseStars(int stars) {
         getPcs().firePropertyChange("StarsChanged", this.stars, this.stars + stars);
         this.stars += stars;
@@ -94,42 +109,81 @@ public class Settings {
         gameIcon = new Image("images/13_logo.png");
     }
 
+    /**
+     * gets the width of the field
+     * @return field width
+     */
     public int getFieldWidth() {
         return fieldWidth;
     }
 
+    /**
+     * gets the height of the field
+     * @return field height
+     */
     public int getFieldHeight() {
         return fieldHeight;
     }
 
+    /**
+     * gets the height of the game board
+     * @return game board height
+     */
     public int getBoardHeight() {
         return boardHeight;
     }
 
+    /**
+     * gets the width of the game board
+     * @return game board width
+     */
     public int getBoardWidth() {
         return boardWidth;
     }
 
+    /**
+     * gets the game icon
+     * @return game icon
+     */
     public Image getGameIcon() {
         return gameIcon;
     }
 
+    /**
+     * gets the cost of stars for the bomb
+     * @return amount of stars
+     */
     public int getBOMBINCREMENTCOST() {
         return BOMBINCREMENTCOST;
     }
 
+    /**
+     * gets the cost of stars for the undo
+     * @return amount of stars
+     */
     public int getUNDOINCREMENTCOST() {
         return UNDOINCREMENTCOST;
     }
 
+    /**
+     * gets the best high score
+     * @return high score
+     */
     public Score getHighscore() {
         return scores.get(0);
     }
 
+    /**
+     * gets the list with the high scores
+     * @return list of high scores
+     */
     public ArrayList<Score> getScores() {
         return scores;
     }
 
+    /**
+     * compares the high score and saves it to the list if it was higher than a previous one in the list
+     */
     public void setHighscore() {
         scores.add(new Score(ThirteenApplication.getGame().getBoard().getCurrent_max(), ThirteenApplication.getGame().getMoves(), ThirteenApplication.getGame().getTimer().getTime(), ThirteenApplication.getGame().getBoard().getGameState() == GameState.WON));
         scores.sort(new ScoreComparator());
@@ -142,10 +196,17 @@ public class Settings {
         ThirteenApplication.log.log("high score set", Level.FINE);
     }
 
+    /**
+     * gets the property change support
+     * @return property change support
+     */
     public PropertyChangeSupport getPcs() {
         return pcs;
     }
 
+    /**
+     * toggles the music
+     */
     public void toggleMusic() {
         musicOn = !musicOn;
     }
