@@ -1,6 +1,7 @@
 package main.java.ch.bfh.thirteen.model;
 
 import main.java.ch.bfh.thirteen.application.ThirteenApplication;
+import main.java.ch.bfh.thirteen.fieldlabel.FieldLabel;
 import main.java.ch.bfh.thirteen.observer.CustomPropertyChangeSupport;
 import main.java.ch.bfh.thirteen.stack.SizedStack;
 import main.java.ch.bfh.thirteen.timer.Timer;

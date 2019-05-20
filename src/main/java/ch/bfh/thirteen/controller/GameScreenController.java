@@ -16,6 +16,8 @@ import javafx.util.Duration;
 import main.java.ch.bfh.thirteen.application.ThirteenApplication;
 import main.java.ch.bfh.thirteen.exception.FieldLabelNotFoundException;
 import main.java.ch.bfh.thirteen.exception.UINotMatchingModelException;
+import main.java.ch.bfh.thirteen.fieldlabel.FieldLabel;
+import main.java.ch.bfh.thirteen.fieldlabel.FieldLabelFactory;
 import main.java.ch.bfh.thirteen.model.*;
 
 import java.beans.PropertyChangeEvent;

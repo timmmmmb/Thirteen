@@ -1,6 +1,7 @@
-package main.java.ch.bfh.thirteen.model;
+package main.java.ch.bfh.thirteen.fieldlabel;
 
 import main.java.ch.bfh.thirteen.application.ThirteenApplication;
+import main.java.ch.bfh.thirteen.model.Field;
 
 public class FieldLabelFactory {
     /**

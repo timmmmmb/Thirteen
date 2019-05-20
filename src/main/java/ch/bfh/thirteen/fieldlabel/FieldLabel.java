@@ -1,4 +1,4 @@
-package main.java.ch.bfh.thirteen.model;
+package main.java.ch.bfh.thirteen.fieldlabel;
 
 import javafx.scene.control.Label;
 import main.java.ch.bfh.thirteen.application.ThirteenApplication;
