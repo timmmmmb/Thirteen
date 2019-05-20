@@ -14,6 +14,7 @@ import main.java.ch.bfh.thirteen.settings.Settings;
 
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -24,20 +25,24 @@ public class ThirteenApplication extends Application {
     private static Settings settings;
     public static FileLogger log = new FileLogger();
 
+    /**
+     * this function is called before the application is started
+     * it loads music and images
+     */
     @Override
-    public void init()  {
+    public void init() {
         try {
             settings = Loader.loadSettings();
         } catch (FileNotFoundException fe) {
-            log.log("settings File not found",Level.SEVERE);
+            log.log("settings File not found", Level.SEVERE);
             settings = new Settings();
             try {
                 Saver.saveSettings(settings);
             } catch (JAXBException e) {
-                log.log(e.toString(),Level.SEVERE);
+                log.log(e.toString(), Level.SEVERE);
             }
         } catch (JAXBException e) {
-            log.log(e.toString(),Level.SEVERE);
+            log.log(e.toString(), Level.SEVERE);
         }
         settings.loadResources();
         game = new Game();
@@ -47,7 +52,7 @@ public class ThirteenApplication extends Application {
                 music.play();
             }
         } catch (URISyntaxException e) {
-            log.log(e.getMessage(),Level.SEVERE);
+            log.log(e.getMessage(), Level.SEVERE);
         }
         try {
             Thread.sleep(1000);
@@ -57,8 +62,14 @@ public class ThirteenApplication extends Application {
 
     }
 
+    /**
+     * this function is called after the init it creates the ui and displays it
+     *
+     * @param gameStage the stage that shall display the application
+     * @throws IOException if the fxml file was not found
+     */
     @Override
-    public void start(Stage gameStage) throws Exception {
+    public void start(Stage gameStage) throws IOException {
         // loads the fxml from the resources
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("fxml/menuScreen.fxml")));
 
@@ -75,22 +86,39 @@ public class ThirteenApplication extends Application {
 
     }
 
+    /**
+     * used to get the musicPlayer from the application
+     *
+     * @return the musicplayer of the application
+     */
     public static MusicPlayer getMusic() {
         return music;
     }
 
+    /**
+     * gets the settings from the application
+     *
+     * @return the settings of the application
+     */
     public static Settings getSettings() {
         return settings;
     }
 
+    /**
+     * gets the game from the application
+     *
+     * @return the game of the application
+     */
     public static Game getGame() {
         return game;
     }
 
+    /**
+     * sets the game from in application
+     */
     public static void setGame(Game game) {
         ThirteenApplication.game = game;
     }
-
 
 
 }
