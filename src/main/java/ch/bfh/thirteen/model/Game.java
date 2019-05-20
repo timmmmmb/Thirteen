@@ -14,6 +14,10 @@ import java.beans.PropertyChangeSupport;
 import static main.java.ch.bfh.thirteen.application.ThirteenApplication.getSettings;
 
 @XmlRootElement(name = "game")
+
+/**
+ * class to control the game on the board
+ */
 public class Game implements PropertyChangeListener {
     private CustomPropertyChangeSupport pcs = new CustomPropertyChangeSupport(this);
     @XmlElement(name = "history")
@@ -29,10 +33,16 @@ public class Game implements PropertyChangeListener {
     @XmlElement(name = "undocost")
     private int undocost = 50;
 
+    /**
+     * constructor for the game that sets up the game board
+     */
     public Game() {
         setGameBoard(new Board(getSettings().getBoardWidth(), getSettings().getBoardHeight()));
     }
 
+    /**
+     * restarts the game with a new game board, timer and moves
+     */
     public void restartGame() {
         history.clear();
         setGameBoard(new Board(getSettings().getBoardWidth(), getSettings().getBoardHeight()));
@@ -41,14 +51,27 @@ public class Game implements PropertyChangeListener {
         moves = 0;
     }
 
+    /**
+     * gets the property change support
+     * @return property change support
+     */
     public PropertyChangeSupport getPcs() {
         return pcs;
     }
 
+    /**
+     * returns the current game board
+     * @return game board
+     */
     public Board getBoard() {
         return gameBoard;
     }
 
+    /**
+     * removes a given field
+     * gets the cost for using the removal bomb
+     * @param fl field to remove
+     */
     public void removeField(FieldLabel fl) {
         addHistory();
         bombcost += getSettings().getBOMBINCREMENTCOST();
@@ -81,6 +104,9 @@ public class Game implements PropertyChangeListener {
         moves++;
     }
 
+    /**
+     * undoes the last move at a cost of stars
+     */
     public void undo() {
         if (history.isEmpty() || getSettings().decreaseStars(undocost)) {
             return;
@@ -90,6 +116,10 @@ public class Game implements PropertyChangeListener {
         moves++;
     }
 
+    /**
+     * sets up a game board from a given game board
+     * @param b board to set
+     */
     private void setGameBoard(Board b) {
         if (gameBoard != null) {
             gameBoard.getPcs().removePropertyChangeListener(this);
@@ -107,10 +137,18 @@ public class Game implements PropertyChangeListener {
         ThirteenApplication.getSettings().getPcs().addPropertyChangeListener(this);
     }
 
+    /**
+     * adds the history of moves
+     */
     private void addHistory() {
         history.push(new Board(gameBoard));
     }
 
+    /**
+     * gets coordinates of field from field label
+     * @param fl field  label to get coordinates from
+     * @return field of x and y coordinates
+     */
     private Field getFieldFromFieldLabel(FieldLabel fl) {
         //get coordinates
         int x = (int) fl.getBoundsInParent().getMinX() / getSettings().getFieldWidth();
@@ -118,31 +156,59 @@ public class Game implements PropertyChangeListener {
         return gameBoard.getField(x, y);
     }
 
+    /**
+     * property change with the property change event
+     * @param evt property change event
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         this.pcs.firePropertyChange(evt);
     }
 
+    /**
+     * gets the time from timer
+     * @return time
+     */
     public Timer getTimer() {
         return timer;
     }
 
+    /**
+     * gets number of moves
+     * @return number of moves
+     */
     public int getMoves() {
         return moves;
     }
 
+    /**
+     * to string method for the game
+     * @return String with board information
+     */
     public String toString() {
         return getBoard().toSting();
     }
 
+    /**
+     * gets the cost for the bomb
+     * @return bomb cost
+     */
     public int getBombcost() {
         return bombcost;
     }
 
+    /**
+     * gets the undo cost
+     * @return undo cost
+     */
     public int getUndocost() {
         return undocost;
     }
 
+    /**
+     * checks if the game has a history of moves
+     * @return game history
+     */
     public boolean hasHistory() {
         return !history.isEmpty();
     }
