@@ -11,7 +11,7 @@ public class TimerTest {
      * tests if the timer counts correctly
      */
     @Test
-    void numbers() {
+    void numbersTest() {
         Timer t =new Timer();
         /*t.play();
         Thread.sleep(1000);
@@ -24,7 +24,7 @@ public class TimerTest {
      * tests the constructor
      */
     @Test
-    void constructor(){
+    void constructorTest(){
         Timer t =new Timer();
         assertEquals(0, t.getTime());
     }

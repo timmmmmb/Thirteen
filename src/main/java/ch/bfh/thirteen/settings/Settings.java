@@ -49,7 +49,7 @@ public class Settings {
 
     /**
      * checks if music is on
-     * @return
+     * @return boolean if the music is on
      */
     public boolean isMusicOn() {
         return musicOn;
@@ -57,7 +57,7 @@ public class Settings {
 
     /**
      * gets the amount of stars
-     * @return
+     * @return int of the amount of stars
      */
     public int getStars() {
         return this.stars;
@@ -88,7 +88,7 @@ public class Settings {
 
     /**
      * increases the amount of stars and saves it
-     * @param stars
+     * @param stars the amount to increase the stars by
      */
     public void increaseStars(int stars) {
         getPcs().firePropertyChange("StarsChanged", this.stars, this.stars + stars);
