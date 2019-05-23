@@ -19,6 +19,7 @@ import main.java.ch.bfh.thirteen.exception.UINotMatchingModelException;
 import main.java.ch.bfh.thirteen.fieldlabel.FieldLabel;
 import main.java.ch.bfh.thirteen.fieldlabel.FieldLabelFactory;
 import main.java.ch.bfh.thirteen.model.*;
+import main.java.ch.bfh.thirteen.score.Score;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -142,7 +143,7 @@ public class GameScreenController implements PropertyChangeListener {
         getGame().getTimer().pause();
         // save the statistic if not a botgame
         if (!simulation) {
-            getSettings().setHighscore();
+            getSettings().setHighscore(new Score(ThirteenApplication.getGame().getBoard().getCurrent_max(), ThirteenApplication.getGame().getMoves(), ThirteenApplication.getGame().getTimer().getTime(), ThirteenApplication.getGame().getBoard().getGameState() == GameState.WON));
             scoreInfoLabel.setText("Your Score: "+String.valueOf(getGame().getBoard().getCurrent_max())+": "+String.valueOf(getGame().getMoves()));
             highScoreLabel.setText("Highscore: "+String.valueOf(getSettings().getHighscore().getHighestnumber())+": "+String.valueOf(getSettings().getHighscore().getMoves()));
             endGamePane.setVisible(true);

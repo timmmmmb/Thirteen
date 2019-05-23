@@ -2,7 +2,6 @@ package main.java.ch.bfh.thirteen.settings;
 
 import javafx.scene.image.Image;
 import main.java.ch.bfh.thirteen.application.ThirteenApplication;
-import main.java.ch.bfh.thirteen.model.GameState;
 import main.java.ch.bfh.thirteen.observer.CustomPropertyChangeSupport;
 import main.java.ch.bfh.thirteen.saver.Saver;
 import main.java.ch.bfh.thirteen.score.Score;
@@ -23,7 +22,6 @@ public class Settings {
 
     @XmlElement(name = "musicOn")
     private boolean musicOn = true;
-    @SuppressWarnings("")
     @XmlElement(name = "BOMBINCREMENTCOST")
     private final int BOMBINCREMENTCOST = 50;
     @XmlElement(name = "UNDOINCREMENTCOST")
@@ -184,8 +182,8 @@ public class Settings {
     /**
      * compares the high score and saves it to the list if it was higher than a previous one in the list
      */
-    public void setHighscore() {
-        scores.add(new Score(ThirteenApplication.getGame().getBoard().getCurrent_max(), ThirteenApplication.getGame().getMoves(), ThirteenApplication.getGame().getTimer().getTime(), ThirteenApplication.getGame().getBoard().getGameState() == GameState.WON));
+    public void setHighscore(Score score) {
+        scores.add(score);
         scores.sort(new ScoreComparator());
         try {
             Saver.saveSettings(this);
