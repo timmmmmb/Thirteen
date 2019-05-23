@@ -61,7 +61,6 @@ public class WeightedRandomNumberGenerator {
             lb++;
         }
         this.w = ub - lb;
-        lb = Math.max(1, ub - w);
         generateKlist();
     }
 

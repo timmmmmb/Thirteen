@@ -28,4 +28,24 @@ class WeightedRandomNumberGeneratorTest {
             assertTrue(number <= max);
         }
     }
+
+    /**
+     * tests if the increaseMax works and the numbers are in the given range
+     */
+    @Test
+    void increaseMax() {
+        for(int j = 0; j < 10; j++){
+            wrng.increaseMax();
+            max++;
+            if (max >= 9) {
+                min++;
+            }
+            for (int i = 0; i < 1000; i++) {
+                int number = wrng.getNumber();
+                assertTrue(number >= min);
+                assertTrue(number <= max);
+            }
+        }
+
+    }
 }
