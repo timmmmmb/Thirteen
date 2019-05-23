@@ -143,7 +143,7 @@ public class GameScreenController implements PropertyChangeListener {
         getGame().getTimer().pause();
         // save the statistic if not a botgame
         if (!simulation) {
-            getSettings().setHighscore(new Score(ThirteenApplication.getGame().getBoard().getCurrent_max(), ThirteenApplication.getGame().getMoves(), ThirteenApplication.getGame().getTimer().getTime(), ThirteenApplication.getGame().getBoard().getGameState() == GameState.WON));
+            getSettings().setScore(new Score(ThirteenApplication.getGame().getBoard().getCurrent_max(), ThirteenApplication.getGame().getMoves(), ThirteenApplication.getGame().getTimer().getTime(), ThirteenApplication.getGame().getBoard().getGameState() == GameState.WON));
             scoreInfoLabel.setText("Your Score: "+String.valueOf(getGame().getBoard().getCurrent_max())+": "+String.valueOf(getGame().getMoves()));
             highScoreLabel.setText("Highscore: "+String.valueOf(getSettings().getHighscore().getHighestnumber())+": "+String.valueOf(getSettings().getHighscore().getMoves()));
             endGamePane.setVisible(true);

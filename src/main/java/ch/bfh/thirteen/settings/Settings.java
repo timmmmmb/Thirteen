@@ -65,7 +65,7 @@ public class Settings {
      * decreases the stars with the amount specified and returns true if there are enough stars and false if there aren't
      *
      * @param stars the amount of stars to decrease the stars with
-     * @return true if the stars were decreased and false if there are not enough stars
+     * @return false if the stars were decreased and true if there are not enough stars
      */
     public boolean decreaseStars(int stars) {
         if (this.stars < stars) {
@@ -165,9 +165,11 @@ public class Settings {
 
     /**
      * gets the best high score
-     * @return high score
+     * @return high score if no scores return null
      */
     public Score getHighscore() {
+        if(scores.isEmpty())
+            return null;
         return scores.get(0);
     }
 
@@ -182,7 +184,7 @@ public class Settings {
     /**
      * compares the high score and saves it to the list if it was higher than a previous one in the list
      */
-    public void setHighscore(Score score) {
+    public void setScore(Score score) {
         scores.add(score);
         scores.sort(new ScoreComparator());
         try {
