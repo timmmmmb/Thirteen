@@ -11,6 +11,9 @@ public class SizedStackTest {
         SizedStack stack = new SizedStack(5);
         assertNotNull(stack);
         assertTrue(stack.size()<=5);
+        stack = new SizedStack();
+        assertNotNull(stack);
+        assertTrue(stack.size()<=5);
     }
 
     @Test
