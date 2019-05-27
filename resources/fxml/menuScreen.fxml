@@ -9,23 +9,23 @@
 <AnchorPane id="pane" prefHeight="500.0" prefWidth="400.0" stylesheets="@../css/menuScreen.css"
             xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="main.java.ch.bfh.thirteen.controller.MenuScreenController">
-    <Button layoutX="113.0" layoutY="352.0" mnemonicParsing="false" onAction="#save"
+    <Button id="saveButton" layoutX="113.0" layoutY="352.0" mnemonicParsing="false" onAction="#save"
             prefHeight="44.0" prefWidth="71.0"/>
-    <Button layoutX="207.0" layoutY="352.0" mnemonicParsing="false" onAction="#load"
+    <Button id="loadButton" layoutX="207.0" layoutY="352.0" mnemonicParsing="false" onAction="#load"
             prefHeight="44.0" prefWidth="71.0"/>
-    <Button layoutX="113.0" layoutY="211.0" mnemonicParsing="false" onAction="#switchGame"
+    <Button id="startButton" layoutX="113.0" layoutY="211.0" mnemonicParsing="false" onAction="#switchGame"
             prefHeight="50.0" prefWidth="170.0" text="Start">
         <font>
             <Font name="Calibri" size="12.0"/>
         </font>
     </Button>
-    <Button layoutX="113.0" layoutY="280.0" mnemonicParsing="false" onAction="#switchAutoplay"
+    <Button id="autoplayButton" layoutX="113.0" layoutY="280.0" mnemonicParsing="false" onAction="#switchAutoplay"
             prefHeight="50.0" prefWidth="170.0" text="Autoplay"/>
-    <Button layoutX="113.0" layoutY="415.0" mnemonicParsing="false" onAction="#switchHighScore"
+    <Button id="hiScoreButton" layoutX="113.0" layoutY="415.0" mnemonicParsing="false" onAction="#switchHighScore"
             prefHeight="44.0" prefWidth="71.0"/>
-    <Button layoutX="208.0" layoutY="415.0" mnemonicParsing="false" onAction="#switchSettings"
+    <Button id="infoButton" layoutX="208.0" layoutY="415.0" mnemonicParsing="false" onAction="#switchSettings"
             prefHeight="44.0" prefWidth="71.0"/>
-    <ImageView fitHeight="116.0" fitWidth="122.0" layoutX="142.0" layoutY="47.0" pickOnBounds="true"
+    <ImageView id="image" fitHeight="116.0" fitWidth="122.0" layoutX="142.0" layoutY="47.0" pickOnBounds="true"
                preserveRatio="true">
         <Image url="@../images/13GameLogo.png"/>
     </ImageView>
