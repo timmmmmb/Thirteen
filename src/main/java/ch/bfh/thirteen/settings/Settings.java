@@ -210,4 +210,19 @@ public class Settings {
     public void toggleMusic() {
         musicOn = !musicOn;
     }
+
+    @Override
+    public String toString() {
+        return "Settings{" +
+                "musicOn=" + musicOn +
+                ", BOMBINCREMENTCOST=" + BOMBINCREMENTCOST +
+                ", UNDOINCREMENTCOST=" + UNDOINCREMENTCOST +
+                ", fieldWidth=" + fieldWidth +
+                ", fieldHeight=" + fieldHeight +
+                ", boardHeight=" + boardHeight +
+                ", boardWidth=" + boardWidth +
+                ", gameIcon=" + gameIcon +
+                ", stars=" + stars +
+                '}';
+    }
 }
