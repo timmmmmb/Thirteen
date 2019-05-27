@@ -42,8 +42,8 @@ public class GameScreenController implements PropertyChangeListener {
     protected AnchorPane gamePane, gameBackground;
     @FXML
     private Label gameStateLabel, timerLabel, starLabel, scoreInfoLabel, highScoreLabel, infoTextLabel;
-    private ArrayList<FieldLabel> removalList = new ArrayList<>();
-    private ArrayList<ArrayList<Transition>> animationList = new ArrayList<>();
+    private final ArrayList<FieldLabel> removalList = new ArrayList<>();
+    private final ArrayList<ArrayList<Transition>> animationList = new ArrayList<>();
     private boolean isRemovalMode = false;
     protected Duration animationTime = Duration.millis(250);
     protected boolean simulation = false;
@@ -141,11 +141,11 @@ public class GameScreenController implements PropertyChangeListener {
      */
     private void createEndscreen(){
         getGame().getTimer().pause();
-        // save the statistic if not a botgame
+        // save the statistic if not a bot game
         if (!simulation) {
             getSettings().setScore(new Score(ThirteenApplication.getGame().getBoard().getCurrent_max(), ThirteenApplication.getGame().getMoves(), ThirteenApplication.getGame().getTimer().getTime(), ThirteenApplication.getGame().getBoard().getGameState() == GameState.WON));
             scoreInfoLabel.setText("Your Score: "+String.valueOf(getGame().getBoard().getCurrent_max())+": "+String.valueOf(getGame().getMoves()));
-            highScoreLabel.setText("Highscore: "+String.valueOf(getSettings().getHighscore().getHighestnumber())+": "+String.valueOf(getSettings().getHighscore().getMoves()));
+            highScoreLabel.setText("High score: "+String.valueOf(getSettings().getHighscore().getHighestnumber())+": "+String.valueOf(getSettings().getHighscore().getMoves()));
             endGamePane.setVisible(true);
         }
         gameStateLabel.setVisible(true);
@@ -205,7 +205,7 @@ public class GameScreenController implements PropertyChangeListener {
 
     /**
      * this function gets called when there is a new max value.
-     * it resetts the styleclass of all fields to their correct styleclass
+     * it resets the style class of all fields to their correct style class
      */
     private void resetStyle() {
         for (Node fl : gamePane.getChildren()) {
@@ -266,8 +266,8 @@ public class GameScreenController implements PropertyChangeListener {
     }
 
     /**
-     * plays all of the animations in the animation animationlist that are at the position i
-     * after the last animation is finished it will conitnue with the next one by calling itself recursivly with i+1 till i > animationList.size
+     * plays all of the animations in the animation animation list that are at the position i
+     * after the last animation is finished it will continue with the next one by calling itself recursively with i+1 till i > animationList.size
      *
      * @param i the position of the animations
      */
@@ -336,7 +336,7 @@ public class GameScreenController implements PropertyChangeListener {
      * @param f the field that shall get found
      * @param x the x coordinate of the field in the board
      * @param y the y coordinate of the field in the board
-     * @return the fieldlabel in the ui
+     * @return the field label in the ui
      * @throws FieldLabelNotFoundException if the field was not found in the ui
      */
     private FieldLabel getFieldLabelByCoordinates(Field f, int x, int y) throws FieldLabelNotFoundException {
@@ -452,7 +452,7 @@ public class GameScreenController implements PropertyChangeListener {
      */
     @FXML
     private void click(MouseEvent event) {
-        // dont allow clicking if simulation
+        // don't allow clicking if simulation
         if (simulation) {
             return;
         }

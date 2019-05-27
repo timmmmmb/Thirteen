@@ -4,7 +4,7 @@ import main.java.ch.bfh.thirteen.application.ThirteenPreloader;
 
 public class Start {
     /**
-     * this is the entry point of the game it starts a preloader(loadingscreen) and when the application is ready it starts the application
+     * this is the entry point of the game it starts a preloader(loading screen) and when the application is ready it starts the application
      *
      * @param args arguments for the application
      */

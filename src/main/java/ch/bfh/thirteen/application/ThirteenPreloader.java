@@ -14,7 +14,7 @@ public class ThirteenPreloader extends Preloader {
     private Stage preloaderStage;
 
     /**
-     * loads and displays a loadingscreen
+     * loads and displays a loading screen
      *
      * @param primaryStage the primary stage of the preloader
      * @throws IOException when the file is not found

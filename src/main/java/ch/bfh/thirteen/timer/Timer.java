@@ -14,8 +14,8 @@ import java.beans.PropertyChangeSupport;
 public class Timer {
     @XmlElement(name = "t")
     private int t = 0;
-    private Timeline tl;
-    private CustomPropertyChangeSupport pcs = new CustomPropertyChangeSupport(this);
+    private final Timeline tl;
+    private final CustomPropertyChangeSupport pcs = new CustomPropertyChangeSupport(this);
 
     /**
      * the timer counts the variable t up by 1 each second

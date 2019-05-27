@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BoardTest {
 
-    private static int height = 5;
-    private static int width = 6;
+    private static final int height = 5;
+    private static final int width = 6;
     private static Board gameBoard;
 
     @BeforeAll
@@ -18,7 +18,7 @@ class BoardTest {
     }
 
     /**
-     * tests if the height of the board is used propertly
+     * tests if the height of the board is used properly
      */
     @Test
     void testConstructorHeight() {

@@ -22,8 +22,8 @@ public class StageChanger {
     public static void changeStage(ActionEvent event, String filename) {
         try {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Parent newroot = FXMLLoader.load(Objects.requireNonNull(StageChanger.class.getClassLoader().getResource(filename)));
-            stage.setScene(new Scene(newroot));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(StageChanger.class.getClassLoader().getResource(filename)));
+            stage.setScene(new Scene(root));
         } catch (IOException e) {
             e.printStackTrace();
             ThirteenApplication.log.log("failed to change stage", Level.SEVERE);

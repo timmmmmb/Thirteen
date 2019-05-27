@@ -27,7 +27,7 @@ public class SettingsTest {
     }
 
     /**
-     * tests if the togglemusic function works
+     * tests if the toggle music function works
      */
     @Test
     void toggleMusicTest(){
@@ -40,7 +40,7 @@ public class SettingsTest {
     }
 
     /**
-     * tests if the togglemusic function works
+     * tests if the toggle music function works
      */
     @Test
     void increaseStarsTest(){

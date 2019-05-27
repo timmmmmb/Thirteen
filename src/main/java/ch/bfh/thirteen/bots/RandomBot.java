@@ -10,7 +10,7 @@ import java.util.Random;
  * this bots clicks a random clickable field
  */
 public class RandomBot implements BotInterface {
-    private Random r = new Random();
+    private final Random r = new Random();
 
     /**
      * does the turn which is selecting a random clickable field

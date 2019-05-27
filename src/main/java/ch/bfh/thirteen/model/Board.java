@@ -11,25 +11,26 @@ import java.util.Random;
 
 @XmlRootElement(namespace = "board")
 public class Board {
-    private WeightedRandomNumberGenerator wrng;
-    private CustomPropertyChangeSupport pcs = new CustomPropertyChangeSupport(this);
+    private final WeightedRandomNumberGenerator wrng;
+    private final CustomPropertyChangeSupport pcs = new CustomPropertyChangeSupport(this);
     @XmlElement(name = "max")
     private int current_max = 6;
     @XmlElement(name = "min")
     private int current_min = 1;
     @XmlElement(name = "width")
-    private int width;
+    private final int width;
     @XmlElement(name = "height")
-    private int height;
+    private final int height;
     private GameState gameState = GameState.UNINITIALIZED;
     @XmlElement(name = "positions")
     private Field[][] positions;
 
-    private ArrayList<Field> clickableFields = new ArrayList<>();
+    private final ArrayList<Field> clickableFields = new ArrayList<>();
 
     /**
      * default constructor for jaxb
      */
+    @SuppressWarnings("unused")
     public Board() {
         this(5, 5);
     }
@@ -72,7 +73,7 @@ public class Board {
     /**
      * gets the state of the board
      *
-     * @return GameState the current gamestate
+     * @return GameState the current game state
      */
     public GameState getGameState() {
         return gameState;
@@ -117,7 +118,7 @@ public class Board {
     }
 
     /**
-     * used to click a field by coordinats
+     * used to click a field by coordinates
      *
      * @param x the x coordinate 0<=x<=width
      * @param y the y coordinate 0<=y<=height
@@ -145,7 +146,7 @@ public class Board {
     }
 
     /**
-     * called to change the gamestate when the animation is finished
+     * called to change the game state when the animation is finished
      */
     public void finishAnimation() {
         if (gameState != GameState.ANIMATING) {
@@ -189,7 +190,7 @@ public class Board {
                 addField(x, y);
             }
         }
-        // once add the maxnumber to the board
+        // once add the max number to the board
         Field f = positions[new Random().nextInt(getWidth() - 1)][getHeight() - 1];
         f.setValue(current_max);
 
@@ -204,7 +205,7 @@ public class Board {
     /**
      * checks if two fields are clickable
      *
-     * @param f the field that gets checkt
+     * @param f the field that gets checked
      * @return true if the field f can be clicked
      */
     private boolean isClickable(Field f) {
@@ -217,10 +218,10 @@ public class Board {
     }
 
     /**
-     * this function is used to get all neighbores of a field
+     * this function is used to get all neighbors of a field
      *
-     * @param f the field which neighbores you need
-     * @return an arraylist with all of the neighbores
+     * @param f the field which neighbors you need
+     * @return an array list with all of the neighbors
      */
     private ArrayList<Field> getNeighbors(Field f) {
 
@@ -257,7 +258,7 @@ public class Board {
      * checks each field if it is clickable
      * also adds all of the clickable fields to the clickableField ArrayList
      *
-     * @return true if there is atleast one field clickable
+     * @return true if there is at least one field clickable
      */
     private boolean isLost() {
         clickableFields.clear();
@@ -276,7 +277,7 @@ public class Board {
     /**
      * removes the neighboring fields of f if they have the same value
      *
-     * @param f the field whose neighbores shall get removed
+     * @param f the field whose neighbors shall get removed
      */
     private void removeNeighbors(Field f) {
         f.setVisited(true);
@@ -358,9 +359,9 @@ public class Board {
     }
 
     /**
-     * changes the gamestate of the board and fires a pcs
+     * changes the game state of the board and fires a pcs
      *
-     * @param gameState the new gamestate
+     * @param gameState the new game state
      */
     private void setGameState(GameState gameState) {
         this.pcs.firePropertyChange("GameStateChange", this.gameState, gameState);
@@ -369,7 +370,7 @@ public class Board {
     }
 
     /**
-     * increments a fieldvalue and fires a pcs
+     * increments a field value and fires a pcs
      *
      * @param f the f that gets incremented
      */
@@ -452,7 +453,7 @@ public class Board {
     /**
      * gets all of the fields that can be clicked
      *
-     * @return an arraylist of all clickable fields
+     * @return an array list of all clickable fields
      */
     public ArrayList<Field> getClickableFields() {
         return clickableFields;

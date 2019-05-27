@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FieldTest {
-    private static int value = 1;
+    private static final int value = 1;
     private static Field field;
 
     @BeforeAll

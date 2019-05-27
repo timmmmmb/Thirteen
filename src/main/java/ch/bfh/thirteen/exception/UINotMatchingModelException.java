@@ -1,7 +1,7 @@
 package main.java.ch.bfh.thirteen.exception;
 
 /**
- * use this exception if the ui doesnt match the model
+ * use this exception if the ui doesn't match the model
  */
 public class UINotMatchingModelException extends Exception{
     /**

@@ -36,6 +36,7 @@ public class Score {
     /**
      * used for jaxb default constructor
      */
+    @SuppressWarnings("unused")
     public Score() {
         this(0, 0, 0, false);
     }

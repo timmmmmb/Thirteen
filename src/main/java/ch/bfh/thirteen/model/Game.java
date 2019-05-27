@@ -21,13 +21,13 @@ public class Game implements PropertyChangeListener {
     /**
      * class to control the game on the board
      */
-    private CustomPropertyChangeSupport pcs = new CustomPropertyChangeSupport(this);
+    private final CustomPropertyChangeSupport pcs = new CustomPropertyChangeSupport(this);
     @XmlElement(name = "history")
-    private SizedStack<Board> history = new SizedStack<>(10);
+    private final SizedStack<Board> history = new SizedStack<>(10);
     @XmlElement(name = "board")
     private Board gameBoard;
     @XmlElement(name = "timer")
-    private Timer timer = new Timer();
+    private final Timer timer = new Timer();
     @XmlElement(name = "moves")
     private int moves = 0;
     @XmlElement(name = "bombcost")
@@ -87,7 +87,7 @@ public class Game implements PropertyChangeListener {
     /**
      * this function is called by a player to click a field
      *
-     * @param fl the fieldlabel that was clicked
+     * @param fl the field label that was clicked
      */
     public void clickField(FieldLabel fl) {
         addHistory();

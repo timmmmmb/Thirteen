@@ -31,7 +31,7 @@ public class Saver {
      * @param filename the name of the file that shall get saved
      * @param o the object to save
      * @param context the jaxbcontext of the object
-     * @throws JAXBException if an error occures while saving
+     * @throws JAXBException if an error occurs while saving
      */
     public static void save(String filename, Object o, JAXBContext context) throws JAXBException {
 

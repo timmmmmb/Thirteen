@@ -21,7 +21,7 @@ public class FieldLabel extends Label {
     }
 
     /**
-     * changes the textvalue of the label and also changes the Class
+     * changes the text value of the label and also changes the Class
      * @param s the new value String
      */
     public void setTextAndClass(String s) {

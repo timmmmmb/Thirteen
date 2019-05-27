@@ -17,6 +17,7 @@ import java.util.logging.Level;
 /**
  * class to change some of the settings such as stars, music and high scores in the game
  */
+@SuppressWarnings("SpellCheckingInspection")
 @XmlRootElement(name = "Settings")
 public class Settings {
 
@@ -38,8 +39,8 @@ public class Settings {
     @XmlElement(name = "Stars")
     private int stars = 0;
     @XmlElement(name = "scores")
-    private ArrayList<Score> scores = new ArrayList<>();
-    private CustomPropertyChangeSupport pcs = new CustomPropertyChangeSupport(this);
+    private final ArrayList<Score> scores = new ArrayList<>();
+    private final CustomPropertyChangeSupport pcs = new CustomPropertyChangeSupport(this);
 
     public Settings() {
 

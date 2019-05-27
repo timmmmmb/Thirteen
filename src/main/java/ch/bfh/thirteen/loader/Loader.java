@@ -13,7 +13,7 @@ public class Loader {
     /**
      * loads from file and returns a new game
      *
-     * @return a game loaded from the savedata
+     * @return a game loaded from the save data
      */
     public static Game loadGame() throws JAXBException, FileNotFoundException {
         return (Game) load("ThirteenSave.xml", JAXBContext.newInstance(Game.class));
@@ -36,7 +36,7 @@ public class Loader {
     /**
      * loads from file and returns a new settings object
      *
-     * @return a Settings object loaded from the savedata
+     * @return a Settings object loaded from the save data
      */
     public static Settings loadSettings() throws JAXBException, FileNotFoundException {
         return (Settings) load("Settings.xml", JAXBContext.newInstance(Settings.class));

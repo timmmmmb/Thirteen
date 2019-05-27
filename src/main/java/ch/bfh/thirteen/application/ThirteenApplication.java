@@ -23,7 +23,7 @@ public class ThirteenApplication extends Application {
     private static Game game;
     private static MusicPlayer music;
     private static Settings settings;
-    public static FileLogger log = new FileLogger();
+    public static final FileLogger log = new FileLogger();
 
     /**
      * this function is called before the application is started
@@ -89,7 +89,7 @@ public class ThirteenApplication extends Application {
     /**
      * used to get the musicPlayer from the application
      *
-     * @return the musicplayer of the application
+     * @return the music player of the application
      */
     public static MusicPlayer getMusic() {
         return music;

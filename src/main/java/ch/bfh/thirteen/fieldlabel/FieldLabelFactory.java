@@ -7,7 +7,7 @@ public class FieldLabelFactory {
     /**
      * creates a fieldLabel
      * @param f the field from the model
-     * @return a new generated fieldlabel
+     * @return a new generated field label
      */
     public static FieldLabel createFieldLabel(Field f) {
         FieldLabel fl = new FieldLabel(f.getCoordinate().getX(), f.getCoordinate().getY());
@@ -20,7 +20,7 @@ public class FieldLabelFactory {
      * @param f the field
      * @param height the height of the fl
      * @param width the width of the fl
-     * @return a new fieldlabel
+     * @return a new field label
      */
     public static FieldLabel createFieldLabel(Field f, int height, int width) {
         FieldLabel fl = createFieldLabel(f);

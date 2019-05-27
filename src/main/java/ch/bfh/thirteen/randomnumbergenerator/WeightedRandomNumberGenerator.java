@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * this class creates reandom numbers but it uses a weightingSystem so it uses some numbers more than others
+ * this class creates random numbers but it uses a weightingSystem so it uses some numbers more than others
  */
 public class WeightedRandomNumberGenerator {
     private int lb, ub;
-    private double p;
+    private final double p;
     private int w;
-    private ArrayList<Double> klist = new ArrayList<>();
+    private final ArrayList<Double> klist = new ArrayList<>();
 
     /**
      * constructor creates a new RNG
      * @param max the max of the rng
-     * @param min the min value that gets generatet
-     * @param p a double value to controll the distribution
+     * @param min the min value that gets generated
+     * @param p a double value to control the distribution
      */
     public WeightedRandomNumberGenerator(int max, int min, double p) {
         this.lb = min;
@@ -27,7 +27,7 @@ public class WeightedRandomNumberGenerator {
     }
 
     /**
-     * generates the list with all of the probabilitys for the numbers
+     * generates the list with all of the probabilities for the numbers
      */
     private void generateKlist() {
         for (int i = 0; i <= w; i++) {

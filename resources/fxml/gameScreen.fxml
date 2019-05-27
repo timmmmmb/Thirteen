@@ -68,7 +68,7 @@
             <String fx:value="bigLabel" />
          </styleClass></Label>
         <Label fx:id="scoreInfoLabel" styleClass="smallLabel" text="Your Score:" />
-        <Label fx:id="highScoreLabel" layoutX="83.0" layoutY="265.0" styleClass="smallLabel" text="Highscore:" />
+        <Label fx:id="highScoreLabel" layoutX="83.0" layoutY="265.0" styleClass="smallLabel" text="High score:" />
         <Button id="restartButton" mnemonicParsing="false" onAction="#restart" text="Restart" />
     </VBox>
 </StackPane>

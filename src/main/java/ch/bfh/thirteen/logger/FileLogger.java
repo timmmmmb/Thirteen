@@ -10,7 +10,7 @@ import java.util.logging.Logger;
  */
 public class FileLogger {
 
-    private Logger logger;
+    private final Logger logger;
 
     /**
      * Constructor for the file logger

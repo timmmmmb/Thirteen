@@ -5,7 +5,7 @@ import java.util.Stack;
 
 @XmlRootElement(name = "SizedStack")
 public class SizedStack<T> extends Stack<T> {
-    private int maxSize;
+    private final int maxSize;
 
     /**
      * create a new stack with a maximum size
@@ -18,7 +18,7 @@ public class SizedStack<T> extends Stack<T> {
     }
 
     /**
-     * this constuctor is for the jaxb
+     * this constructor is for the jaxb
      */
     @SuppressWarnings("unused")
     public SizedStack() {
@@ -26,7 +26,7 @@ public class SizedStack<T> extends Stack<T> {
     }
 
     /**
-     * pushes an object ontop of the stack if the stack has reached its maxsize it removes its oldest element
+     * pushes an object on top of the stack if the stack has reached its maxsize it removes its oldest element
      *
      * @param object the object to get added to the stack
      * @return the argument
