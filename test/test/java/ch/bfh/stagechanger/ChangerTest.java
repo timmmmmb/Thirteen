@@ -14,7 +14,6 @@ import org.testfx.framework.junit5.Start;
 
 @ExtendWith(ApplicationExtension.class)
 public class ChangerTest {
-    private Button button;
     /**
      * Will be called with {@code @Before} semantics, i. e. before each test method.
      *
@@ -22,7 +21,7 @@ public class ChangerTest {
      */
     @Start
     private void start(Stage stage) {
-        button = new Button();
+        Button button = new Button();
         button.setOnAction(ae -> StageChanger.changeStage(ae, "test.fxml"));
         stage.setScene(new Scene(new StackPane(button), 100, 100));
         stage.show();
