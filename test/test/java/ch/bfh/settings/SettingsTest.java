@@ -1,14 +1,31 @@
 package test.java.ch.bfh.settings;
 
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import main.java.ch.bfh.thirteen.score.Score;
 import main.java.ch.bfh.thirteen.settings.Settings;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.testfx.framework.junit5.ApplicationExtension;
+import org.testfx.framework.junit5.Start;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(ApplicationExtension.class)
 public class SettingsTest {
+    /**
+     * Will be called with {@code @Before} semantics, i. e. before each test method.
+     *
+     * @param stage - Will be injected by the test runner.
+     */
+    @Start
+    private void start(Stage stage) {
+        stage.setScene(new Scene(new StackPane(), 100, 100));
+    }
+
     /**
      * tests if the constructor works and gets all of the default values
      */
@@ -74,4 +91,16 @@ public class SettingsTest {
         settings.setScore(sc4);
         assertEquals(sc4,settings.getHighscore());
     }
+
+    /**
+     * tests if the resources are loaded correctly
+     */
+    @Test
+    void resourceTest(){
+        Settings settings = new Settings();
+        assertNull(settings.getGameIcon());
+        settings.loadResources();
+        assertNotNull(settings.getGameIcon());
+    }
+
 }

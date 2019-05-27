@@ -43,7 +43,6 @@ public class Settings {
     private final CustomPropertyChangeSupport pcs = new CustomPropertyChangeSupport(this);
 
     public Settings() {
-
     }
 
     /**

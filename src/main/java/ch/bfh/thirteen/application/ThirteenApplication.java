@@ -120,5 +120,4 @@ public class ThirteenApplication extends Application {
         ThirteenApplication.game = game;
     }
 
-
 }
