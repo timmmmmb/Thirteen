@@ -29,3 +29,5 @@ bin/*
 META-INF/*
 target/*
 logfile.txt
+Settings.xml
+ThirteenSave.xml
