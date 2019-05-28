@@ -33,6 +33,7 @@ public class SaverTest extends ApplicationTest {
     @Test
     void saveSettingsTest() throws JAXBException, FileNotFoundException {
         Settings settings = new Settings();
+        Saver.saveSettings(settings);
         Settings loadedSettings = Loader.loadSettings();
         assertNotNull(loadedSettings);
         assertEquals(loadedSettings.toString(),settings.toString());
