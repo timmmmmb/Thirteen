@@ -30,7 +30,7 @@ public class SettingsTest {
      * tests if the constructor works and gets all of the default values
      */
     @Test
-    void constructorTest(){
+    void constructorTest() {
         Settings settings = new Settings();
         assertEquals(settings.getScores(), new ArrayList<Score>());
         assertEquals(settings.getFieldHeight(), 64);
@@ -47,7 +47,7 @@ public class SettingsTest {
      * tests if the toggle music function works
      */
     @Test
-    void toggleMusicTest(){
+    void toggleMusicTest() {
         Settings settings = new Settings();
         assertTrue(settings.isMusicOn());
         settings.toggleMusic();
@@ -60,22 +60,22 @@ public class SettingsTest {
      * tests if the toggle music function works
      */
     @Test
-    void increaseStarsTest(){
+    void increaseStarsTest() {
         Settings settings = new Settings();
-        assertEquals(0,settings.getStars());
+        assertEquals(0, settings.getStars());
         settings.increaseStars(50);
-        assertEquals(settings.getStars(),50);
+        assertEquals(settings.getStars(), 50);
         assertFalse(settings.decreaseStars(20));
-        assertEquals(settings.getStars(),30);
+        assertEquals(settings.getStars(), 30);
         assertTrue(settings.decreaseStars(100));
-        assertEquals(settings.getStars(),30);
+        assertEquals(settings.getStars(), 30);
     }
 
     /**
      * tests if the score functions work
      */
     @Test
-    void scoreFunctionsTest(){
+    void scoreFunctionsTest() {
         Settings settings = new Settings();
         assertNull(settings.getHighscore());
         Score sc1 = new Score(6, 1, 10, false);
@@ -83,20 +83,20 @@ public class SettingsTest {
         Score sc3 = new Score(7, 20, 10, false);
         Score sc4 = new Score(11, 1, 10, false);
         settings.setScore(sc1);
-        assertEquals(sc1,settings.getHighscore());
+        assertEquals(sc1, settings.getHighscore());
         settings.setScore(sc2);
-        assertEquals(sc2,settings.getHighscore());
+        assertEquals(sc2, settings.getHighscore());
         settings.setScore(sc3);
-        assertEquals(sc3,settings.getHighscore());
+        assertEquals(sc3, settings.getHighscore());
         settings.setScore(sc4);
-        assertEquals(sc4,settings.getHighscore());
+        assertEquals(sc4, settings.getHighscore());
     }
 
     /**
      * tests if the resources are loaded correctly
      */
     @Test
-    void resourceTest(){
+    void resourceTest() {
         Settings settings = new Settings();
         assertNull(settings.getGameIcon());
         settings.loadResources();

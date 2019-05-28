@@ -11,9 +11,12 @@ class FieldTest {
     private static final int value = 1;
     private static Field field;
 
+    /**
+     * Creates required field
+     */
     @BeforeAll
     static void initializeTests() {
-        field = new Field(value,new Coordinate(0,0));
+        field = new Field(value, new Coordinate(0, 0));
     }
 
     /**

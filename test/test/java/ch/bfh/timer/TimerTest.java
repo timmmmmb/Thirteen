@@ -12,7 +12,7 @@ public class TimerTest {
      */
     @Test
     void numbersTest() {
-        Timer t =new Timer();
+        Timer t = new Timer();
         /*t.play();
         Thread.sleep(1000);
         assertEquals(1, t.getTime());*/
@@ -24,8 +24,8 @@ public class TimerTest {
      * tests the constructor
      */
     @Test
-    void constructorTest(){
-        Timer t =new Timer();
+    void constructorTest() {
+        Timer t = new Timer();
         assertEquals(0, t.getTime());
     }
 }

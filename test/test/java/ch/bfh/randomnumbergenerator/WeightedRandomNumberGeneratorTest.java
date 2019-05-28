@@ -14,7 +14,7 @@ class WeightedRandomNumberGeneratorTest {
 
     @BeforeAll
     static void initializeTests() {
-        wrng = new WeightedRandomNumberGenerator(max, min,0.3);
+        wrng = new WeightedRandomNumberGenerator(max, min, 0.3);
     }
 
     /**
@@ -34,7 +34,7 @@ class WeightedRandomNumberGeneratorTest {
      */
     @Test
     void increaseMax() {
-        for(int j = 0; j < 10; j++){
+        for (int j = 0; j < 10; j++) {
             wrng.increaseMax();
             max++;
             if (max >= 9) {

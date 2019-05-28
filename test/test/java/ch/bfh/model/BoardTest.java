@@ -12,6 +12,9 @@ class BoardTest {
     private static final int width = 6;
     private static Board gameBoard;
 
+    /**
+     * creates required board
+     */
     @BeforeAll
     static void initializeTests() {
         gameBoard = new Board(width, height);

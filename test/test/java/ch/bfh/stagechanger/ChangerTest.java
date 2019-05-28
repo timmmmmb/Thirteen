@@ -27,8 +27,13 @@ public class ChangerTest {
         stage.show();
     }
 
+    /**
+     * tests if onbutton click the stage changes
+     *
+     * @param robot the testfx robot to test the ui
+     */
     @Test
-    void stageChangeTest(FxRobot robot){
+    void stageChangeTest(FxRobot robot) {
         robot.clickOn(".button");
         Assertions.assertThat(robot.lookup(".button").queryButton()).hasText("testButton");
     }
