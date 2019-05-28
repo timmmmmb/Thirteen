@@ -58,6 +58,14 @@ Button {
     -fx-background-color: #e3ff8b;
 }
 
+#startButton {
+    -fx-background-color: #84d550;
+}
+
+#startButton:hover {
+    -fx-background-color: #7eff30;
+}
+
 #undoButton {
     -fx-background-color: #e4734f;
     -fx-background-image: url("../images/undo-arrow.png");

@@ -15,7 +15,7 @@
             <Font size="40.0"/>
         </font>
     </Label>
-    <Button layoutX="164.0" layoutY="416.0" mnemonicParsing="false" onAction="#switchMenu" text="Back"/>
+    <Button id="backButton" layoutX="164.0" layoutY="416.0" mnemonicParsing="false" onAction="#switchMenu" text="Back"/>
     <TableView fx:id="scoreTable" layoutX="31.0" layoutY="107.0" prefHeight="297.0" prefWidth="340.0">
         <columns>
             <TableColumn fx:id="maxNumRow" prefWidth="74.0" text="MaxNum"/>

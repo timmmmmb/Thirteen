@@ -35,7 +35,7 @@
                         <Cursor fx:constant="HAND"/>
                     </cursor>
                 </ChoiceBox>
-                <Button id="restartButton" fx:id="startButton" mnemonicParsing="false" onAction="#runSimulation"
+                <Button id="startButton" fx:id="startButton" mnemonicParsing="false" onAction="#runSimulation"
                         text="Start"/>
             </HBox>
             <Label fx:id="timerLabel" visible="false"/>
