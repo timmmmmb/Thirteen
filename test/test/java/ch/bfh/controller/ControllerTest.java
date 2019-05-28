@@ -1,5 +1,6 @@
 package test.java.ch.bfh.controller;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ToggleButton;
@@ -19,9 +20,7 @@ import org.testfx.framework.junit5.Start;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(ApplicationExtension.class)
 public class ControllerTest {
@@ -125,27 +124,24 @@ public class ControllerTest {
         if(oldstars<ThirteenApplication.getSettings().getBOMBINCREMENTCOST()){
             Assertions.assertThat(robot.lookup("#deleteButton").queryButton()).isDisabled();
         }
+        //set stars to 100
+        Platform.runLater(() -> ThirteenApplication.getSettings().increaseStars(100-ThirteenApplication.getSettings().getStars()+1));
+
         int i = 0;
         //play the game
         while(i<10&&ThirteenApplication.getGame().getBoard().getGameState()!=GameState.LOST&&ThirteenApplication.getGame().getBoard().getGameState()!=GameState.WON){
             // test the undo
             if(i == 5){
-                //set stars to 50
-                /*ThirteenApplication.getSettings().increaseStars(50-ThirteenApplication.getSettings().getStars());
-                robot.sleep(100);*/
                 robot.clickOn("#undoButton");
                 robot.clickOn("#rejectButton");
                 robot.clickOn("#undoButton");
                 robot.clickOn("#agreeButton");
-                i++;
                 robot.sleep(1000);
+                i++;
                 continue;
             }
             //test the delete
             if(i == 3){
-                //set stars to 50
-                /*ThirteenApplication.getSettings().increaseStars(50-ThirteenApplication.getSettings().getStars());
-                robot.sleep(100);*/
                 robot.clickOn("#deleteButton");
                 robot.clickOn("#rejectButton");
                 robot.clickOn("#deleteButton");
