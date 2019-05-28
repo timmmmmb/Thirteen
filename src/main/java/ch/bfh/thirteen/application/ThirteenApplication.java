@@ -54,12 +54,6 @@ public class ThirteenApplication extends Application {
         } catch (URISyntaxException e) {
             log.log(e.getMessage(), Level.SEVERE);
         }
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
     }
 
     /**
@@ -82,7 +76,6 @@ public class ThirteenApplication extends Application {
         gameStage.show();
 
         log.log("application started", Level.INFO);
-
 
     }
 
