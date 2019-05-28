@@ -56,7 +56,7 @@ public class SettingsScreenController {
      */
     @FXML
     void switchInfoScreen(ActionEvent event) {
-        changeStage(event, "fxml/InfoScreen.fxml");
+        changeStage(event, "fxml/infoScreen.fxml");
     }
 
     /**
