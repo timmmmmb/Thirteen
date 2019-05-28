@@ -1,9 +1,13 @@
 package test.java.ch.bfh.controller;
 
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import main.java.ch.bfh.thirteen.application.ThirteenApplication;
+import main.java.ch.bfh.thirteen.fieldlabel.FieldLabel;
+import main.java.ch.bfh.thirteen.model.Field;
 import main.java.ch.bfh.thirteen.model.Game;
 import main.java.ch.bfh.thirteen.model.GameState;
 import org.junit.jupiter.api.Test;
@@ -15,6 +19,7 @@ import org.testfx.framework.junit5.Start;
 
 import java.io.IOException;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
@@ -110,9 +115,70 @@ public class ControllerTest {
     @Test
     void gameTest(FxRobot robot) {
         robot.clickOn("#startButton");
+        //test if everything is here
+        Assertions.assertThat(robot.lookup("#restartButton").queryButton()).hasText("Restart");
+        Assertions.assertThat(robot.lookup("#undoButton").queryButton()).hasText("");
+        Assertions.assertThat(robot.lookup("#deleteButton").queryButton()).hasText(" ");
+        int oldstars = ThirteenApplication.getSettings().getStars();
+        robot.clickOn("#restartButton");
+        Assertions.assertThat(robot.lookup("#undoButton").queryButton()).isDisabled();
+        if(oldstars<ThirteenApplication.getSettings().getBOMBINCREMENTCOST()){
+            Assertions.assertThat(robot.lookup("#deleteButton").queryButton()).isDisabled();
+        }
+        int i = 0;
+        //play the game
+        while(i<10&&ThirteenApplication.getGame().getBoard().getGameState()!=GameState.LOST&&ThirteenApplication.getGame().getBoard().getGameState()!=GameState.WON){
+            // test the undo
+            if(i == 5){
+                //set stars to 50
+                /*ThirteenApplication.getSettings().increaseStars(50-ThirteenApplication.getSettings().getStars());
+                robot.sleep(100);*/
+                robot.clickOn("#undoButton");
+                robot.clickOn("#rejectButton");
+                robot.clickOn("#undoButton");
+                robot.clickOn("#agreeButton");
+                i++;
+                robot.sleep(1000);
+                continue;
+            }
+            //test the delete
+            if(i == 3){
+                //set stars to 50
+                /*ThirteenApplication.getSettings().increaseStars(50-ThirteenApplication.getSettings().getStars());
+                robot.sleep(100);*/
+                robot.clickOn("#deleteButton");
+                robot.clickOn("#rejectButton");
+                robot.clickOn("#deleteButton");
+                robot.clickOn("#agreeButton");
+                FieldLabel fl = getFieldLabel((robot.lookup("#gamePane")).queryParent().getChildrenUnmodifiable(),ThirteenApplication.getGame().getBoard().getClickableFields().get(0));
+                robot.clickOn(fl);
+                robot.sleep(1000);
+                i++;
+                continue;
+            }
+            //click field
+            FieldLabel fl = getFieldLabel((robot.lookup("#gamePane")).queryParent().getChildrenUnmodifiable(),ThirteenApplication.getGame().getBoard().getClickableFields().get(0));
+            oldstars = ThirteenApplication.getSettings().getStars();
+            robot.clickOn(fl);
+            assertEquals(oldstars+1,ThirteenApplication.getSettings().getStars());
+            robot.sleep(1000);
+            i++;
+        }
 
         Assertions.assertThat(robot.lookup("#menuButton").queryButton()).hasText("");
         robot.clickOn("#menuButton");
+    }
+
+    private FieldLabel getFieldLabel(ObservableList<Node> fls, Field f){
+        for(Node child :fls){
+            FieldLabel fl = (FieldLabel) child;
+            int layoutX = (int) fl.getBoundsInParent().getMinX() / ThirteenApplication.getSettings().getFieldWidth();
+            int layoutY = (int) fl.getBoundsInParent().getMinY() / ThirteenApplication.getSettings().getFieldHeight();
+            if (layoutX == f.getCoordinate().getX() && layoutY == f.getCoordinate().getY() && String.valueOf(f.getValue()).equals(fl.getText())) {
+                return fl;
+            }
+        }
+        return null;
     }
 
     @Test

@@ -68,6 +68,7 @@ public class Board {
                 positions[x][y] = new Field(b.positions[x][y]);
             }
         }
+        isLost();
     }
 
     /**
