@@ -21,6 +21,7 @@ public class MusicPlayer {
     public MusicPlayer(String musicFile) throws URISyntaxException {
         Media sound = new Media(Objects.requireNonNull(MusicPlayer.class.getClassLoader().getResource(musicFile)).toURI().toString());
         mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
     }
 
     /**
@@ -28,7 +29,6 @@ public class MusicPlayer {
      */
     public void play(){
         mediaPlayer.play();
-        mediaPlayer.getOnRepeat();
     }
 
     /**
